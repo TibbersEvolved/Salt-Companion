@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Card {
 
-    private int delete;
+
     private int id;
 
     private String text;

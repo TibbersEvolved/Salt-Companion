@@ -2,6 +2,7 @@ package chilis.dev.SaltCompanion.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class Deck {
@@ -22,6 +23,27 @@ public class Deck {
         return deckCards.get(card);
     }
 
+    public List<Card> getDeckCards() {
+        return deckCards;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Deck deck)) return false;
+        return id == deck.id;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "id=" + id +
+                ", deckCards=" + deckCards +
+                '}';
+    }
 }
