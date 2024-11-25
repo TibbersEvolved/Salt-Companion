@@ -23,7 +23,7 @@ public class User {
     }
 
     public String getMail() {
-        return mail;
+        return email;
     }
 
     @Override
