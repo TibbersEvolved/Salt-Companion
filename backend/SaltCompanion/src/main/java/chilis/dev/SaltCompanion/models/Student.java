@@ -2,7 +2,7 @@ package chilis.dev.SaltCompanion.models;
 
 import java.util.Objects;
 
-public class User {
+public class Student {
 
     private Long id;
 
@@ -10,11 +10,11 @@ public class User {
 
     private String name;
 
-    public User() {
+    public Student() {
 
     }
 
-    public User(String mail) {
+    public Student(String mail) {
 
     }
 
@@ -26,11 +26,15 @@ public class User {
         return email;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email);
+        if (!(o instanceof Student student)) return false;
+        return Objects.equals(id, student.id) && Objects.equals(email, student.email);
     }
 
     @Override
