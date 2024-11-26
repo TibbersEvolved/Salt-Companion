@@ -1,21 +1,33 @@
 package chilis.dev.SaltCompanion.models;
 
+import jakarta.persistence.*;
+import org.hibernate.annotations.ManyToAny;
+
 import java.util.Objects;
 
+@Entity
 public class Student {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String email;
 
+    @Column(nullable = false)
     private String name;
+
+    @ManyToOne()
+    @JoinColumn(name = "bootCamp")
+    private BootCamp bootCamp;
 
     public Student() {
 
     }
 
-    public Student(String mail) {
+    public Student(String email) {
 
+        this.email = email;
     }
 
     public String getEmail() {

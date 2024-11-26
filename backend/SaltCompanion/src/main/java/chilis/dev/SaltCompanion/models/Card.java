@@ -1,9 +1,6 @@
 package chilis.dev.SaltCompanion.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -14,16 +11,24 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String text;
 
+    @Column(nullable = false)
     private String answer;
 
     private CardDifficulty difficulty;
 
-    public Card(){
+    public Card() {
 
     }
-    public Card( String text, String answer){
+
+    public Card(String text, String answer) {
+
+        if (text == null || answer == null) {
+            throw new NullPointerException("Card must have text and answer");
+        }
+
         this.text = text;
         this.answer = answer;
         this.difficulty = CardDifficulty.IMPOSSIBLE;

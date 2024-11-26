@@ -1,9 +1,6 @@
 package chilis.dev.SaltCompanion.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +13,22 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     private String email;
 
+    @OneToMany
+    @JoinColumn(name = "bootcamp_id", nullable = false)
     private List<BootCamp> bootCampList;
 
-    public Teacher(){
-
+    public Teacher() {
     }
-    public Teacher(String name, String email){
-        this.name= name;
+
+    public Teacher(String name, String email) {
+        this.name = name;
         this.email = email;
-        this.bootCampList= new ArrayList<>();
+        this.bootCampList = new ArrayList<>();
     }
 
     public Long getId() {

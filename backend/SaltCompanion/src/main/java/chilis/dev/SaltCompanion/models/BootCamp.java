@@ -17,11 +17,11 @@ public class BootCamp {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "topic_id")
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Topic> topics;
 
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     @OneToMany(cascade = CascadeType.ALL)
