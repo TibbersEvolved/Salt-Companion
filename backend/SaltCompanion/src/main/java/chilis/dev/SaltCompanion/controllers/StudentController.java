@@ -24,4 +24,6 @@ public class StudentController {
     public void getAllTopics(@PathVariable String id) {
         //gets ListDetailedTopicsDto to send to frontend.
     }
+
+
 }
