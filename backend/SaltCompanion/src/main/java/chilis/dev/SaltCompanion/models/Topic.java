@@ -29,4 +29,8 @@ public class Topic {
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
