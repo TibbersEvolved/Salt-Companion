@@ -44,14 +44,19 @@ export const LandingPage = () => {
   return (
     <div className="m-0 p-0 overflow-hidden">
       <SignedIn>
-        <div className="m-0 p-0 bg-slate-600">
+        <div className="m-0 p-0 bg-slate-600 w-screen h-screen items-center">
           <h2 className="text-center text-5xl">Welcome {user?.firstName}</h2>
 
-          <div className="w-screen h-screen overflow-hidden text-5xl">
+          <div className="text-5xl grid grid-cols-2 gap-4 ">
             {mockedCourseData.map((t) => (
-              <button>{t.topic}</button>
+              <button className="border-solid rounded-lg border-2 border-black w-6/12">
+                {t.topic}
+              </button>
             ))}
           </div>
+          <button className="text-5xl border-solid rounded-lg border-2 border-black w-fit">
+            Next
+          </button>
         </div>
         <div className="w-screen h-screen overflow-hidden bg-gray-200">
           <h2 className="text-center text-5xl">Stats</h2>
