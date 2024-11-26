@@ -1,6 +1,7 @@
 import { SignedIn, UserProfile, useUser } from "@clerk/clerk-react";
 import { Link } from "@tanstack/react-router";
 import { mockedCourseData } from "../mocked/mocked-data";
+import Select from "react-select";
 
 export const LandingPage = () => {
   const { user } = useUser();
@@ -12,11 +13,13 @@ export const LandingPage = () => {
           <h2 className="text-center text-5xl">Welcome {user?.firstName}</h2>
 
           <div className="grid grid-cols-2 gap-4 place-content-center ">
-            {mockedCourseData.map((t) => (
-              <Link to="/flashcard">
-                <button>{t.topic}</button>
-              </Link>
-            ))}
+            <Select
+              isMulti
+              name="colors"
+              options={mockedCourseData}
+              className="basic-multi-select"
+              classNamePrefix="select"
+            />
           </div>
           <button className="text-5xl border-solid rounded-lg border-2 border-black w-fit">
             Next
