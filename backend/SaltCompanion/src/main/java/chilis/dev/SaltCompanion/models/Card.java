@@ -17,6 +17,7 @@ public class Card {
     @Column(nullable = false)
     private String answer;
 
+    @Enumerated(EnumType.STRING)
     private CardDifficulty difficulty;
 
     @ManyToOne(cascade = CascadeType.ALL)
