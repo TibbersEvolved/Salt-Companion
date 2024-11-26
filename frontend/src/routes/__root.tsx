@@ -3,6 +3,7 @@ import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { ClerkProvider, SignedIn } from "@clerk/clerk-react";
 import Navbar from "../shared/navbar";
+import Footer from "../shared/footer";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -22,10 +23,10 @@ function RootComponent() {
         afterSignOutUrl="/"
         signInFallbackRedirectUrl="/landing"
       >
-        <SignedIn>
-          <Navbar />
-        </SignedIn>
+        <Navbar />
+
         <Outlet />
+        <Footer />
       </ClerkProvider>
     </>
   );
