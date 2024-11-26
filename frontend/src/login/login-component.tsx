@@ -1,6 +1,7 @@
 import {
   SignedIn,
   SignedOut,
+  SignIn,
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
@@ -9,7 +10,7 @@ export default function Login() {
   return (
     <header>
       <SignedOut>
-        <SignInButton />
+        <SignIn />
       </SignedOut>
       <SignedIn>
         <UserButton />
