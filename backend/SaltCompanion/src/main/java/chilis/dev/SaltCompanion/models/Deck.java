@@ -1,16 +1,26 @@
 package chilis.dev.SaltCompanion.models;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
+@Entity
 public class Deck {
 
-    private long id;
-    private List<Card> deckCards = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL)
+    private List<Card> deckCards;
 
     public Deck() {
+        this.deckCards = new ArrayList<>();
+
     }
 
     public void addCard(Card card) {
