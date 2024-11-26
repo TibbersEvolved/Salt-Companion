@@ -22,7 +22,7 @@ public class Topic {
     @JoinColumn(name = "deck_id")
     private Deck deck;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     private BootCamp bootCamp;
 
     public BootCamp getBootCampList() {

@@ -16,9 +16,8 @@ public class BootCamp {
     @Column(nullable = false)
     private String name;
 
-
     @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL)
-    private List<Topic> topics = new ArrayList<>();
+    private List<Topic> topics;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id")
@@ -32,7 +31,7 @@ public class BootCamp {
     public BootCamp(String name, Teacher teacher){
         this.name = name;
         this.teacher = teacher;
-
+        this.topics = new ArrayList<>();
     }
 
     public BootCamp() {
@@ -46,7 +45,7 @@ public class BootCamp {
     }
 
     public boolean removeStudent(Long studentId){
-        for(Student s: students) {
+        for(Student s: students){
             if(s.getId()==studentId);
             this.students.remove(s);
             return true;
@@ -54,7 +53,7 @@ public class BootCamp {
         return false;
     }
 
-
+    @Transactional
     public void addTopic(Topic topic) {
         topic.addBootCamp(this);
         topics.add(topic);
