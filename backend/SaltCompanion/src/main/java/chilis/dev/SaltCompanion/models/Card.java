@@ -17,11 +17,11 @@ public class Card {
     @Column(nullable = false)
     private String answer;
 
-    @Enumerated(EnumType.STRING)
+    @Transient
     private CardDifficulty difficulty;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="deck_id")
+    @JoinColumn(name ="deck_id", nullable = false)
     private Deck deck;
 
     public Card() {
