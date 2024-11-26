@@ -17,12 +17,12 @@ public class BootcampService {
     TeacherRepository teacherRepository;
 
     public BootcampService(BootCampRepository bootCampRepository, TeacherRepository teacherRepository) {
-        this.bootCampRepository = bootCampRepository;
-        this.teacherRepository = teacherRepository;
-        Teacher alek = new Teacher("Alek", "alek@saltEmail.com");
-        Long id = addBootCamp("JFS",alek);
-        Topic topic = new Topic("Java");
-        addTopicToBootCamp(id,topic);
+//        this.bootCampRepository = bootCampRepository;
+//        this.teacherRepository = teacherRepository;
+//        Teacher alek = new Teacher("Alek", "alek@saltEmail.com");
+//        Long id = addBootCamp("JFS",alek);
+//        Topic topic = new Topic("Java");
+//        addTopicToBootCamp(id,topic);
     }
 
     public Long addBootCamp(String name, Teacher teacher) {

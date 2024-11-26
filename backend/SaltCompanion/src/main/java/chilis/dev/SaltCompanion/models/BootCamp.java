@@ -20,9 +20,10 @@ public class BootCamp {
     private List<Topic> topics;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL)
     private List<Student> students;
 
 
