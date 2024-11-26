@@ -20,8 +20,7 @@ public class Teacher {
 
     private String email;
 
-    @OneToMany
-    @JoinColumn(name = "bootcamp_id", nullable = false)
+    @OneToMany(mappedBy = "teacher")
     private List<BootCamp> bootCampList;
 
     public Teacher() {
@@ -31,6 +30,10 @@ public class Teacher {
         this.name = name;
         this.email = email;
         this.bootCampList = new ArrayList<>();
+    }
+
+    public void addBootCamp(BootCamp bootCamp) {
+        bootCampList.add(bootCamp);
     }
 
     public Long getId() {

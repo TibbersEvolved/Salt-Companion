@@ -1,8 +1,12 @@
 package chilis.dev.SaltCompanion.models;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Topic {
@@ -14,21 +18,19 @@ public class Topic {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "deck_id")
     private Deck deck;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<BootCamp> bootCampList;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private BootCamp bootCamp;
 
-    public List<BootCamp> getBootCampList() {
-        return bootCampList;
+    public BootCamp getBootCampList() {
+        return bootCamp;
     }
 
     public Topic(String name) {
-
         this.name = name;
-
     }
 
     public Topic() {
@@ -51,22 +53,17 @@ public class Topic {
         this.deck = deck;
     }
 
+    public void setBootCamp(BootCamp bootCamp) {
+        this.bootCamp = bootCamp;
+    }
+
     public Long getId() {
         return id;
     }
 
+
     public void addBootCamp(BootCamp bootCamp) {
-        bootCampList.add(bootCamp);
+        this.bootCamp = bootCamp;
     }
 
-    public boolean removeBootCamp(Long bootCampId) {
-        for (BootCamp b : bootCampList) {
-            if (b.getId() == bootCampId) {
-                bootCampList.remove(b);
-                return true;
-            }
-
-        }
-        return false;
-    }
 }

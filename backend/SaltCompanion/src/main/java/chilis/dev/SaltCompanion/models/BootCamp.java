@@ -1,10 +1,9 @@
 package chilis.dev.SaltCompanion.models;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
@@ -17,26 +16,24 @@ public class BootCamp {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL)
     private List<Topic> topics;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
     private List<Student> students;
 
 
 
-    public BootCamp(String name, Teacher teacher){
+    public BootCamp(String name, Teacher teacher, List<Topic> topics){
         this.name = name;
-        this.topics = new ArrayList<>();
-        this.students = new ArrayList<>();
+        this.teacher = teacher;
+        this.topics = topics;
     }
 
-    public BootCamp(){
+    public BootCamp() {
 
     }
 
@@ -55,8 +52,9 @@ public class BootCamp {
         return false;
     }
 
-    public void addTopic(Topic topic){
-
+    @Transactional
+    public void addTopic(Topic topic) {
+        topic.addBootCamp(this);
         topics.add(topic);
     }
 
@@ -108,6 +106,10 @@ public class BootCamp {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 
     @Override
