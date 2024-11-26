@@ -19,6 +19,10 @@ public class Card {
 
     private CardDifficulty difficulty;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="deck_id")
+    private Deck deck;
+
     public Card() {
 
     }

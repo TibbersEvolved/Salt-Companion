@@ -14,14 +14,14 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/saltDB}
     username: ${DB_SALT:chilis}
-    password: ${DB_PASSWORD:redHot}
+    password: ${DB_PASSWORD:redhot}
 
 
   jpa:
     show-sql: true
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
 
 logging:
