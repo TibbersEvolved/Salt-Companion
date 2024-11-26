@@ -7,10 +7,7 @@ import chilis.dev.SaltCompanion.controllers.dto.TeacherDto;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +44,12 @@ public class BootcampController {
             ));
         });
         return ResponseEntity.ok(new BootCampListDto(bootCampDtos));
+    }
+
+    @PostMapping("/{name}")
+    public ResponseEntity createBootCamp(@PathVariable String name) {
+        Teacher teacher = new Teacher("FakeTeacher","mock@gmail.com");
+        bootcampService.addBootCamp(name,teacher);
+        return ResponseEntity.status(201).build();
     }
 }
