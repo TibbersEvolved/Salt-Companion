@@ -18,16 +18,19 @@ if (!PUBLISHABLE_KEY) {
 function RootComponent() {
   return (
     <>
-      <ClerkProvider
-        publishableKey={PUBLISHABLE_KEY}
-        afterSignOutUrl="/"
-        signInFallbackRedirectUrl="/landing"
-      >
-        <Navbar />
-
-        <Outlet />
-        <Footer />
-      </ClerkProvider>
+      <div className="min-h-screen flex flex-col">
+        <ClerkProvider
+          publishableKey={PUBLISHABLE_KEY}
+          afterSignOutUrl="/"
+          signInFallbackRedirectUrl="/landing"
+        >
+          <Navbar />
+          <div className="flex-grow">
+            <Outlet />
+          </div>
+          <Footer />
+        </ClerkProvider>
+      </div>
     </>
   );
 }
