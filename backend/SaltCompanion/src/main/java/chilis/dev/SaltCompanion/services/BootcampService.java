@@ -23,20 +23,9 @@ public class BootcampService {
         this.bootCampRepository = bootCampRepository;
         this.topicRepository = topicRepository;
         this.teacherRepository = teacherRepository;
-        Teacher alek = new Teacher("Alek", "alek@saltEmail.com");
-        Long id = addBootCamp("JFS",alek);
-        Topic topic = new Topic("Java");
-        Topic topic2 = new Topic("React");
-        addTopicToBootCamp(id,topic);
-        addTopicToBootCamp(id,topic2);
-        BootCamp bootCamp = bootCampRepository.findById(id).get();
-        List<Topic> topics = topicRepository.findAllByBootCamp_Id(id);
-        topics.forEach(s -> System.out.println(s.getName()));
-
     }
 
     public Long addBootCamp(String name, Teacher teacher) {
-
         BootCamp bootCamp = new BootCamp(name, teacher);
         teacher.addBootCamp(bootCamp);
         bootCampRepository.save(bootCamp);
@@ -53,10 +42,18 @@ public class BootcampService {
     }
 
     public BootCamp getBootCamp(long id) {
-        //Fetches a bootcamp by id.
-        return null;
+        return bootCampRepository.findById(id).get();
     }
 
+    public List<Topic> getTopicsForBootCamp(long id) {
+        return topicRepository.findAllByBootCamp_Id(id);
+    }
 
+    public List<BootCamp> getAllBootCamps() {
+        return bootCampRepository.findAll();
+    }
 
+    public Teacher getTeacher(long id) {
+        return bootCampRepository.findById(id).get().getTeacher();
+    }
 }
