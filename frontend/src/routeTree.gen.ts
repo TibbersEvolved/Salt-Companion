@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LandingImport } from './routes/landing'
+import { Route as FlashcardImport } from './routes/flashcard'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
@@ -20,6 +21,12 @@ import { Route as IndexImport } from './routes/index'
 const LandingRoute = LandingImport.update({
   id: '/landing',
   path: '/landing',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FlashcardRoute = FlashcardImport.update({
+  id: '/flashcard',
+  path: '/flashcard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/flashcard': {
+      id: '/flashcard'
+      path: '/flashcard'
+      fullPath: '/flashcard'
+      preLoaderRoute: typeof FlashcardImport
+      parentRoute: typeof rootRoute
+    }
     '/landing': {
       id: '/landing'
       path: '/landing'
@@ -68,12 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/flashcard': typeof FlashcardRoute
   '/landing': typeof LandingRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/flashcard': typeof FlashcardRoute
   '/landing': typeof LandingRoute
 }
 
@@ -81,27 +97,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/flashcard': typeof FlashcardRoute
   '/landing': typeof LandingRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/landing'
+  fullPaths: '/' | '/about' | '/flashcard' | '/landing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/landing'
-  id: '__root__' | '/' | '/about' | '/landing'
+  to: '/' | '/about' | '/flashcard' | '/landing'
+  id: '__root__' | '/' | '/about' | '/flashcard' | '/landing'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  FlashcardRoute: typeof FlashcardRoute
   LandingRoute: typeof LandingRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  FlashcardRoute: FlashcardRoute,
   LandingRoute: LandingRoute,
 }
 
@@ -117,6 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/flashcard",
         "/landing"
       ]
     },
@@ -125,6 +145,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/flashcard": {
+      "filePath": "flashcard.tsx"
     },
     "/landing": {
       "filePath": "landing.tsx"
