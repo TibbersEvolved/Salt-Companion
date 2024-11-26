@@ -22,7 +22,6 @@ function RootComponent() {
         signInFallbackRedirectUrl="/landing"
       >
         <Outlet />
-        <TanStackRouterDevtools position="bottom-right" />
       </ClerkProvider>
     </>
   );
