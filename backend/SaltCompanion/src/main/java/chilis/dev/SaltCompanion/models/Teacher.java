@@ -13,6 +13,8 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String clerkId;
+
     @Column(nullable = false)
     private String name;
 
@@ -47,6 +49,8 @@ public class Teacher {
         return bootCampList;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,4 +72,5 @@ public class Teacher {
                 ", bootCampList=" + bootCampList +
                 '}';
     }
+
 }

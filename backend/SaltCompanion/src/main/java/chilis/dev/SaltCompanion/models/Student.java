@@ -12,7 +12,11 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String clerkId;
+
     private String email;
+
+
 
     @Column(nullable = false)
     private String name;
