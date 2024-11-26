@@ -16,5 +16,16 @@ public class BootcampController {
     @GetMapping("/topic/{id}")
     public void getCoursesFromBootcamp(@PathVariable int id) {
         List<Long> topicIds = new ArrayList<>();
+        //Get bootcamp, get all topics by id, send out to client
+    }
+
+    @GetMapping("/teacher/{id}")
+    public void getTeacherFromBootCamp(@PathVariable int id) {
+        //return teacher name
+    }
+
+    @GetMapping()
+    public void getAllBootCamps() {
+
     }
 }
