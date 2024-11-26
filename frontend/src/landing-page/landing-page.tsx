@@ -48,7 +48,7 @@ export const LandingPage = () => {
         <div className="m-0 p-0 bg-slate-600 w-screen h-screen items-center">
           <h2 className="text-center text-5xl">Welcome {user?.firstName}</h2>
 
-          <div className=" grid grid-cols-2 gap-4 ">
+          <div className="grid grid-cols-2 gap-4 place-content-center ">
             {mockedCourseData.map((t) => (
               <Link to="/flashcard">
                 <button>{t.topic}</button>
