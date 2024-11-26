@@ -36,9 +36,7 @@ public class BootcampService {
 
     public void addTopicToBootCamp(Long id, Topic topic) {
         BootCamp bootCamp = bootCampRepository.findById(id).get();
-        //bootCamp.addTopic(topic);
         List<Topic> topics = new ArrayList();
-        topics.addAll(bootCamp.getTopics());
         topic.setBootCamp(bootCamp);
         topics.add(topic);
 
