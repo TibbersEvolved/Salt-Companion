@@ -1,10 +1,9 @@
 package chilis.dev.SaltCompanion.controllers;
 
-import chilis.dev.SaltCompanion.controllers.dto.BootCampDto;
-import chilis.dev.SaltCompanion.controllers.dto.BootCampListDto;
-import chilis.dev.SaltCompanion.controllers.dto.ListTopicsDto;
-import chilis.dev.SaltCompanion.controllers.dto.TeacherDto;
+import chilis.dev.SaltCompanion.controllers.dto.*;
+import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTopicDto;
 import chilis.dev.SaltCompanion.models.Teacher;
+import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +22,12 @@ public class BootcampController {
     }
 
     @GetMapping("/topic/{id}")
-    public ResponseEntity<ListTopicsDto> getCoursesFromBootcamp(@PathVariable int id) {
-        List<Long> topicIds = bootcampService.getTopicsForBootCamp(id).stream()
-                .map(s -> s.getId())
-                .toList();
-        return ResponseEntity.ok(new ListTopicsDto(topicIds));
+    public ResponseEntity<ListDetailedTopicsDto> getCoursesFromBootcamp(@PathVariable int id) {
+        List<TopicDto> payload = new ArrayList<>();
+        bootcampService.getTopicsForBootCamp(id).forEach(s -> {
+            payload.add(new TopicDto(s.getId(),s.getName()));
+        });
+        return ResponseEntity.ok(new ListDetailedTopicsDto(payload));
     }
 
     @GetMapping("/teacher/{id}")
@@ -50,6 +50,13 @@ public class BootcampController {
     public ResponseEntity createBootCamp(@PathVariable String name) {
         Teacher teacher = new Teacher("FakeTeacher","mock@gmail.com");
         bootcampService.addBootCamp(name,teacher);
+        return ResponseEntity.status(201).build();
+    }
+
+    @PostMapping("/topic/add")
+    public ResponseEntity addTopic(@RequestBody CreateTopicDto dto) {
+        Topic topic = new Topic(dto.name());
+        bootcampService.addTopicToBootCamp(dto.id(), topic);
         return ResponseEntity.status(201).build();
     }
 }

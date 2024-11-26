@@ -1,4 +1,6 @@
 package chilis.dev.SaltCompanion.controllers.dto;
 
-public record ListDetailedTopicsDto(long id, String name) {
+import java.util.List;
+
+public record ListDetailedTopicsDto(List<TopicDto> topics) {
 }
