@@ -1,6 +1,7 @@
 package chilis.dev.SaltCompanion.services;
 
 import chilis.dev.SaltCompanion.models.BootCamp;
+import chilis.dev.SaltCompanion.models.Deck;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
@@ -27,6 +28,7 @@ public class BootcampService {
 
     public Long addBootCamp(String name, Teacher teacher) {
         BootCamp bootCamp = new BootCamp(name, teacher);
+        Deck deck = new Deck();
         teacher.addBootCamp(bootCamp);
         bootCampRepository.save(bootCamp);
         return bootCamp.getId();
