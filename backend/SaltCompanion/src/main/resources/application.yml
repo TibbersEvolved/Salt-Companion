@@ -1,0 +1,32 @@
+debug: true
+server:
+  port: ${PORT:8080}
+spring:
+  sql:
+    init:
+      platform: postgresql
+      mode: always
+
+  output:
+    ansi:
+      enabled: always
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/saltDB}
+    username: ${DB_SALT:chilis}
+    password: ${DB_PASSWORD:redHot}
+
+
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
