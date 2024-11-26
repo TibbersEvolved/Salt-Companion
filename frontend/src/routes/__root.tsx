@@ -16,7 +16,11 @@ if (!PUBLISHABLE_KEY) {
 function RootComponent() {
   return (
     <>
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <ClerkProvider
+        publishableKey={PUBLISHABLE_KEY}
+        afterSignOutUrl="/"
+        signInFallbackRedirectUrl="/landing"
+      >
         <Outlet />
         <TanStackRouterDevtools position="bottom-right" />
       </ClerkProvider>
