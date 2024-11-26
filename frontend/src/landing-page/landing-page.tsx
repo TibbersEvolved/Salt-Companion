@@ -9,15 +9,15 @@ export const LandingPage = () => {
   return (
     <div className="m-0 p-0 overflow-hidden place-content-center">
       <SignedIn>
-        <div className="m-0 p-0 bg-slate-600 w-screen h-screen items-center">
+        <div className="m-0 p-0 bg-slate-600 w-screen h-screen items-center grid grid-cols-1">
           <h2 className="text-center text-5xl">Welcome {user?.firstName}</h2>
 
-          <div className="grid grid-cols-2 gap-4 place-content-center ">
+          <div className="grid grid-cols-1 ">
             <Select
               isMulti
               name="colors"
               options={mockedCourseData}
-              className="basic-multi-select"
+              className="text-black w-1/2"
               classNamePrefix="select"
             />
           </div>
