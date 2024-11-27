@@ -23,6 +23,10 @@ public class BootcampService {
         this.teacherRepository = teacherRepository;
     }
 
+    public void saveBootcamp(BootCamp bootCamp){
+        bootCampRepository.save(bootCamp);
+    }
+
     public Long addBootCamp(String name, Teacher teacher) {
         BootCamp bootCamp = new BootCamp(name, teacher);
         teacher.addBootCamp(bootCamp);
@@ -38,6 +42,18 @@ public class BootcampService {
         bootCamp.setTopics(topics);
         bootCampRepository.save(bootCamp);
     }
+
+public Topic findBootCampTopic(Long bootCampId, String topicName){
+        BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
+        validateBootCamp(bootCamp);
+        List<Topic> topics = bootCamp.getTopics();
+        for(Topic topic: topics){
+            if(topic.getName().equals(topicName)){
+                return topic;
+            }
+        }
+        return null;
+}
 
     public BootCamp getBootCamp(long id) {
         return bootCampRepository.findById(id).get();
@@ -57,19 +73,17 @@ public class BootcampService {
 
     public void addStudent(Long bootCampId, Student student){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
-        if(bootCamp == null){
-            throw new NullPointerException("Bootcamp not found");
-        }
+       validateBootCamp(bootCamp);
 
         student.setBootCamp(bootCamp);
         bootCamp.addStudent(student);
         bootCampRepository.save(bootCamp);
     }
     public boolean removeStudent(Long bootCampId, Long StudentId){
+
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
-        if(bootCamp == null){
-            throw new NullPointerException("Bootcamp not found");
-        }
+        validateBootCamp(bootCamp);
+
         if(bootCamp.findStudent(StudentId)){
            bootCamp.removeStudent(StudentId);
 
@@ -78,5 +92,13 @@ public class BootcampService {
            return true;
         }
         return false;
+    }
+
+    public boolean validateBootCamp(BootCamp bootCamp){
+
+        if(bootCamp==null){
+            throw new NullPointerException("Bootcamp not found");
+        }
+        return true;
     }
 }

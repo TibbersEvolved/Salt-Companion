@@ -3,10 +3,7 @@ package chilis.dev.SaltCompanion.models;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Topic {
@@ -72,4 +69,15 @@ public class Topic {
         this.bootCamp = bootCamp;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Topic topic)) return false;
+        return Objects.equals(name, topic.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
+    }
 }
