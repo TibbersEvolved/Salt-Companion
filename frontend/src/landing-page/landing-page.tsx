@@ -39,7 +39,7 @@ export const LandingPage = () => {
               onClick={handleClick}
               className="m-6 bg-gray-300 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-gray-500 transition duration-200"
             >
-              Quiz
+              <Link to="/quiz">Quiz</Link>
             </button>
             <div className="h-20 w-54 border border-black  mx-auto">
               Stuff to practice{" "}
