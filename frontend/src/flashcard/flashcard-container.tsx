@@ -38,8 +38,10 @@ export const Flashcard = () => {
         </>
       ) : (
         <>
-          <h1 className="text-3xl text-center mt-10">{currentCard.question}</h1>
-
+          <div className="text-center space-y-10 mt-10">
+            <h1 className="text-5xl">Topic name</h1>
+            <h2 className="text-3xl">{currentCard.question}</h2>
+          </div>
           <div className="flex justify-center mt-16 space-y-36 bg-">
             <ReactFlipCard
               flipTrigger="onClick"
