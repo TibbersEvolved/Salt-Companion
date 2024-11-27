@@ -44,7 +44,7 @@ public class BootcampController {
 
     @PostMapping("/{name}")
     public ResponseEntity createBootCamp(@PathVariable String name) {
-        Teacher teacher = new Teacher("FakeTeacher","mock@gmail.com");
+        Teacher teacher = new Teacher("fd","FakeTeacher","mock@gmail.com");
         bootcampService.addBootCamp(name,teacher);
         return ResponseEntity.status(201).build();
     }

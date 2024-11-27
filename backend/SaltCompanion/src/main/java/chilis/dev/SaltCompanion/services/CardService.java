@@ -26,6 +26,11 @@ public class CardService {
         return session.drawNext();
     }
 
+    public int getCardsLeft(UUID id) {
+        FlashcardSession session = findSession(id);
+        return session.getCardsLeft();
+    }
+
     public boolean isSessionDone(UUID id) {
         FlashcardSession session = findSession(id);
         return (session.getFlashDeck().size()-1 == session.getIndex());

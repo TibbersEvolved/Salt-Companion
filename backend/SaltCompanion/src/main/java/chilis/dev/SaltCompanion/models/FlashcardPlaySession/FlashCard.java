@@ -19,19 +19,19 @@ public class FlashCard {
         this.answer = answer;
     }
 
-    public String getTopic() {
+    public String getQuestion() {
         return question;
     }
 
-    public void setTopic(String topic) {
-        this.question = topic;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getName() {
+    public String getTopic() {
         return topic;
     }
 
-    public void setName(String name) {
-        this.topic = name;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }

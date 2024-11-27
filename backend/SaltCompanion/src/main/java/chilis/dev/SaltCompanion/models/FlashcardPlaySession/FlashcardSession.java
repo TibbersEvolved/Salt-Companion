@@ -25,6 +25,10 @@ public class FlashcardSession {
         return id;
     }
 
+    public int getCardsLeft() {
+        return flashDeck.size() - index;
+    }
+
     public List<FlashCard> getFlashDeck() {
         return flashDeck;
     }
