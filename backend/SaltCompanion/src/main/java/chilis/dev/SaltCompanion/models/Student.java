@@ -27,6 +27,12 @@ public class Student {
 
     }
 
+    public Student(String clerkId, String name, BootCamp bootCamp) {
+        this.clerkId = clerkId;
+        this.name = name;
+        this.bootCamp = bootCamp;
+    }
+
     public Student(String email) {
 
         this.email = email;
@@ -70,5 +76,25 @@ public class Student {
                 "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public String getClerkId() {
+        return clerkId;
+    }
+
+    public void setClerkId(String clerkId) {
+        this.clerkId = clerkId;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

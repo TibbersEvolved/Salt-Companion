@@ -2,6 +2,7 @@ package chilis.dev.SaltCompanion.services;
 
 import chilis.dev.SaltCompanion.controllers.BootcampController;
 import chilis.dev.SaltCompanion.models.BootCamp;
+import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.repositories.StudentRepo;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class StudentService {
     }
 
     public void createStudent(String name, String clerkId, BootCamp bootCamp) {
+
     }
 
 
