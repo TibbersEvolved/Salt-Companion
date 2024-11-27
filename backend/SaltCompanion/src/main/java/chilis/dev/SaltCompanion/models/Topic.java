@@ -35,6 +35,7 @@ public class Topic {
 
     public Topic(String name) {
         this.name = name;
+        this.deck = new Deck();
     }
 
     public Topic() {
