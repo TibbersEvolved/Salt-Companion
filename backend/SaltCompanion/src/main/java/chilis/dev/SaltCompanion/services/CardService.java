@@ -22,11 +22,6 @@ public class CardService {
         this.studentService = studentService;
         this.bootcampService = bootcampService;
         Topic topic = new Topic("Java44");
-        System.out.println(topic.getDeck());
-        Long boot = bootcampService.addBootCamp("Slatan",new Teacher("Jesus","heaven@gmail.com"));
-        bootcampService.addTopicToBootCamp(boot,topic);
-        List<Topic> topicList = bootcampService.getTopicsForBootCamp(boot);
-
     }
 
     public UUID startNewSession(List<Topic> topics, int cardAmount) {
