@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ReactFlipCard from "reactjs-flip-card";
 import { flashCard } from "../mocked/mocked-data";
 import { Link } from "@tanstack/react-router";
+import Confetti from "react-confetti";
+import { useWindowSize } from "react-use";
 
 export const Flashcard = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -13,22 +15,27 @@ export const Flashcard = () => {
 
   const isEndReached = currentCardIndex >= flashCard.length;
 
+  const { width, height } = useWindowSize();
+
   return (
     <>
       {isEndReached ? (
-        <div className="flex flex-col items-center justify-center h-screen">
-          <h1 className="text-3xl text-center mt-10">
-            You've reached the end of the flashcards!
-          </h1>
-          <Link to="/landing">
-            <button
-              className="bg-rose-600 text-white px-6 py-3 rounded-md mt-6"
-              onClick={() => setCurrentCardIndex(0)}
-            >
-              Go back to the main page
-            </button>
-          </Link>
-        </div>
+        <>
+          <Confetti width={width} height={height} />
+          <div className="flex flex-col items-center justify-center h-screen">
+            <h1 className="text-3xl text-center mt-10">
+              You've reached the end of the flashcards!
+            </h1>
+            <Link to="/landing">
+              <button
+                className="bg-rose-600 text-white px-6 py-3 rounded-md mt-6"
+                onClick={() => setCurrentCardIndex(0)}
+              >
+                Go back to the main page
+              </button>
+            </Link>
+          </div>
+        </>
       ) : (
         <>
           <h1 className="text-3xl text-center mt-10">{currentCard.question}</h1>
