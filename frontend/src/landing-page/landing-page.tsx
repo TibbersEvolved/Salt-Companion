@@ -10,28 +10,34 @@ export const LandingPage = () => {
 
   const handleChange = (selected) => {
     setSelectedOptions(selected);
-    console.log(selected);
+  };
+
+  const handleClick = () => {
+    console.log(selectedOptions);
   };
 
   return (
-    <div className="m-0 p-0 overflow-hidden place-content-center">
-      <SignedIn>
+    <SignedIn>
+      <div className="m-0 p-0 overflow-hidden place-content-center">
         <div className="m-0 p-0 bg-slate-600 w-screen h-screen items-center grid grid-cols-1">
           <h2 className="text-center text-5xl">
             Welcome {user?.firstName} ID:{user?.id}
           </h2>
 
-          <div className="grid grid-cols-1 ">
+          <div>
             <Select
               isMulti
-              name="colors"
               options={mockedCourseData}
               className="text-black w-1/2"
               classNamePrefix="select"
               onChange={handleChange}
+              placeholder="Select topic to practice"
             />
           </div>
-          <button className="text-5xl border-solid rounded-lg border-2 border-black w-fit">
+          <button
+            onClick={handleClick}
+            className="text-5xl border-solid rounded-lg border-2 border-black w-fit"
+          >
             Next
           </button>
         </div>
@@ -41,7 +47,7 @@ export const LandingPage = () => {
             <h2>buncha scool stats</h2>
           </div>
         </div>
-      </SignedIn>
-    </div>
+      </div>
+    </SignedIn>
   );
 };
