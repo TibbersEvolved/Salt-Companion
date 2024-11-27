@@ -7,9 +7,7 @@ import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.models.Topic;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CardService {
@@ -21,12 +19,42 @@ public class CardService {
     public CardService(StudentService studentService, BootcampService bootcampService) {
         this.studentService = studentService;
         this.bootcampService = bootcampService;
-        Topic topic = new Topic("Java44");
     }
 
+    public FlashCard drawNewCard(UUID id) {
+        FlashcardSession session = findSession(id);
+        return session.drawNext();
+    }
+
+    private FlashcardSession findSession(UUID id) {
+        Optional<FlashcardSession> session = sessions.stream()
+                .filter(s -> s.getId().equals(id))
+                .findFirst();
+        if(session.isEmpty()) {
+            return null;
+        }
+        return session.get();
+    }
     public UUID startNewSession(List<Topic> topics, int cardAmount) {
-        List<FlashCard> cards = new ArrayList<>();
+        List<FlashCard> flashCardList = new ArrayList<>();
         List<Card> selectableCards = new ArrayList<>();
-        return UUID.randomUUID();
+        topics.forEach(s -> {
+            selectableCards.addAll(s.getDeck().getDeckCards());
+        });
+        if (selectableCards.size() > cardAmount) {
+            cardAmount = selectableCards.size();
+        }
+        Random random = new Random();
+        for(int i = 0; cardAmount < i; i++ ) {
+            int index = random.nextInt(0,selectableCards.size());
+            Card card = selectableCards.get(index);
+            String topic = card.getDeck().getTopic().getName();
+            flashCardList.add(new FlashCard(topic,card.getText(),card.getAnswer()));
+            selectableCards.remove(index);
+        }
+        FlashcardSession newSession = new FlashcardSession(flashCardList);
+        UUID identifier = newSession.getId();
+        sessions.add(newSession);
+        return identifier;
     }
 }

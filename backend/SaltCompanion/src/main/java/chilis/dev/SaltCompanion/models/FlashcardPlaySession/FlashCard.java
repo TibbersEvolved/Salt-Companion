@@ -1,13 +1,13 @@
 package chilis.dev.SaltCompanion.models.FlashcardPlaySession;
 
 public class FlashCard {
-    private String name;
     private String topic;
+    private String question;
     private String answer;
 
-    public FlashCard(String name, String topic, String answer) {
-        this.name = name;
+    public FlashCard(String topic, String question, String answer) {
         this.topic = topic;
+        this.question = question;
         this.answer = answer;
     }
 
@@ -20,18 +20,18 @@ public class FlashCard {
     }
 
     public String getTopic() {
-        return topic;
+        return question;
     }
 
     public void setTopic(String topic) {
-        this.topic = topic;
+        this.question = topic;
     }
 
     public String getName() {
-        return name;
+        return topic;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.topic = name;
     }
 }
