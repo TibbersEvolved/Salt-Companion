@@ -21,7 +21,7 @@ export const Flashcard = () => {
     <>
       {isEndReached ? (
         <>
-          <Confetti width={width} height={height} />
+          <Confetti width={width} height={height} initialVelocityY={25} />
           <div className="flex flex-col items-center justify-center h-screen">
             <h1 className="text-3xl text-center mt-10">
               You've reached the end of the flashcards!
