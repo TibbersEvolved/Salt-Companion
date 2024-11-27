@@ -13,38 +13,64 @@ export const LandingPage = () => {
   };
 
   const handleClick = () => {
+    <Link to="/flashcard" />;
     console.log(selectedOptions);
   };
 
   return (
     <SignedIn>
-      <div className="m-0 p-0 overflow-hidden place-content-center">
-        <div className="m-0 p-0 bg-slate-600 w-screen h-screen items-center grid grid-cols-1">
-          <h2 className="text-center text-5xl">
-            Welcome {user?.firstName} ID:{user?.id}
-          </h2>
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+        <div className="bg-white shadow-md rounded-lg w-full max-w-4xl p-6 grid grid-cols-1 gap-8">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-gray-800 mb-2">
+              Welcome, {user?.firstName}!
+            </h2>
+            <p className="text-gray-600">User ID: {user?.id}</p>
+          </div>
 
-          <div>
+          <div className="text-center">
+            <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+              Not sure what to study?
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Take our quiz to find your focus!
+            </p>
+            <button
+              onClick={handleClick}
+              className="m-6 bg-gray-300 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-gray-500 transition duration-200"
+            >
+              Quiz
+            </button>
+            <div className="h-20 w-54 border border-black  mx-auto">
+              Stuff to practice{" "}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center">
             <Select
               isMulti
               options={mockedCourseData}
-              className="text-black w-1/2"
+              className="text-black w-full max-w-md"
               classNamePrefix="select"
               onChange={handleChange}
-              placeholder="Select topic to practice"
+              placeholder="Select topics to practice shadow-md"
             />
+            <button
+              onClick={handleClick}
+              className="mt-6 bg-gray-300 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-gray-500 transition duration-200"
+            >
+              <Link to="/flashcard">Next</Link>
+            </button>
           </div>
-          <button
-            onClick={handleClick}
-            className="text-5xl border-solid rounded-lg border-2 border-black w-fit"
-          >
-            Next
-          </button>
         </div>
-        <div className="w-screen h-screen overflow-hidden bg-white grid  ">
-          <h2 className="text-center text-5xl">Stats</h2>
-          <div className="border border-black h-10/12 w-3/4">
-            <h2>buncha scool stats</h2>
+        <div className="bg-white shadow-md rounded-lg w-full max-w-4xl mt-8 p-6">
+          <h2 className="text-center text-3xl font-bold text-gray-800 mb-4">
+            Stats
+          </h2>
+          <div className="border border-gray-300 rounded-lg p-4">
+            <h2 className="text-lg text-gray-700">
+              Here are some school stats:
+            </h2>
           </div>
         </div>
       </div>
