@@ -26,6 +26,11 @@ public class CardService {
         return session.drawNext();
     }
 
+    public boolean isSessionDone(UUID id) {
+        FlashcardSession session = findSession(id);
+        return (session.getFlashDeck().size()-1 == session.getIndex());
+    }
+
     private FlashcardSession findSession(UUID id) {
         Optional<FlashcardSession> session = sessions.stream()
                 .filter(s -> s.getId().equals(id))
