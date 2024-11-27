@@ -55,7 +55,7 @@ export const Flashcard = () => {
                     <div className="flex-grow flex items-center justify-center p-12 text-center text-2xl">
                       <p>{currentCard.answer}</p>
                     </div>
-                    <div className="absolute bottom-6 space-x-3 text-white">
+                    {/* <div className="absolute bottom-6 space-x-3 text-white">
                       <button
                         className="bg-red-800 w-24 p-2 rounded-md"
                         onClick={() => nextCard()}
@@ -80,7 +80,7 @@ export const Flashcard = () => {
                       >
                         Very easy
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                   <p
                     className="text-center mt-8 italic text-gray-500"
@@ -88,6 +88,32 @@ export const Flashcard = () => {
                   >
                     How difficult was this card? Select an option to continue
                   </p>
+                  <div className="space-x-3 text-white flex-grow flex items-center justify-center mt-5">
+                    <button
+                      className="bg-red-800 w-24 p-2 rounded-md"
+                      onClick={() => nextCard()}
+                    >
+                      Difficult
+                    </button>
+                    <button
+                      className="bg-yellow-500 w-24 p-2 rounded-md"
+                      onClick={() => nextCard()}
+                    >
+                      Moderate
+                    </button>
+                    <button
+                      className="bg-sky-600 w-24 p-2 rounded-md"
+                      onClick={() => nextCard()}
+                    >
+                      Easy
+                    </button>
+                    <button
+                      className="bg-green-700 w-24 p-2 rounded-md"
+                      onClick={() => nextCard()}
+                    >
+                      Very easy
+                    </button>
+                  </div>
                 </>
               }
             />
