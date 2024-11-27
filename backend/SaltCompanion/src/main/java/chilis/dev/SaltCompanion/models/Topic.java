@@ -21,8 +21,8 @@ public class Topic {
     //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "deck_id")
 //    private Deck deck;
-    @ManyToOne
-    @JoinColumn(name = "deck_id", unique = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "deck")
     private Deck deck;
 
     @ManyToOne
@@ -36,6 +36,7 @@ public class Topic {
     public Topic(String name) {
         this.name = name;
         this.deck = new Deck();
+        this.deck.setTopic(this);
     }
 
     public Topic() {

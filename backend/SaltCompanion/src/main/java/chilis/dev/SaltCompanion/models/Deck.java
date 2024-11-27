@@ -18,8 +18,8 @@ public class Deck {
     @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL)
     private List<Card> deckCards = new ArrayList<>();
 
-    @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL)
-    private List<Topic> topics = new ArrayList<>();
+    @OneToOne(mappedBy = "deck")
+    private Topic topic;
 
 
     public Deck() {
@@ -49,6 +49,14 @@ public class Deck {
 
     public List<Card> getDeckCards() {
         return deckCards;
+    }
+
+    public chilis.dev.SaltCompanion.models.Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(chilis.dev.SaltCompanion.models.Topic topic) {
+        this.topic = topic;
     }
 
     @Override
