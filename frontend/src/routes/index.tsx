@@ -18,9 +18,11 @@ function LoginPage() {
           />
         </div>
         <div className="flex flex-col justify-center items-center">
-          <h1 className="text-4xl p-2 text-center mb-10">
-            Welcome to the ultimate SALT Companion
-          </h1>
+          <img
+            src="public/salt-logo-dark.svg"
+            alt="Salt logo"
+            className="h-52 w-52"
+          />
           <Login />
         </div>
       </div>
