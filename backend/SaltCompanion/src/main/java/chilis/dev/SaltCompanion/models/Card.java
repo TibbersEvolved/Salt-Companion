@@ -20,7 +20,7 @@ public class Card {
     @Transient
     private CardDifficulty difficulty;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name ="deck_id", nullable = false)
     private Deck deck;
 
@@ -33,7 +33,7 @@ public class Card {
         if (text == null || answer == null) {
             throw new NullPointerException("Card must have text and answer");
         }
-
+        this.deck = deck;
         this.text = text;
         this.answer = answer;
         this.difficulty = CardDifficulty.IMPOSSIBLE;

@@ -23,7 +23,7 @@ public class Topic {
     private Deck deck;
 
     @ManyToOne
-    @JoinColumn(name = "bootcamp_id", nullable = false)
+    @JoinColumn(name = "bootCamp", nullable = false)
     private BootCamp bootCamp;
 
     public BootCamp getBootCampList() {

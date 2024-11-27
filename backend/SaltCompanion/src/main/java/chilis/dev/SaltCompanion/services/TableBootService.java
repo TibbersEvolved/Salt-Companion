@@ -1,6 +1,7 @@
 package chilis.dev.SaltCompanion.services;
 
 import chilis.dev.SaltCompanion.models.*;
+import chilis.dev.SaltCompanion.repositories.CardRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,16 @@ public class TableBootService {
 
     BootcampService bootcampService;
     TeacherService teacherService;
+    CardRepository cardRepository;
 
-    public TableBootService(BootcampService bootcampService, TeacherService teacherService) {
+    public TableBootService(BootcampService bootcampService, TeacherService teacherService, CardRepository cardRepository) {
         this.bootcampService = bootcampService;
         this.teacherService = teacherService;
+        this.cardRepository = cardRepository;
         BootTables("JFS");
     }
 
-    @Transactional
+
     public void BootTables(String bootCampName){
 
         Teacher teacher = teacherService.createTeacher("550e8400-e29b-41d4-a716-446655440000",
@@ -35,7 +38,7 @@ public class TableBootService {
        Deck deck = topic.getDeck();
        loadDeck(deck);
        loadStudents(bootCamp);
-
+       topic.setDeck(deck);
        bootcampService.saveBootcamp(bootCamp);
 
 
@@ -47,6 +50,14 @@ public class TableBootService {
         Card card3 = new Card("Is JPA a fun thing?", "Yes it is so much fun",deck);
         Card card4 = new Card("Why do you push ?", "version control",deck);
         Card card5 = new Card("Is Python cred or no?", "no",deck);
+        List<Card> list = new ArrayList<>();
+        list.add(card1);
+        list.add(card2);
+        list.add(card3);
+        list.add(card4);
+        list.add(card5);
+        list.forEach(s -> cardRepository.save(s));
+        deck.setDeckCards(list);
     }
 
     public void loadStudents(BootCamp bootCamp){
