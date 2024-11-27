@@ -1,4 +1,4 @@
-INSERT INTO public.teacher(id, email, name) VALUES (1,'hej@salt.se','Alek');
+/*INSERT INTO public.teacher(id, email, name) VALUES (1,'hej@salt.se','Alek');
 
 INSERT INTO public.boot_camp(id, teacher_id, name) VALUES (10,1,'JFS');
 

@@ -28,7 +28,7 @@ public class Card {
 
     }
 
-    public Card(String text, String answer) {
+    public Card(String text, String answer, Deck deck) {
 
         if (text == null || answer == null) {
             throw new NullPointerException("Card must have text and answer");
