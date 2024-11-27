@@ -36,6 +36,9 @@ export const Flashcard = () => {
                   </button>
                 </div>
               </div>
+              <p className="text-center mt-8 italic text-gray-500">
+                How difficult was this card? Select an option to continue
+              </p>
             </>
           }
         />
