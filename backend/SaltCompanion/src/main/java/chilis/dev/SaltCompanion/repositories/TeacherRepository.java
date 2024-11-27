@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TeacherRepository extends ListCrudRepository<Teacher, Long> {
+    boolean findByClerkId(String clerkId);
+
+    Teacher findTeacherByClerkId(String clerkId);
 }
