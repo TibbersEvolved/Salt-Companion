@@ -16,10 +16,13 @@ public class Deck {
 
 
     @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL)
-    private List<Card> deckCards;
+    private List<Card> deckCards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL)
+    private List<Topic> topics = new ArrayList<>();
+
 
     public Deck() {
-        this.deckCards = new ArrayList<>();
 
     }
 

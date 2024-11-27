@@ -18,10 +18,11 @@ spring:
 
 
   jpa:
-    show-sql: true
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    defer-datasource-initialization: true
+
 
 
 logging:
