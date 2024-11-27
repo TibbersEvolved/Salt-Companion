@@ -55,6 +55,15 @@ public class BootCamp {
         return false;
     }
 
+    public boolean findStudent(Long studentId){
+        for(Student s: students){
+            if(s.getId()==studentId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Transactional
     public void addTopic(Topic topic) {
         topic.addBootCamp(this);

@@ -1,9 +1,6 @@
 package chilis.dev.SaltCompanion.services;
 
-import chilis.dev.SaltCompanion.models.BootCamp;
-import chilis.dev.SaltCompanion.models.Deck;
-import chilis.dev.SaltCompanion.models.Teacher;
-import chilis.dev.SaltCompanion.models.Topic;
+import chilis.dev.SaltCompanion.models.*;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
 import chilis.dev.SaltCompanion.repositories.TeacherRepository;
 import chilis.dev.SaltCompanion.repositories.TopicRepository;
@@ -56,5 +53,30 @@ public class BootcampService {
 
     public Teacher getTeacher(long id) {
         return bootCampRepository.findById(id).get().getTeacher();
+    }
+
+    public void addStudent(Long bootCampId, Student student){
+        BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
+        if(bootCamp == null){
+            throw new NullPointerException("Bootcamp not found");
+        }
+
+        student.setBootCamp(bootCamp);
+        bootCamp.addStudent(student);
+        bootCampRepository.save(bootCamp);
+    }
+    public boolean removeStudent(Long bootCampId, Long StudentId){
+        BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
+        if(bootCamp == null){
+            throw new NullPointerException("Bootcamp not found");
+        }
+        if(bootCamp.findStudent(StudentId)){
+           bootCamp.removeStudent(StudentId);
+
+            bootCampRepository.save(bootCamp);
+
+           return true;
+        }
+        return false;
     }
 }

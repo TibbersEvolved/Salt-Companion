@@ -18,18 +18,13 @@ public class TableBootService {
         Teacher teacher = teacherService.createTeacher("550e8400-e29b-41d4-a716-446655440000",
                 "Alek","alek@salt.com");
 
-        bootcampService.addBootCamp(bootCampName, teacher);
+       Long bootCampId = bootcampService.addBootCamp(bootCampName, teacher);
+
+       bootcampService.addTopicToBootCamp(bootCampId, new Topic("React"));
 
     }
 
 
-    public void addBootCamp(String name, Teacher teacher) {
-        bootcampService.addBootCamp(name, teacher);
-    }
-
-    public void addTopicToBootCamp(Long id, Topic topic) {
-        bootcampService.addTopicToBootCamp(id, topic);
-    }
 
 
 }
