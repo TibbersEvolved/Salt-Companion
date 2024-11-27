@@ -22,12 +22,8 @@ public class BootcampController {
     }
 
     @GetMapping("/topic/{id}")
-    public ResponseEntity<ListDetailedTopicsDto> getCoursesFromBootcamp(@PathVariable int id) {
-        List<TopicDto> payload = new ArrayList<>();
-        bootcampService.getTopicsForBootCamp(id).forEach(s -> {
-            payload.add(new TopicDto(s.getId(),s.getName()));
-        });
-        return ResponseEntity.ok(new ListDetailedTopicsDto(payload));
+    public ResponseEntity<ListDetailedTopicsDto> getCoursesFromBootcamp(@PathVariable Long id) {
+        return ResponseEntity.ok(getListTopicsDto(id));
     }
 
     @GetMapping("/teacher/{id}")
@@ -58,5 +54,13 @@ public class BootcampController {
         Topic topic = new Topic(dto.name());
         bootcampService.addTopicToBootCamp(dto.id(), topic);
         return ResponseEntity.status(201).build();
+    }
+
+    public ListDetailedTopicsDto getListTopicsDto(Long bootCampId) {
+        List<TopicDto> payload = new ArrayList<>();
+        bootcampService.getTopicsForBootCamp(bootCampId).forEach(s -> {
+            payload.add(new TopicDto(s.getId(),s.getName()));
+        });
+        return new ListDetailedTopicsDto(payload);
     }
 }

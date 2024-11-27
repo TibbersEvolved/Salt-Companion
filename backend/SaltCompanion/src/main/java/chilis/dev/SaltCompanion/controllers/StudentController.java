@@ -1,12 +1,14 @@
 package chilis.dev.SaltCompanion.controllers;
 
+import chilis.dev.SaltCompanion.controllers.dto.ListDetailedTopicsDto;
 import chilis.dev.SaltCompanion.controllers.dto.ListTopicsDto;
+import chilis.dev.SaltCompanion.controllers.dto.StudentDetailedInfoDto;
+import chilis.dev.SaltCompanion.controllers.dtoInput.CreateStudentDto;
+import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import chilis.dev.SaltCompanion.services.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/students")
@@ -14,15 +16,30 @@ public class StudentController {
 
     private StudentService studentService;
     private BootcampService bootcampService;
+    private BootcampController bootcampController;
 
-    public StudentController(StudentService studentService, BootcampService bootcampService) {
+    public StudentController(StudentService studentService, BootcampService bootcampService, BootcampController bootcampController) {
         this.studentService = studentService;
         this.bootcampService = bootcampService;
+        this.bootcampController = bootcampController;
     }
 
     @GetMapping("/{id}")
-    public void getAllTopics(@PathVariable String id) {
-        //gets ListDetailedTopicsDto to send to frontend.
+    public ResponseEntity<StudentDetailedInfoDto> getStudentInfo(@PathVariable String id) {
+        Student student = studentService.findStudentByClerkId(id);
+        if(student == null) {
+            return ResponseEntity.status(400).build();
+        }
+        ListDetailedTopicsDto studentTopics = bootcampController.
+                getListTopicsDto(student.getBootCamp().getId());
+        return ResponseEntity.ok(new StudentDetailedInfoDto(student.getName(),
+                student.getBootCamp().getName(), studentTopics));
+    }
+
+    @PostMapping
+    public ResponseEntity createStudent(@RequestBody CreateStudentDto input) {
+        studentService.createStudent(input.name(),input.clerkId());
+        return ResponseEntity.status(201).build();
     }
 
 
