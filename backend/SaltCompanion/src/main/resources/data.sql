@@ -9,6 +9,7 @@ INSERT INTO public.student(id, email, name) VALUES (4, 'student4@salt.com', 'And
 INSERT INTO public.student(id, email, name) VALUES (5, 'student5@salt.com', 'Lawe');
 
 INSERT INTO public.deck(id) VALUES (1);
+INSERT INTO public.topic(bootcamp_id, deck_id, id,name) VALUES (10,1,1, 'Java');
 
 INSERT INTO public.card(deck_id, id, answer, text) VALUES (1, 1, 'Java', 'What is Code really?');
 INSERT INTO public.card(deck_id, id, answer, text) VALUES (1, 2, 'Frontend', 'What is JPA reaaally?');
