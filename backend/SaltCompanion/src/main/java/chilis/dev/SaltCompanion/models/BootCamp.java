@@ -16,22 +16,22 @@ public class BootCamp {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL)
-    private List<Topic> topics;
+    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Topic> topics = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL)
-    private List<Student> students;
+    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Student> students = new ArrayList<>();
 
 
 
     public BootCamp(String name, Teacher teacher){
         this.name = name;
         this.teacher = teacher;
-        this.topics = new ArrayList<>();
+
     }
 
     public BootCamp() {
@@ -40,15 +40,18 @@ public class BootCamp {
 
 
     public void addStudent(Student student){
-
         this.students.add(student);
+        student.setBootCamp(this);
     }
 
     public boolean removeStudent(Long studentId){
         for(Student s: students){
-            if(s.getId()==studentId);
-            this.students.remove(s);
-            return true;
+            if(s.getId()==studentId) {
+                s.setBootCamp(null);
+                this.students.remove(s);
+
+                return true;
+            }
         }
         return false;
     }
@@ -62,8 +65,8 @@ public class BootCamp {
     public boolean removeTopic(Long topicId){
 
         for(Topic t : topics){
-
             if(t.getId()==topicId){
+               t.setBootCamp(null);
                 topics.remove(t);
                 return true;
             }

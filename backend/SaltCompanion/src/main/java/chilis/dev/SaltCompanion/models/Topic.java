@@ -18,14 +18,15 @@ public class Topic {
     @Column(nullable = false)
     private String name;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
+    //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "deck_id")
 //    private Deck deck;
-@ManyToOne
-@JoinColumn(name = "deck_id", unique = true)
-private Deck deck;
+    @ManyToOne
+    @JoinColumn(name = "deck_id", unique = true)
+    private Deck deck;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "bootcamp_id", nullable = false)
     private BootCamp bootCamp;
 
     public BootCamp getBootCampList() {

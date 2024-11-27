@@ -28,6 +28,17 @@ public class Deck {
 
     public void addCard(Card card) {
         deckCards.add(card);
+        card.setDeck(this);
+    }
+    public boolean removeCard(Long cardId){
+        for(Card c: deckCards){
+            if(c.getId()==cardId) {
+                c.setDeck(null);
+                this.deckCards.remove(c);
+                return true;
+            }
+        }
+        return false;
     }
 
     public Card getRandomCard() {

@@ -19,7 +19,7 @@ public class Student {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "bootcamp_id")
     private BootCamp bootCamp;
 
@@ -38,6 +38,14 @@ public class Student {
 
     public String getMail() {
         return email;
+    }
+
+    public BootCamp getBootCamp() {
+        return bootCamp;
+    }
+
+    public void setBootCamp(BootCamp bootCamp) {
+        this.bootCamp = bootCamp;
     }
 
     public Long getId() {

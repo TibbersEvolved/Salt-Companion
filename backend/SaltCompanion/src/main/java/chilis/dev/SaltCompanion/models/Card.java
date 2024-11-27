@@ -40,6 +40,14 @@ public class Card {
 
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
     public String getText() {
         return text;
     }
@@ -62,6 +70,14 @@ public class Card {
 
     public void setDifficulty(CardDifficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
