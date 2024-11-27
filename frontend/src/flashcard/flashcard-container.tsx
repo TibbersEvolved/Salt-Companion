@@ -6,10 +6,10 @@ export const Flashcard = () => {
         <div className="w-[600px] h-96 bg-gray-200 flex items-center justify-center">
           <p>flashcard.front</p>
           <div>
-            <button>Very hard</button>
-            <button>Hard</button>
+            <button>Difficult</button>
+            <button>Moderate</button>
             <button>Easy</button>
-            <button>Too easy</button>
+            <button>Very easy</button>
           </div>
         </div>
       </div>
