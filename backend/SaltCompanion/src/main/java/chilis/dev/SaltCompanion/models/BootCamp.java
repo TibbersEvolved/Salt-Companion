@@ -16,14 +16,14 @@ public class BootCamp {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL)
     private List<Topic> topics = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "bootCamp", cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<>();
 
 
@@ -37,7 +37,6 @@ public class BootCamp {
     public BootCamp() {
 
     }
-
 
     public void addStudent(Student student){
         this.students.add(student);
