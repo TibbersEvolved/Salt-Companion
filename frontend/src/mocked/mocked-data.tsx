@@ -57,3 +57,65 @@ export const colourOptions = [
   { value: "slate", label: "Slate", color: "#253858" },
   { value: "silver", label: "Silver", color: "#666666" },
 ];
+
+export const flashCard = [
+  {
+    id: 1,
+    question: "What is JavaScript?",
+    answer:
+      "JavaScript is a programming language that enables you to interact with web pages.",
+  },
+  {
+    id: 2,
+    question: "What is React?",
+    answer: "React is a JavaScript library for building user interfaces.",
+  },
+  {
+    id: 3,
+    question: "What is TypeScript?",
+    answer:
+      "TypeScript is a superset of JavaScript that adds static typing to the language.",
+  },
+  {
+    id: 4,
+    question: "What is HTML?",
+    answer:
+      "HTML is a markup language that is used to create the structure of a web page.",
+  },
+  {
+    id: 5,
+    question: "What is CSS?",
+    answer:
+      "CSS is a styling language that is used to control the layout and appearance of a web page.",
+  },
+  {
+    id: 6,
+    question: "What is a component?",
+    answer:
+      "A component is a reusable piece of code that can be used to build user interfaces.",
+  },
+  {
+    id: 7,
+    question: "What is a prop?",
+    answer:
+      "A prop is a way to pass data from a parent component to a child component.",
+  },
+  {
+    id: 8,
+    question: "What is Java?",
+    answer:
+      "Java is a programming language that is used to build applications that can run on any platform.",
+  },
+  {
+    id: 9,
+    question: "What is OOP?",
+    answer:
+      "OOP stands for Object-Oriented Programming, which is a programming paradigm that uses objects to model real-world entities.",
+  },
+  {
+    id: 10,
+    question: "What is a bean?",
+    answer:
+      "A bean is a Java class that is used to encapsulate data and provide methods to access and manipulate that data.",
+  },
+];
