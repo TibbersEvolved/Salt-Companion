@@ -1,23 +1,25 @@
 package chilis.dev.SaltCompanion.services;
 
 import chilis.dev.SaltCompanion.models.*;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TableBootService {
 
     BootcampService bootcampService;
     TeacherService teacherService;
 
-    private List<Student> mockStudents = new ArrayList<>();
-    private List <Card> mockCards = new ArrayList<>();
-
     public TableBootService(BootcampService bootcampService, TeacherService teacherService) {
         this.bootcampService = bootcampService;
         this.teacherService = teacherService;
+        BootTables("JFS");
     }
 
+    @Transactional
     public void BootTables(String bootCampName){
 
         Teacher teacher = teacherService.createTeacher("550e8400-e29b-41d4-a716-446655440000",

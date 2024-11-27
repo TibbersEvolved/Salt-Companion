@@ -2,7 +2,9 @@ package chilis.dev.SaltCompanion.services;
 
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.repositories.TeacherRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TeacherService {
 
     TeacherRepository teacherRepository;
@@ -12,7 +14,9 @@ public class TeacherService {
     }
 
     public Teacher createTeacher(String clerkId, String name, String email) {
-        if(teacherRepository.findByClerkId(clerkId)) {
+        Teacher teacher = teacherRepository.findTeacherByClerkId(clerkId);
+
+        if(teacher!=null) {
             throw new IllegalArgumentException("Teacher with clerkId " + clerkId + " already exists");
         }
         return teacherRepository.save(new Teacher(clerkId,name,email));

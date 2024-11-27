@@ -104,6 +104,10 @@ public class BootCamp {
         return teacher;
     }
 
+    public void setTeacher(Teacher teacher){
+        this.teacher = teacher;
+    }
+
     public List<Student> getStudents() {
         return students;
     }

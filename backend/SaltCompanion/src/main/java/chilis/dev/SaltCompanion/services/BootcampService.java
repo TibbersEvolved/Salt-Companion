@@ -27,13 +27,17 @@ public class BootcampService {
         bootCampRepository.save(bootCamp);
     }
 
+    @Transactional
     public Long addBootCamp(String name, Teacher teacher) {
         BootCamp bootCamp = new BootCamp(name, teacher);
         teacher.addBootCamp(bootCamp);
+        bootCamp.setTeacher(teacher);
+//        teacherRepository.save(teacher);
+
         bootCampRepository.save(bootCamp);
         return bootCamp.getId();
     }
-
+    @Transactional
     public void addTopicToBootCamp(Long id, Topic topic) {
         BootCamp bootCamp = bootCampRepository.findById(id).get();
         List<Topic> topics = topicRepository.findAllByBootCamp_Id(id);
@@ -70,7 +74,7 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
     public Teacher getTeacher(long id) {
         return bootCampRepository.findById(id).get().getTeacher();
     }
-
+    @Transactional
     public void addStudent(Long bootCampId, Student student){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
        validateBootCamp(bootCamp);
@@ -79,6 +83,7 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
         bootCamp.addStudent(student);
         bootCampRepository.save(bootCamp);
     }
+    @Transactional
     public boolean removeStudent(Long bootCampId, Long StudentId){
 
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
