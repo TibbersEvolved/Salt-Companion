@@ -19,7 +19,7 @@ public class TeacherService {
         if(teacher!=null) {
             throw new IllegalArgumentException("Teacher with clerkId " + clerkId + " already exists");
         }
-        return teacherRepository.save(new Teacher(clerkId,name,email));
+        return new Teacher(clerkId,name,email);
     }
 
     public Teacher findTeacherByClerkId(String clerkId) {

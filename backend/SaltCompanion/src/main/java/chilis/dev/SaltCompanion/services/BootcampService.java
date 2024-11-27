@@ -50,7 +50,7 @@ public class BootcampService {
 public Topic findBootCampTopic(Long bootCampId, String topicName){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
         validateBootCamp(bootCamp);
-        List<Topic> topics = bootCamp.getTopics();
+        List<Topic> topics = topicRepository.findAllByBootCamp_Id(bootCampId);
         for(Topic topic: topics){
             if(topic.getName().equals(topicName)){
                 return topic;
