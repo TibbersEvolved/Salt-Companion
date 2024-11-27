@@ -10,7 +10,9 @@ export const LandingPage = () => {
     <div className="m-0 p-0 overflow-hidden place-content-center">
       <SignedIn>
         <div className="m-0 p-0 bg-slate-600 w-screen h-screen items-center grid grid-cols-1">
-          <h2 className="text-center text-5xl">Welcome {user?.firstName}</h2>
+          <h2 className="text-center text-5xl">
+            Welcome {user?.firstName} ID:{user?.id}
+          </h2>
 
           <div className="grid grid-cols-1 ">
             <Select
