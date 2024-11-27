@@ -53,7 +53,7 @@ export const LandingPage = () => {
               className="text-black w-full max-w-md"
               classNamePrefix="select"
               onChange={handleChange}
-              placeholder="Select topics to practice shadow-md"
+              placeholder="Select topics to practice"
             />
             <button
               onClick={handleClick}
