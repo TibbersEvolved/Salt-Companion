@@ -11,11 +11,11 @@ public class TeacherService {
         this.teacherRepository = teacherRepository;
     }
 
-    public void createTeacher(String clerkId, String name, String email) {
+    public Teacher createTeacher(String clerkId, String name, String email) {
         if(teacherRepository.findByClerkId(clerkId)) {
             throw new IllegalArgumentException("Teacher with clerkId " + clerkId + " already exists");
         }
-        teacherRepository.save(new Teacher(clerkId,name,email));
+        return teacherRepository.save(new Teacher(clerkId,name,email));
     }
 
     public Teacher findTeacherByClerkId(String clerkId) {

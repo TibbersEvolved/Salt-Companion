@@ -28,7 +28,6 @@ public class BootcampService {
 
     public Long addBootCamp(String name, Teacher teacher) {
         BootCamp bootCamp = new BootCamp(name, teacher);
-        Deck deck = new Deck();
         teacher.addBootCamp(bootCamp);
         bootCampRepository.save(bootCamp);
         return bootCamp.getId();

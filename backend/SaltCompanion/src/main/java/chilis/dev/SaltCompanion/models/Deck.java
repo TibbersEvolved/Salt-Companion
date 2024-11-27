@@ -25,6 +25,10 @@ public class Deck {
     public Deck() {
 
     }
+    public Deck(Topic topic){
+        this.topic = topic;
+    }
+
 
     public void addCard(Card card) {
         deckCards.add(card);
@@ -58,6 +62,11 @@ public class Deck {
     public void setTopic(chilis.dev.SaltCompanion.models.Topic topic) {
         this.topic = topic;
     }
+
+    public void setDeckCards(List<Card> deckCards) {
+        this.deckCards = deckCards;
+    }
+
 
     @Override
     public boolean equals(Object o) {
