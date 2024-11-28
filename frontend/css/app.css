@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1,
+h2,
+h3 {
+  color: #0f2d45;
+}
+
+p {
+  font-weight: 300;
+}
