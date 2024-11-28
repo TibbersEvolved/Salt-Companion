@@ -39,8 +39,8 @@ export const Flashcard = () => {
       ) : (
         <>
           <div className="flex items-center justify-center h-screen">
-            <div className="bg-[#eed1d6] h-[730px] w-[750px] rounded-2xl">
-              <div className="text-center space-y-5 mt-10">
+            <div className="bg-[#eed1d6] h-[670px] w-[750px] rounded-2xl">
+              <div className="text-center space-y-5 mt-5">
                 <p className="text-[#f36384]">TOPIC NAME</p>
                 <h2 className="text-3xl font-extrabold">
                   {currentCard.question}
@@ -91,7 +91,7 @@ export const Flashcard = () => {
                     </div> */}
                       </div>
                       <p
-                        className="text-center mt-10 text-[#424242]"
+                        className="text-center mt-5 text-[#424242]"
                         onClick={() => nextCard()}
                       >
                         How difficult was this card? Select an option to
