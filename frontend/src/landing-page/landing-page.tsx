@@ -22,17 +22,17 @@ export const LandingPage = () => {
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 grid grid-cols-1 gap-8">
           <div className="text-center">
-            <h2 className="text-4xl font-bold text-gray-800 mb-2">
+            <h2 className="text-4xl font-bold mb-2">
               Welcome, {user?.firstName}!
             </h2>
-            <p className="text-gray-600">User ID: {user?.id}</p>
+            <p className="text-[#424242]">User ID: {user?.id}</p>
           </div>
 
           <div className="text-center">
-            <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+            <h3 className="text-2xl font-semibold mb-2">
               Not sure what to study?
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-[#424242] mb-4">
               Take our quiz to find your focus!
             </p>
             <button
@@ -64,13 +64,11 @@ export const LandingPage = () => {
           </div>
         </div>
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
-          <h2 className="text-center text-3xl font-bold text-gray-800 mb-4">
-            Stats
-          </h2>
+          <h2 className="text-center text-3xl font-bold mb-4">Stats</h2>
           <div className="border border-gray-300 rounded-lg p-4">
-            <h2 className="text-lg text-gray-700">
+            <p className="text-[#424242] text-lg">
               Here are some school stats:
-            </h2>
+            </p>
           </div>
         </div>
       </div>
