@@ -1,10 +1,12 @@
 package chilis.dev.SaltCompanion.controllers;
 
 import chilis.dev.SaltCompanion.controllers.dto.*;
+import chilis.dev.SaltCompanion.controllers.dtoInput.CreateBootCampDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTopicDto;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
+import chilis.dev.SaltCompanion.services.TeacherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +17,12 @@ import java.util.List;
 @RequestMapping("/api/bootcamps")
 public class BootcampController {
 
-    BootcampService bootcampService;
+    private BootcampService bootcampService;
+    private TeacherService teacherService;
 
-    public BootcampController(BootcampService bootcampService) {
+    public BootcampController(BootcampService bootcampService, TeacherService teacherService) {
         this.bootcampService = bootcampService;
+        this.teacherService = teacherService;
     }
 
     @GetMapping("/topic/{id}")
@@ -42,10 +46,10 @@ public class BootcampController {
         return ResponseEntity.ok(new BootCampListDto(bootCampDtos));
     }
 
-    @PostMapping("/{name}")
-    public ResponseEntity createBootCamp(@PathVariable String name) {
-        Teacher teacher = new Teacher("fd","FakeTeacher","mock@gmail.com");
-        bootcampService.addBootCamp(name,teacher);
+    @PostMapping
+    public ResponseEntity createBootCamp(@RequestBody CreateBootCampDto dto) {
+        Teacher teacher = teacherService.findTeacherByClerkId(dto.clerkId());
+        bootcampService.addBootCamp(dto.name(),teacher);
         return ResponseEntity.status(201).build();
     }
 
