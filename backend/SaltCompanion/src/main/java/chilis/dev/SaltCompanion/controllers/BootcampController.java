@@ -1,8 +1,10 @@
 package chilis.dev.SaltCompanion.controllers;
 
+import chilis.dev.SaltCompanion.Exceptions.BootCampExistException;
 import chilis.dev.SaltCompanion.controllers.dto.*;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateBootCampDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTopicDto;
+import chilis.dev.SaltCompanion.models.BootCamp;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
@@ -24,6 +26,17 @@ public class BootcampController {
     public BootcampController(BootcampService bootcampService, TeacherService teacherService) {
         this.bootcampService = bootcampService;
         this.teacherService = teacherService;
+    }
+
+    @GetMapping("/{bootcampId}")
+    public ResponseEntity<BootCampDto> getBootCamp(@PathVariable Long bootcampId) {
+        BootCamp bootCamp = bootcampService.getBootCamp(bootcampId);
+        validateBootCamp(bootCamp);
+        return ResponseEntity.ok(new BootCampDto(
+                bootCamp.getName(),
+               bootCamp.getId(),
+                bootCamp.getTeacher().getName()
+        ));
     }
 
     @GetMapping("/topic/{id}")
@@ -67,5 +80,14 @@ public class BootcampController {
             payload.add(new TopicDto(s.getId(),s.getName()));
         });
         return new ListDetailedTopicsDto(payload);
+    }
+
+
+    public boolean validateBootCamp(BootCamp bootCamp){
+
+        if(bootCamp==null){
+            throw new BootCampExistException("Bootcamp not found");
+        }
+        return true;
     }
 }

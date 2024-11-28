@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({BootCampExistException.class})
-    protected ResponseEntity handlePresidentExistenceException(
+    protected ResponseEntity handleBootCampExistException(
             BootCampExistException ex, WebRequest request) {
 
         String message = "Not found: " + ex.getMessage();

@@ -62,7 +62,6 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
 
     public BootCamp getBootCamp(long id) {
 
-        validateBootCamp(bootCampRepository.findById(id).get());
         return bootCampRepository.findById(id).get();
     }
 
