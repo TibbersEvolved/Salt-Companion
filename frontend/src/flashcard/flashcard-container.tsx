@@ -38,26 +38,32 @@ export const Flashcard = () => {
         </>
       ) : (
         <>
-          <div className="text-center space-y-10 mt-10">
-            <h1 className="text-5xl">Topic name</h1>
-            <h2 className="text-3xl">{currentCard.question}</h2>
-          </div>
-          <div className="flex justify-center mt-16 space-y-36 bg-">
-            <ReactFlipCard
-              flipTrigger="onClick"
-              containerCss="w-[600px] h-96 bg-sky-300 flex items-center justify-center relative rounded-lg"
-              frontComponent={
-                <div className="flex items-center justify-center h-full">
-                  <p>Click to see the answer</p>
-                </div>
-              }
-              backComponent={
-                <>
-                  <div className="flex flex-col  bg-red-300 justify-between h-full items-center rounded-lg">
-                    <div className="flex-grow flex items-center justify-center p-12 text-center text-2xl">
-                      <p>{currentCard.answer}</p>
+          <div className="flex items-center justify-center h-screen">
+            <div className="bg-[#eed1d6] h-[730px] w-[750px] rounded-2xl">
+              <div className="text-center space-y-5 mt-10">
+                <p className="text-[#f36384]">TOPIC NAME</p>
+                <h2 className="text-3xl font-extrabold">
+                  {currentCard.question}
+                </h2>
+              </div>
+              <div className="flex justify-center mt-10 space-y-36">
+                <ReactFlipCard
+                  flipTrigger="onClick"
+                  containerCss="w-[600px] h-96 bg-white shadow-md flex items-center justify-center relative rounded-2xl"
+                  frontComponent={
+                    <div className="flex items-center justify-center h-full">
+                      <p className="text-2xl text-[#424242]">
+                        Click to see the answer
+                      </p>
                     </div>
-                    {/* <div className="absolute bottom-6 space-x-3 text-white">
+                  }
+                  backComponent={
+                    <>
+                      <div className="flex flex-col  bg-[#0f2d45] text-white justify-between h-full items-center rounded-2xl">
+                        <div className="flex-grow flex items-center justify-center p-12 text-center text-2xl">
+                          <p className="font-bold">{currentCard.answer}</p>
+                        </div>
+                        {/* <div className="absolute bottom-6 space-x-3 text-white">
                       <button
                         className="bg-red-800 w-24 p-2 rounded-md"
                         onClick={() => nextCard()}
@@ -83,42 +89,45 @@ export const Flashcard = () => {
                         Very easy
                       </button>
                     </div> */}
-                  </div>
-                  <p
-                    className="text-center mt-8 italic text-gray-500"
-                    onClick={() => nextCard()}
-                  >
-                    How difficult was this card? Select an option to continue
-                  </p>
-                  <div className="space-x-3 text-white flex-grow flex items-center justify-center mt-5">
-                    <button
-                      className="bg-red-800 w-24 p-2 rounded-md"
-                      onClick={() => nextCard()}
-                    >
-                      Difficult
-                    </button>
-                    <button
-                      className="bg-yellow-500 w-24 p-2 rounded-md"
-                      onClick={() => nextCard()}
-                    >
-                      Moderate
-                    </button>
-                    <button
-                      className="bg-sky-600 w-24 p-2 rounded-md"
-                      onClick={() => nextCard()}
-                    >
-                      Easy
-                    </button>
-                    <button
-                      className="bg-green-700 w-24 p-2 rounded-md"
-                      onClick={() => nextCard()}
-                    >
-                      Very easy
-                    </button>
-                  </div>
-                </>
-              }
-            />
+                      </div>
+                      <p
+                        className="text-center mt-10 text-[#424242]"
+                        onClick={() => nextCard()}
+                      >
+                        How difficult was this card? Select an option to
+                        continue
+                      </p>
+                      <div className="space-x-3 text-white flex-grow flex items-center justify-center mt-5">
+                        <button
+                          className="bg-red-800 w-24 p-2 rounded-md"
+                          onClick={() => nextCard()}
+                        >
+                          Difficult
+                        </button>
+                        <button
+                          className="bg-yellow-500 w-24 p-2 rounded-md"
+                          onClick={() => nextCard()}
+                        >
+                          Moderate
+                        </button>
+                        <button
+                          className="bg-sky-600 w-24 p-2 rounded-md"
+                          onClick={() => nextCard()}
+                        >
+                          Easy
+                        </button>
+                        <button
+                          className="bg-green-700 w-24 p-2 rounded-md"
+                          onClick={() => nextCard()}
+                        >
+                          Very easy
+                        </button>
+                      </div>
+                    </>
+                  }
+                />
+              </div>
+            </div>
           </div>
         </>
       )}
