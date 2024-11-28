@@ -10,6 +10,7 @@ import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTeacherDto;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.services.TeacherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity createTeacher(@RequestBody CreateTeacherDto teacherDto) {
+    public ResponseEntity createTeacher(@RequestBody @Valid CreateTeacherDto teacherDto) {
         teacherService.createTeacher(teacherDto.clerkId(),teacherDto.name(),teacherDto.email());
         return ResponseEntity.status(201).build();
     }
