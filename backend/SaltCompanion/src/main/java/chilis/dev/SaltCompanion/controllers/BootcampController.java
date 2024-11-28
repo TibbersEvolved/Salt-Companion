@@ -80,6 +80,9 @@ public class BootcampController {
     }
 
     public ListDetailedTopicsDto getListTopicsDto(Long bootCampId) {
+
+        validateBootCampId(bootCampId);
+
         List<TopicDto> payload = new ArrayList<>();
         bootcampService.getTopicsForBootCamp(bootCampId).forEach(s -> {
             payload.add(new TopicDto(s.getId(), s.getName()));
