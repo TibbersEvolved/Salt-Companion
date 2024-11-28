@@ -14,6 +14,7 @@ spring:
 
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/saltDB}
+
     username: ${DB_SALT:chilis}
     password: ${DB_PASSWORD:redhot}
 

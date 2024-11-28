@@ -10,6 +10,7 @@ import chilis.dev.SaltCompanion.services.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
