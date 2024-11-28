@@ -8,6 +8,17 @@ h3 {
   color: #0f2d45;
 }
 
-p {
+p,
+input,
+label {
   font-weight: 300;
+}
+
+input,
+label {
+  color: #424242;
+}
+
+input:checked {
+  border: 6px solid #f36384;
 }
