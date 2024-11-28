@@ -1,5 +1,6 @@
 package chilis.dev.SaltCompanion.services;
 
+import chilis.dev.SaltCompanion.Exceptions.BootCampExistException;
 import chilis.dev.SaltCompanion.models.*;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
 import chilis.dev.SaltCompanion.repositories.TeacherRepository;
@@ -60,6 +61,8 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
 }
 
     public BootCamp getBootCamp(long id) {
+
+        validateBootCamp(bootCampRepository.findById(id).get());
         return bootCampRepository.findById(id).get();
     }
 
@@ -102,7 +105,7 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
     public boolean validateBootCamp(BootCamp bootCamp){
 
         if(bootCamp==null){
-            throw new NullPointerException("Bootcamp not found");
+            throw new BootCampExistException("Bootcamp not found");
         }
         return true;
     }
