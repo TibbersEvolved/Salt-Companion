@@ -20,7 +20,7 @@ export const LandingPage = () => {
   return (
     <SignedIn>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-        <div className="bg-white shadow-md rounded-lg w-full max-w-4xl p-6 grid grid-cols-1 gap-8">
+        <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 grid grid-cols-1 gap-8">
           <div className="text-center">
             <h2 className="text-4xl font-bold text-gray-800 mb-2">
               Welcome, {user?.firstName}!
@@ -63,7 +63,7 @@ export const LandingPage = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white shadow-md rounded-lg w-full max-w-4xl mt-8 p-6">
+        <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
           <h2 className="text-center text-3xl font-bold text-gray-800 mb-4">
             Stats
           </h2>
