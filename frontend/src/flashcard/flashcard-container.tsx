@@ -4,10 +4,13 @@ import { flashCard } from "../mocked/mocked-data";
 import { Link } from "@tanstack/react-router";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
+import { useQuery } from "@tanstack/react-query";
+import { getFlashcardQuestions } from "../services/api";
 
 export const Flashcard = () => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const currentCard = flashCard[currentCardIndex];
+  const { width, height } = useWindowSize();
 
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => prevIndex + 1);
@@ -15,7 +18,20 @@ export const Flashcard = () => {
 
   const isEndReached = currentCardIndex >= flashCard.length;
 
-  const { width, height } = useWindowSize();
+  // const { data: flashCards, isLoading, isError } = useQuery({
+  //   queryKey: ["flashCards"],
+  //   queryFn: getFlashcardQuestions,
+  // });
+
+  // const nextCard = () => {
+  //   setCurrentCardIndex((prevIndex) => prevIndex + 1);
+  // }
+
+  // const isEndReached = currentCardIndex >= flashCards.length;
+  // const currentCard = flashCard[currentCardIndex];
+
+  // if (isLoading) return <div>Loading pls add toast</div>
+  // if (isError) return <div>Error pls add toas</div>
 
   return (
     <>
@@ -45,8 +61,12 @@ export const Flashcard = () => {
                 <h2 className="text-3xl font-extrabold">
                   {currentCard.question}
                 </h2>
+                {/* {currentCard && (
+                <h2 className="text-3xl font-extrabold">{currentCard.question}</h2>
+              )} */}
               </div>
               <div className="flex justify-center mt-10 space-y-36">
+                {/* {currentCard && (whole ReactFlipCard component)} */}
                 <ReactFlipCard
                   flipTrigger="onClick"
                   containerCss="w-[600px] h-96 bg-white shadow-md flex items-center justify-center relative rounded-2xl"
