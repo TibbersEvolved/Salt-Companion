@@ -3,7 +3,7 @@ import { SignedIn } from "@clerk/clerk-react";
 export default function Footer() {
   return (
     <SignedIn>
-      <footer className="footer bg-neutral text-neutral-content items-center p-4">
+      <footer className="footer bg-[#0f2d45] text-white items-center p-4">
         <aside className="grid-flow-col items-center ml-4">
           <img src="public/salt-logo-light.svg" alt="salt logo" />
           <p className="ml-4">
