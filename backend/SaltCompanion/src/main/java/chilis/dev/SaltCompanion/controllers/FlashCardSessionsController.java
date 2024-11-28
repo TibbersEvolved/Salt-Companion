@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/cards")
-public class CardController {
+@RequestMapping("/api/flashSession")
+public class FlashCardSessionsController {
 
     private CardService cardService;
     private BootcampService bootcampService;
     private StudentService studentService;
 
-    public CardController(CardService cardService, BootcampService bootcampService, StudentService studentService) {
+    public FlashCardSessionsController(CardService cardService, BootcampService bootcampService, StudentService studentService) {
         this.cardService = cardService;
         this.bootcampService = bootcampService;
         this.studentService = studentService;
