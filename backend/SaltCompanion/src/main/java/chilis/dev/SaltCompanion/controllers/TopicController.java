@@ -3,6 +3,7 @@ package chilis.dev.SaltCompanion.controllers;
 import chilis.dev.SaltCompanion.controllers.dto.FlashCardDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateCardDto;
 import chilis.dev.SaltCompanion.services.CardService;
+import chilis.dev.SaltCompanion.services.ZpplicationInitializer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.*;
 public class TopicController {
 
     private CardService cardService;
+    private ZpplicationInitializer initializer;
 
-    public TopicController(CardService cardService) {
+    public TopicController(CardService cardService, ZpplicationInitializer init) {
         this.cardService = cardService;
+        this.initializer = init;
     }
 
     @PostMapping
@@ -26,6 +29,12 @@ public class TopicController {
     public ResponseEntity deleteCard(@PathVariable Long cardId) {
         cardService.deleteCard(cardId);
         return ResponseEntity.status(200).build();
+    }
+
+    @GetMapping("/init")
+    public ResponseEntity initDB () {
+        initializer.initialize();
+        return ResponseEntity.ok().build();
     }
 
 
