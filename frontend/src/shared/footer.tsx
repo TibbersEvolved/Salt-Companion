@@ -7,7 +7,7 @@ export default function Footer() {
         <aside className="grid-flow-col items-center ml-4">
           <img src="public/salt-logo-light.svg" alt="salt logo" />
           <p className="ml-4">
-            Copyright © {new Date().getFullYear()} - All right reserved
+            © SALT {new Date().getFullYear()} - All rights reserved
           </p>
         </aside>
       </footer>
