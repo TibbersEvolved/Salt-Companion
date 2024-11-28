@@ -61,11 +61,11 @@ public class TableBootService {
 
     @Transactional
     public void loadTypeScript(Deck deck){
-        Card card1 = new Card("What is fetch?", "It fetches data",deck);
-        Card card2 = new Card("ASd", "to write to slow",deck);
-        Card card3 = new Card("Is sdffun thing?", "Yes it is so much fun",deck);
-        Card card4 = new Card("Why dosdfush ?", "version control",deck);
-        Card card5 = new Card("Is Pytsdf or no?", "no",deck);
+        Card card1 = new Card("What does === do, and how does it differ to ==", "It checks that the value AND type is the same. == only checks for value and will try converting other types to a matching value.",deck);
+        Card card2 = new Card("What is TypeScript, and how does it differ from JavaScript", "TypeScript is a strongly typed onment",deck);
+        Card card3 = new Card("How does TypeScript handle optional properties in an object, and what is the syntax to define one??", "Optional propertif that type.",deck);
+        Card card4 = new Card("Is it an error?", "No just typescript",deck);
+        Card card5 = new Card("What is a type in Typescript?", "A type is a object that holds specific attributes",deck);
         deck.addCard(card1);
         deck.addCard(card2);
         deck.addCard(card3);
