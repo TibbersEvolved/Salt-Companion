@@ -51,7 +51,7 @@ public class CardService {
         topics.forEach(s -> {
             selectableCards.addAll(s.getDeck().getDeckCards());
         });
-        if (selectableCards.size() > cardAmount) {
+        if (selectableCards.size() < cardAmount) {
             cardAmount = selectableCards.size();
         }
         Random random = new Random();

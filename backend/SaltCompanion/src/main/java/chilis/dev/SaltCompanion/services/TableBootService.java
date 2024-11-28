@@ -29,12 +29,15 @@ public class TableBootService {
         Long bootCampId = bootcampService.addBootCamp(bootCampName, teacher);
 
         bootcampService.addTopicToBootCamp(bootCampId, new Topic("React"));
+        bootcampService.addTopicToBootCamp(bootCampId, new Topic("Typescript"));
 
         BootCamp bootCamp = bootcampService.getBootCamp(bootCampId);
 
         Topic topic = bootcampService.findBootCampTopic(bootCampId, "React");
+        Topic ts = bootcampService.findBootCampTopic(bootCampId, "Typescript");
         Deck deck = topic.getDeck();
         loadDeck(deck);
+        loadTypeScript(ts.getDeck());
         loadStudents(bootCamp);
 
         bootcampService.saveBootcamp(bootCamp);
@@ -49,6 +52,20 @@ public class TableBootService {
         Card card4 = new Card("Why do you push ?", "version control",deck);
         Card card5 = new Card("Is Python cred or no?", "no",deck);
 
+        deck.addCard(card1);
+        deck.addCard(card2);
+        deck.addCard(card3);
+        deck.addCard(card4);
+        deck.addCard(card5);
+    }
+
+    @Transactional
+    public void loadTypeScript(Deck deck){
+        Card card1 = new Card("What is fetch?", "It fetches data",deck);
+        Card card2 = new Card("ASd", "to write to slow",deck);
+        Card card3 = new Card("Is sdffun thing?", "Yes it is so much fun",deck);
+        Card card4 = new Card("Why dosdfush ?", "version control",deck);
+        Card card5 = new Card("Is Pytsdf or no?", "no",deck);
         deck.addCard(card1);
         deck.addCard(card2);
         deck.addCard(card3);
