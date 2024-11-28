@@ -83,32 +83,6 @@ export const Flashcard = () => {
                         <div className="flex-grow flex items-center justify-center p-12 text-center text-2xl">
                           <p className="font-bold">{currentCard.answer}</p>
                         </div>
-                        {/* <div className="absolute bottom-6 space-x-3 text-white">
-                      <button
-                        className="bg-red-800 w-24 p-2 rounded-md"
-                        onClick={() => nextCard()}
-                      >
-                        Difficult
-                      </button>
-                      <button
-                        className="bg-yellow-500 w-24 p-2 rounded-md"
-                        onClick={() => nextCard()}
-                      >
-                        Moderate
-                      </button>
-                      <button
-                        className="bg-sky-600 w-24 p-2 rounded-md"
-                        onClick={() => nextCard()}
-                      >
-                        Easy
-                      </button>
-                      <button
-                        className="bg-green-700 w-24 p-2 rounded-md"
-                        onClick={() => nextCard()}
-                      >
-                        Very easy
-                      </button>
-                    </div> */}
                       </div>
                       <p
                         className="text-center mt-5 text-[#424242]"
