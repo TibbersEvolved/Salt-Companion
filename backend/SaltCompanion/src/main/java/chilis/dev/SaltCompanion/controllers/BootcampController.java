@@ -10,6 +10,7 @@ import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import chilis.dev.SaltCompanion.services.TeacherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,12 +32,13 @@ public class BootcampController {
     @GetMapping("/{bootcampId}")
     public ResponseEntity<BootCampDto> getBootCamp(@PathVariable Long bootcampId) {
         BootCamp bootCamp = bootcampService.getBootCamp(bootcampId);
-        validateBootCamp(bootCamp);
-        return ResponseEntity.ok(new BootCampDto(
+        validateBootCampExist(bootCamp);
+        BootCampDto response = new BootCampDto(
                 bootCamp.getName(),
-               bootCamp.getId(),
+                bootCamp.getId(),
                 bootCamp.getTeacher().getName()
-        ));
+        );
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/topic/{id}")
@@ -83,7 +85,7 @@ public class BootcampController {
     }
 
 
-    public boolean validateBootCamp(BootCamp bootCamp){
+    public boolean validateBootCampExist(BootCamp bootCamp){
 
         if(bootCamp==null){
             throw new BootCampExistException("Bootcamp not found");
