@@ -54,35 +54,35 @@ export const mockedQuiz = [
     answer3: "A framework for creating 2D graphics",
     answer4: "A tool for deploying servers",
   },
-  // {
-  //   question: "What is React?",
-  //   answer1: "A JavaScript library for building user interfaces",
-  //   answer2: "A social media platform",
-  //   answer3: "A tool for backend development",
-  //   answer4: "A mobile application debugger",
-  // },
-  // {
-  //   question: "What is JavaScript?",
-  //   answer1:
-  //     "A versatile programming language primarily used for web development",
-  //   answer2: "An extension of the Java language",
-  //   answer3: "A tool for designing websites",
-  //   answer4: "A gaming engine for creating 3D games",
-  // },
-  // {
-  //   question: "What is PostgreSQL?",
-  //   answer1: "An advanced open-source relational database system",
-  //   answer2: "A tool for creating user interfaces",
-  //   answer3: "A type of file compression software",
-  //   answer4: "A social networking platform",
-  // },
-  // {
-  //   question: "What is TypeScript?",
-  //   answer1: "A strongly typed superset of JavaScript",
-  //   answer2: "A scripting language for server automation",
-  //   answer3: "A text editor for programming",
-  //   answer4: "A tool for creating APIs",
-  // },
+  {
+    question: "What is React?",
+    answer1: "A JavaScript library for building user interfaces",
+    answer2: "A social media platform",
+    answer3: "A tool for backend development",
+    answer4: "A mobile application debugger",
+  },
+  {
+    question: "What is JavaScript?",
+    answer1:
+      "A versatile programming language primarily used for web development",
+    answer2: "An extension of the Java language",
+    answer3: "A tool for designing websites",
+    answer4: "A gaming engine for creating 3D games",
+  },
+  {
+    question: "What is PostgreSQL?",
+    answer1: "An advanced open-source relational database system",
+    answer2: "A tool for creating user interfaces",
+    answer3: "A type of file compression software",
+    answer4: "A social networking platform",
+  },
+  {
+    question: "What is TypeScript?",
+    answer1: "A strongly typed superset of JavaScript",
+    answer2: "A scripting language for server automation",
+    answer3: "A text editor for programming",
+    answer4: "A tool for creating APIs",
+  },
 ];
 
 export const flashCard = [
