@@ -35,7 +35,7 @@ public class BootcampController {
         validateBootCampId(bootcampId);
 
         BootCamp bootCamp = bootcampService.getBootCamp(bootcampId);
-        validateBootCampExist(bootCamp);
+
         BootCampDto response = new BootCampDto(
                 bootCamp.getName(),
                 bootCamp.getId(),
@@ -107,11 +107,5 @@ public class BootcampController {
 
     }
 
-    public boolean validateBootCampExist(BootCamp bootCamp) {
 
-        if (bootCamp == null) {
-            throw new BootCampExistException("Bootcamp not found");
-        }
-        return true;
-    }
 }

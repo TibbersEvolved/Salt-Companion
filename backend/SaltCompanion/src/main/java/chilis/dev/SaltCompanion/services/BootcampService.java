@@ -50,7 +50,7 @@ public class BootcampService {
 
 public Topic findBootCampTopic(Long bootCampId, String topicName){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
-        validateBootCamp(bootCamp);
+        validateBootCampExist(bootCamp);
         List<Topic> topics = topicRepository.findAllByBootCamp_Id(bootCampId);
         for(Topic topic: topics){
             if(topic.getName().equals(topicName)){
@@ -61,8 +61,9 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
 }
 
     public BootCamp getBootCamp(long id) {
-
-        return bootCampRepository.findById(id).orElse(null);
+        BootCamp bootCamp = bootCampRepository.findById(id).orElse(null);
+        validateBootCampExist(bootCamp);
+        return bootCamp;
     }
 
     public List<Topic> getTopicsForBootCamp(long id) {
@@ -79,7 +80,7 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
     @Transactional
     public void addStudent(Long bootCampId, Student student){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
-       validateBootCamp(bootCamp);
+       validateBootCampExist(bootCamp);
 
         student.setBootCamp(bootCamp);
         bootCamp.addStudent(student);
@@ -89,7 +90,7 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
     public boolean removeStudent(Long bootCampId, Long StudentId){
 
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
-        validateBootCamp(bootCamp);
+        validateBootCampExist(bootCamp);
 
         if(bootCamp.findStudent(StudentId)){
            bootCamp.removeStudent(StudentId);
@@ -101,9 +102,9 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
         return false;
     }
 
-    public boolean validateBootCamp(BootCamp bootCamp){
+    public boolean validateBootCampExist(BootCamp bootCamp) {
 
-        if(bootCamp==null){
+        if (bootCamp == null) {
             throw new BootCampExistException("Bootcamp not found");
         }
         return true;

@@ -22,7 +22,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity handleBootCampExistException(
             BootCampExistException ex, WebRequest request) {
 
-        String message = "Not found: " + ex.getMessage();
+        String message = "Bootcamp not found: " + ex.getMessage();
         return handleExceptionInternal(ex, message,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity handleBootCampIdException(
             BootCampIdException ex, WebRequest request) {
 
-        String message = "Not valid " + ex.getMessage();
+        String message = "Bootcamp id invalid " + ex.getMessage();
         return handleExceptionInternal(ex, message,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
@@ -44,6 +44,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         String message = "Not valid input format " + ex.getMessage();
         return handleExceptionInternal(ex, message,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler({TeacherExistException.class})
+    protected ResponseEntity handleTeacherExist(
+            TeacherExistException ex, WebRequest request) {
+
+        String message = "Teacher not found " + ex.getMessage();
+        return handleExceptionInternal(ex, message,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
 }
