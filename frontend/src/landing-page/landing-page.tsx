@@ -50,7 +50,7 @@ export const LandingPage = () => {
             <Select
               isMulti
               options={mockedCourseData}
-              className="text-black w-full max-w-md"
+              className="text-[#424242] w-full max-w-md font-light"
               classNamePrefix="select"
               onChange={handleChange}
               placeholder="Select topics to practice"
