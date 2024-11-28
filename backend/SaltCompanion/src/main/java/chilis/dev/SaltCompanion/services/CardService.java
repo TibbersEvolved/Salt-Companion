@@ -55,7 +55,8 @@ public class CardService {
             cardAmount = selectableCards.size();
         }
         Random random = new Random();
-        for(int i = 0; cardAmount < i; i++ ) {
+        for(int i = 0; i < cardAmount; i++ ) {
+            System.out.println("ranLoop");
             int index = random.nextInt(0,selectableCards.size());
             Card card = selectableCards.get(index);
             String topic = card.getDeck().getTopic().getName();
@@ -64,6 +65,7 @@ public class CardService {
         }
         FlashcardSession newSession = new FlashcardSession(flashCardList);
         UUID identifier = newSession.getId();
+        System.out.println("New Deck size: " + newSession.getFlashDeck().size());
         sessions.add(newSession);
         return identifier;
     }
