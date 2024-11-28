@@ -16,7 +16,7 @@ public class ZpplicationInitializer {
 
     @Transactional
 //    @PostConstruct
-    @DependsOn("SaltCompanionApplication")
+//    @DependsOn("SaltCompanionApplication")
     public void initialize() {
         tableBootService.BootTables("JFS");
     }
