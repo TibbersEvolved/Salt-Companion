@@ -1,6 +1,7 @@
 package chilis.dev.SaltCompanion.controllers;
 
 import chilis.dev.SaltCompanion.Exceptions.BootCampExistException;
+import chilis.dev.SaltCompanion.Exceptions.BootCampIdException;
 import chilis.dev.SaltCompanion.controllers.dto.*;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateBootCampDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTopicDto;
@@ -31,6 +32,8 @@ public class BootcampController {
 
     @GetMapping("/{bootcampId}")
     public ResponseEntity<BootCampDto> getBootCamp(@PathVariable Long bootcampId) {
+        validateBootCampId(bootcampId);
+
         BootCamp bootCamp = bootcampService.getBootCamp(bootcampId);
         validateBootCampExist(bootCamp);
         BootCampDto response = new BootCampDto(
@@ -56,7 +59,7 @@ public class BootcampController {
         List<BootCampDto> bootCampDtos = new ArrayList<>();
         bootcampService.getAllBootCamps().forEach(bootCamp -> {
             bootCampDtos.add(new BootCampDto(
-                    bootCamp.getName(),bootCamp.getId(),bootCamp.getTeacher().getName()
+                    bootCamp.getName(), bootCamp.getId(), bootCamp.getTeacher().getName()
             ));
         });
         return ResponseEntity.ok(new BootCampListDto(bootCampDtos));
@@ -65,7 +68,7 @@ public class BootcampController {
     @PostMapping
     public ResponseEntity createBootCamp(@RequestBody CreateBootCampDto dto) {
         Teacher teacher = teacherService.findTeacherByClerkId(dto.clerkId());
-        bootcampService.addBootCamp(dto.name(),teacher);
+        bootcampService.addBootCamp(dto.name(), teacher);
         return ResponseEntity.status(201).build();
     }
 
@@ -79,15 +82,31 @@ public class BootcampController {
     public ListDetailedTopicsDto getListTopicsDto(Long bootCampId) {
         List<TopicDto> payload = new ArrayList<>();
         bootcampService.getTopicsForBootCamp(bootCampId).forEach(s -> {
-            payload.add(new TopicDto(s.getId(),s.getName()));
+            payload.add(new TopicDto(s.getId(), s.getName()));
         });
         return new ListDetailedTopicsDto(payload);
     }
 
 
-    public boolean validateBootCampExist(BootCamp bootCamp){
+    public boolean validateBootCampId(Long bootCampId) {
 
-        if(bootCamp==null){
+
+        if (bootCampId == null) {
+            throw new BootCampIdException("Bootcamp id must be a long");
+        }
+
+        if (bootCampId < 1) {
+            throw new BootCampIdException("Bootcamp id must be a long greater than 1");
+        }
+
+
+        return true;
+
+    }
+
+    public boolean validateBootCampExist(BootCamp bootCamp) {
+
+        if (bootCamp == null) {
             throw new BootCampExistException("Bootcamp not found");
         }
         return true;

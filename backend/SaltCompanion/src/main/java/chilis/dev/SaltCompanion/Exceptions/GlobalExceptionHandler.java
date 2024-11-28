@@ -26,4 +26,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @ExceptionHandler({BootCampIdException.class})
+    protected ResponseEntity handleBootCampIdException(
+            BootCampIdException ex, WebRequest request) {
+
+        String message = "Not valid " + ex.getMessage();
+        return handleExceptionInternal(ex, message,
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
 }
