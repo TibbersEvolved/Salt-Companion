@@ -31,7 +31,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity handleBootCampIdException(
             BootCampIdException ex, WebRequest request) {
 
-        String message = "Bootcamp id invalid " + ex.getMessage();
+        String message = "Id invalid " + ex.getMessage();
         return handleExceptionInternal(ex, message,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
@@ -53,6 +53,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         String message = "Teacher not found " + ex.getMessage();
         return handleExceptionInternal(ex, message,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler({UUIDException.class})
+    protected ResponseEntity handleUUIDException(
+            UUIDException ex, WebRequest request) {
+
+        String message = "Not a valid UUID " + ex.getMessage();
+        return handleExceptionInternal(ex, message,
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
 }

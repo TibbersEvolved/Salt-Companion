@@ -1,5 +1,8 @@
 package chilis.dev.SaltCompanion.controllers;
 
+import chilis.dev.SaltCompanion.Exceptions.BootCampIdException;
+import chilis.dev.SaltCompanion.Exceptions.UUIDException;
+import chilis.dev.SaltCompanion.Exceptions.ValidateUUID;
 import chilis.dev.SaltCompanion.controllers.dto.BootCampDto;
 import chilis.dev.SaltCompanion.controllers.dto.BootCampListDto;
 import chilis.dev.SaltCompanion.controllers.dto.TeacherDto;
@@ -20,8 +23,11 @@ public class TeacherController {
 
     private TeacherService teacherService;
 
-    public TeacherController(TeacherService teacherService) {
+
+
+    public TeacherController(TeacherService teacherService, ValidateUUID validate) {
         this.teacherService = teacherService;
+
     }
 
     @PostMapping
@@ -32,12 +38,16 @@ public class TeacherController {
 
     @GetMapping("/{id}")
     public TeacherDto findTeacherById(@PathVariable  String id) {
+
         Teacher teacher = teacherService.findTeacherByClerkId(id);
         return new TeacherDto(teacher.getName());
     }
 
     @GetMapping("/bootcamps/{id}")
     public ResponseEntity<BootCampListDto> getTeacherBootCamps(@PathVariable String id) {
+
+
+
         Teacher teacher = teacherService.findTeacherByClerkId(id);
         List<BootCampDto> bootCampDtoList = new ArrayList<>();
         teacher.getBootCampList().forEach(s -> {
@@ -45,4 +55,7 @@ public class TeacherController {
         });
         return ResponseEntity.ok(new BootCampListDto(bootCampDtoList));
     }
+
+
+
 }
