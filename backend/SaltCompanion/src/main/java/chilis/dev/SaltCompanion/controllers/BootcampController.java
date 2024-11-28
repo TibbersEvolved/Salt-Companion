@@ -7,6 +7,7 @@ import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import chilis.dev.SaltCompanion.services.TeacherService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
