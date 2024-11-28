@@ -48,6 +48,9 @@ public class FlashCardSessionsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<FlashCardDto> drawCard(@PathVariable String id) {
+        if (cardService.getCardsLeft(UUID.fromString(id)) <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
         FlashCard flashCard = cardService.drawNewCard(UUID.fromString(id));
         int cardsLeft = cardService.getCardsLeft(UUID.fromString(id));
         return ResponseEntity.ok(new FlashCardDto(flashCard.getTopic(),
