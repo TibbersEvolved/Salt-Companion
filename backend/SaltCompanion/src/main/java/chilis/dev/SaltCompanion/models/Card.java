@@ -11,10 +11,10 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String text;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String answer;
 
     @Transient

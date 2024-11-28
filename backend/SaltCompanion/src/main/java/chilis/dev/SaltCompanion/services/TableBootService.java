@@ -62,8 +62,8 @@ public class TableBootService {
     @Transactional
     public void loadTypeScript(Deck deck){
         Card card1 = new Card("What does === do, and how does it differ to ==", "It checks that the value AND type is the same. == only checks for value and will try converting other types to a matching value.",deck);
-        Card card2 = new Card("What is TypeScript, and how does it differ from JavaScript", "TypeScript is a strongly typed onment",deck);
-        Card card3 = new Card("How does TypeScript handle optional properties in an object, and what is the syntax to define one??", "Optional propertif that type.",deck);
+        Card card2 = new Card("What is TypeScript, and how does it differ from JavaScript", "TypeScript is a strongly typed superset of JavaScript developed by Microsoft. It builds on JavaScript by adding static types, enabling developers to catch errors during development rather than at runtime. Unlike JavaScript, TypeScript must be compiled into JavaScript before it can run in the browser or Node.js environment",deck);
+        Card card3 = new Card("How does TypeScript handle optional properties in an object, and what is the syntax to define one??", "Optional properties are defined using the ? symbol. These properties are not required when creating an object of that type.",deck);
         Card card4 = new Card("Is it an error?", "No just typescript",deck);
         Card card5 = new Card("What is a type in Typescript?", "A type is a object that holds specific attributes",deck);
         deck.addCard(card1);
