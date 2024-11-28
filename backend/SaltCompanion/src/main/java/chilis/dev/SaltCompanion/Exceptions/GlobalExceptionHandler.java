@@ -46,6 +46,25 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
+//    @Override
+//    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+//            MethodArgumentNotValidException ex, HttpHeaders headers,
+//            HttpStatus status, WebRequest request) {
+//
+//        List<String> errors = ex.getBindingResult()
+//                .getFieldErrors()
+//                .stream()
+//                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+//                .collect(Collectors.toList());
+//        String errorMessage = String.join(",\n ", errors);
+//
+//        return handleExceptionInternal(ex, errorMessage,
+//                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+//    }
+
+
+
+
     @ExceptionHandler({TeacherExistException.class})
     protected ResponseEntity handleTeacherExist(
             TeacherExistException ex, WebRequest request) {
@@ -63,5 +82,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, message,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
+
+
 
 }
