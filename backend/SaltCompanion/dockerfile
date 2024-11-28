@@ -1,0 +1,9 @@
+FROM maven:3.8.7-openjdk-18-slim
+
+
+WORKDIR /app/backend
+COPY . .
+RUN mvn clean package -DskipTests
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","/app/backend/target/SaltCompanion-0.0.1-SNAPSHOT.jar"]
