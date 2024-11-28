@@ -37,7 +37,7 @@ export const LandingPage = () => {
             </p>
             <button
               onClick={handleClick}
-              className="m-6 bg-gray-300 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-gray-500 transition duration-200"
+              className="m-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
             >
               <Link to="/quiz">Quiz</Link>
             </button>
@@ -57,7 +57,7 @@ export const LandingPage = () => {
             />
             <button
               onClick={handleClick}
-              className="mt-6 bg-gray-300 text-black py-3 px-6 rounded-lg text-lg font-semibold hover:bg-gray-500 transition duration-200"
+              className="mt-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
             >
               <Link to="/flashcard">Next</Link>
             </button>
