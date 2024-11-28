@@ -7,7 +7,7 @@ import chilis.dev.SaltCompanion.models.FlashcardPlaySession.FlashCard;
 import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
-import chilis.dev.SaltCompanion.services.CardService;
+import chilis.dev.SaltCompanion.services.FlashCardService;
 import chilis.dev.SaltCompanion.services.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +21,12 @@ import java.util.UUID;
 @RequestMapping("/api/flashSession")
 public class FlashCardSessionsController {
 
-    private CardService cardService;
+    private FlashCardService flashCardService;
     private BootcampService bootcampService;
     private StudentService studentService;
 
-    public FlashCardSessionsController(CardService cardService, BootcampService bootcampService, StudentService studentService) {
-        this.cardService = cardService;
+    public FlashCardSessionsController(FlashCardService flashCardService, BootcampService bootcampService, StudentService studentService) {
+        this.flashCardService = flashCardService;
         this.bootcampService = bootcampService;
         this.studentService = studentService;
     }
@@ -43,17 +43,17 @@ public class FlashCardSessionsController {
                 }
             }
         }
-        UUID sessionId = cardService.startNewSession(mappedTopics,input.cards());
+        UUID sessionId = flashCardService.startNewSession(mappedTopics,input.cards());
         return ResponseEntity.ok(new FlashCardSessionDto(sessionId.toString()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FlashCardDto> drawCard(@PathVariable String id) {
-        if (cardService.getCardsLeft(UUID.fromString(id)) <= 0) {
+        if (flashCardService.getCardsLeft(UUID.fromString(id)) <= 0) {
             return ResponseEntity.badRequest().build();
         }
-        FlashCard flashCard = cardService.drawNewCard(UUID.fromString(id));
-        int cardsLeft = cardService.getCardsLeft(UUID.fromString(id));
+        FlashCard flashCard = flashCardService.drawNewCard(UUID.fromString(id));
+        int cardsLeft = flashCardService.getCardsLeft(UUID.fromString(id));
         return ResponseEntity.ok(new FlashCardDto(flashCard.getTopic(),
                 flashCard.getQuestion(), flashCard.getAnswer(), cardsLeft));
     }
