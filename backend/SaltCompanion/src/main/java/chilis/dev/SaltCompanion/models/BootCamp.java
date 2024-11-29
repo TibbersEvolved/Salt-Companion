@@ -43,9 +43,9 @@ public class BootCamp {
         student.setBootCamp(this);
     }
 
-    public boolean removeStudent(Long studentId){
+    public boolean removeStudent(String clerkId){
         for(Student s: students){
-            if(s.getId()==studentId) {
+            if(s.getClerkId().equals(clerkId)) {
                 s.setBootCamp(null);
                 this.students.remove(s);
 
@@ -55,9 +55,9 @@ public class BootCamp {
         return false;
     }
 
-    public boolean findStudent(Long studentId){
+    public boolean findStudent(String clerkId){
         for(Student s: students){
-            if(s.getId()==studentId) {
+            if(s.getClerkId().equals(clerkId)) {
                 return true;
             }
         }

@@ -17,6 +17,7 @@ public class BootcampService {
     TeacherRepository teacherRepository;
     TopicRepository topicRepository;
 
+
     public BootcampService(BootCampRepository bootCampRepository, TeacherRepository teacherRepository, TopicRepository topicRepository) {
         this.bootCampRepository = bootCampRepository;
         this.topicRepository = topicRepository;
@@ -86,13 +87,13 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
         bootCampRepository.save(bootCamp);
     }
     @Transactional
-    public boolean removeStudent(Long bootCampId, Long StudentId){
+    public boolean removeStudent(Long bootCampId, String clerkId){
 
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
         validateBootCampExist(bootCamp);
 
-        if(bootCamp.findStudent(StudentId)){
-           bootCamp.removeStudent(StudentId);
+        if(bootCamp.findStudent(clerkId)){
+           bootCamp.removeStudent(clerkId);
 
             bootCampRepository.save(bootCamp);
 

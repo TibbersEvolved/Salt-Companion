@@ -5,9 +5,11 @@ import chilis.dev.SaltCompanion.controllers.dto.*;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateBootCampDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTopicDto;
 import chilis.dev.SaltCompanion.models.BootCamp;
+import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
+import chilis.dev.SaltCompanion.services.StudentService;
 import chilis.dev.SaltCompanion.services.TeacherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +24,12 @@ public class BootcampController {
 
     private BootcampService bootcampService;
     private TeacherService teacherService;
+    private StudentService studentService;
 
-    public BootcampController(BootcampService bootcampService, TeacherService teacherService) {
+    public BootcampController(BootcampService bootcampService, TeacherService teacherService, StudentService studentService) {
         this.bootcampService = bootcampService;
         this.teacherService = teacherService;
+        this.studentService = studentService;
     }
 
     @GetMapping("/{bootcampId}")
@@ -86,6 +90,26 @@ public class BootcampController {
             payload.add(new TopicDto(s.getId(), s.getName()));
         });
         return new ListDetailedTopicsDto(payload);
+    }
+
+    @PostMapping("/student/add/{clerkId}{bootCampId}")
+    public ResponseEntity addStudent(@PathVariable String clerkId, @PathVariable Long bootCampId) {
+
+        Student student = studentService.findStudentByClerkId(clerkId);
+        bootcampService.addStudent(bootCampId,student);
+
+        return ResponseEntity.status(201).build();
+
+    }
+
+    @DeleteMapping("/student/remove/{clerkId}{bootCampId}")
+    public ResponseEntity removeStudent(@PathVariable String clerkId, @PathVariable Long bootCampId) {
+
+        Student student = studentService.findStudentByClerkId(clerkId);
+        bootcampService.removeStudent(bootCampId,student.getClerkId());
+
+        return ResponseEntity.status(200).build();
+
     }
 
 
