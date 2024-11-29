@@ -3,19 +3,26 @@ import { Link } from "@tanstack/react-router";
 import { mockedCourseData } from "../mocked/mocked-data";
 import Select from "react-select";
 import { useState } from "react";
+import { Flashcard } from "../flashcard/flashcard-container";
 
 export const LandingPage = () => {
   const { user } = useUser();
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [page, setPage] = useState(1);
 
   const handleChange = (selected) => {
     setSelectedOptions(selected);
   };
 
   const handleClick = () => {
-    <Link to="/flashcard" />;
+    setPage(2);
+    //post to back with selected options
     console.log(selectedOptions);
   };
+
+  if (page === 2) {
+    return <Flashcard sessionId="" />;
+  }
 
   return (
     <SignedIn>
@@ -57,7 +64,7 @@ export const LandingPage = () => {
               onClick={handleClick}
               className="mt-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
             >
-              <Link to="/flashcard">Next</Link>
+              Next
             </button>
           </div>
         </div>

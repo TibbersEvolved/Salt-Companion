@@ -7,5 +7,5 @@ export const Route = createFileRoute("/flashcard")({
 });
 
 function RouteComponent() {
-  return <Flashcard />;
+  return <Flashcard sessionId="" />;
 }

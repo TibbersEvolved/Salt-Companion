@@ -7,7 +7,11 @@ import { useWindowSize } from "react-use";
 import { useQuery } from "@tanstack/react-query";
 import { getFlashcardQuestions } from "../services/api";
 
-export const Flashcard = () => {
+type FlashcardProps = {
+  sessionId: string;
+};
+
+export const Flashcard = (prop: FlashcardProps) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const currentCard = flashCard[currentCardIndex];
   const { width, height } = useWindowSize();
@@ -28,7 +32,7 @@ export const Flashcard = () => {
   // }
 
   // const isEndReached = currentCardIndex >= flashCards.length;
-  // const currentCard = flashCard[currentCardIndex];
+  // const currentCard = flashCards[currentCardIndex];
 
   // if (isLoading) return <div>Loading pls add toast</div>
   // if (isError) return <div>Error pls add toas</div>
@@ -37,7 +41,7 @@ export const Flashcard = () => {
     <>
       {isEndReached ? (
         <>
-          <Confetti width={width} height={height} initialVelocityY={25} />
+          {/* <Confetti width={width} height={height} initialVelocityY={25} /> */}
           <div className="flex flex-col items-center justify-center h-screen">
             <h1 className="text-3xl text-center mt-10">
               You've reached the end of the flashcards!
