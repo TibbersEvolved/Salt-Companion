@@ -1,6 +1,6 @@
 package chilis.dev.SaltCompanion.services;
 
-import chilis.dev.SaltCompanion.Exceptions.BootCampExistException;
+import chilis.dev.SaltCompanion.exceptions.BootCampExistException;
 import chilis.dev.SaltCompanion.models.*;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
 import chilis.dev.SaltCompanion.repositories.TeacherRepository;
@@ -8,7 +8,6 @@ import chilis.dev.SaltCompanion.repositories.TopicRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

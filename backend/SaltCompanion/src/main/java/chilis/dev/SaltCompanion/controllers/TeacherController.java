@@ -1,15 +1,12 @@
 package chilis.dev.SaltCompanion.controllers;
 
-import chilis.dev.SaltCompanion.Exceptions.BootCampIdException;
-import chilis.dev.SaltCompanion.Exceptions.UUIDException;
-import chilis.dev.SaltCompanion.Exceptions.ValidateUUID;
+import chilis.dev.SaltCompanion.exceptions.ValidateUUID;
 import chilis.dev.SaltCompanion.controllers.dto.BootCampDto;
 import chilis.dev.SaltCompanion.controllers.dto.BootCampListDto;
 import chilis.dev.SaltCompanion.controllers.dto.TeacherDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTeacherDto;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.services.TeacherService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

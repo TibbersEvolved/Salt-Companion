@@ -1,4 +1,4 @@
-package chilis.dev.SaltCompanion.Exceptions;
+package chilis.dev.SaltCompanion.exceptions;
 
 public class BootCampIdException extends IllegalArgumentException {
 

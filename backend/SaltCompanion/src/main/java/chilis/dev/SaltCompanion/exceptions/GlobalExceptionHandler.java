@@ -1,4 +1,4 @@
-package chilis.dev.SaltCompanion.Exceptions;
+package chilis.dev.SaltCompanion.exceptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
