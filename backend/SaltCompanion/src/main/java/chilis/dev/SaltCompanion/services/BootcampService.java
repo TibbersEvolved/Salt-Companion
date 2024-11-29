@@ -62,8 +62,19 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
 
     public BootCamp getBootCamp(long id) {
         BootCamp bootCamp = bootCampRepository.findById(id).orElse(null);
+        System.out.println("This is the bootcamp ...");
         validateBootCampExist(bootCamp);
         return bootCamp;
+    }
+
+    @Transactional
+    public boolean deleteBootCamp(Long id){
+        BootCamp bootCamp = getBootCamp(id);
+        bootCampRepository.delete(bootCamp);
+        if(getBootCamp(id)!=null){
+            return false;
+        }
+        return true;
     }
 
     public List<Topic> getTopicsForBootCamp(long id) {

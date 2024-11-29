@@ -74,6 +74,16 @@ public class BootcampController {
         bootcampService.addBootCamp(dto.name(), teacher);
         return ResponseEntity.status(201).build();
     }
+//    Not working
+    @DeleteMapping("/delete/{bootCampId}")
+    public ResponseEntity deleteBootCamp(@PathVariable Long bootCampId) {
+
+        if (bootcampService.deleteBootCamp(bootCampId)) {
+            return ResponseEntity.status(200).body("Bootcamp " + bootCampId + " deleted");
+        }
+        return ResponseEntity.status(404).body("Bootcamp " + bootCampId + " could not be deleted");
+
+    }
 
     @PostMapping("/topic/add")
     public ResponseEntity addTopic(@RequestBody CreateTopicDto dto) {
@@ -97,7 +107,7 @@ public class BootcampController {
     public ResponseEntity addStudent(@RequestBody StudentToBootCampDto dto) {
 
         Student student = studentService.findStudentByClerkId(dto.clerkId());
-        bootcampService.addStudent(dto.bootCampId(),student);
+        bootcampService.addStudent(dto.bootCampId(), student);
 
         return ResponseEntity.status(201).build();
 
@@ -107,7 +117,7 @@ public class BootcampController {
     public ResponseEntity removeStudent(@RequestBody StudentToBootCampDto dto) {
 
         Student student = studentService.findStudentByClerkId(dto.clerkId());
-        bootcampService.removeStudent(dto.bootCampId(),student.getClerkId());
+        bootcampService.removeStudent(dto.bootCampId(), student.getClerkId());
 
         return ResponseEntity.status(200).build();
 
