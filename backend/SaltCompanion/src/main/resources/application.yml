@@ -21,7 +21,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: ${DB_SETTING:create-drop}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     defer-datasource-initialization: true
 
