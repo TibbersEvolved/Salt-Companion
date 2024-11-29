@@ -81,7 +81,9 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
     public void addStudent(Long bootCampId, Student student){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
        validateBootCampExist(bootCamp);
-
+        if(student==null){
+            throw new BootCampExistException("Student not found");
+        }
         student.setBootCamp(bootCamp);
         bootCamp.addStudent(student);
         bootCampRepository.save(bootCamp);

@@ -26,13 +26,20 @@ public class StudentService {
         studentRepo.save(student);
     }
 
-    public Student findStudentByClerkId(String clerkId) {
-        List<Student> optionalStudent = studentRepo.findAllByClerkId(clerkId);
-        if(optionalStudent.isEmpty()) {
-            return null;
-        }
-        return optionalStudent.get(0);
+//    public Student findStudentByClerkId(String clerkId) {
+//        List<Student> optionalStudent = studentRepo.findAllByClerkId(clerkId);
+//        if(optionalStudent.isEmpty()) {
+//            return null;
+//        }
+//        return optionalStudent.get(0);
+//    }
+public Student findStudentByClerkId(String clerkId) {
+    Student student = studentRepo.findStudentByClerkId(clerkId);
+    if(student == null) {
+        return null;
     }
+    return student;
+}
 
 
 

@@ -10,4 +10,6 @@ import java.util.List;
 public interface StudentRepo extends ListCrudRepository<Student, Long> {
 
     public List<Student> findAllByClerkId(String clerkId);
+
+    Student findStudentByClerkId(String clerkId);
 }
