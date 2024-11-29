@@ -41,6 +41,15 @@ public Student findStudentByClerkId(String clerkId) {
     return student;
 }
 
+public void deleteStudentByClerkId(String clerkId){
+        Student student = studentRepo.findStudentByClerkId(clerkId);
+        validateStudentExist(student);
+
+        studentRepo.delete(student);
+
+    System.out.println("Student " + clerkId + " deleted");
+}
+
 public boolean validateStudentExist(Student student) {
         if(student == null) {
             throw new StudentExistException("Student does not exist");

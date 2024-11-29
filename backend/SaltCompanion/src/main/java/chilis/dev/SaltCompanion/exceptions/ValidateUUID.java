@@ -21,5 +21,4 @@ public class ValidateUUID {
         return true;
 
     }
-
 }

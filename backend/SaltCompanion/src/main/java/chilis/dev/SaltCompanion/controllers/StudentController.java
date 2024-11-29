@@ -43,5 +43,12 @@ public class StudentController {
         return ResponseEntity.status(201).build();
     }
 
+    @DeleteMapping("/delete/{clerkId}")
+    public ResponseEntity <String> deleteStudent(@PathVariable String clerkId){
+
+        studentService.deleteStudentByClerkId(clerkId);
+
+        return ResponseEntity.status(200).body("Student " + clerkId + " deleted");
+    }
 
 }
