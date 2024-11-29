@@ -1,6 +1,7 @@
 package chilis.dev.SaltCompanion.services;
 
 import chilis.dev.SaltCompanion.controllers.BootcampController;
+import chilis.dev.SaltCompanion.exceptions.StudentExistException;
 import chilis.dev.SaltCompanion.models.BootCamp;
 import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
@@ -35,10 +36,16 @@ public class StudentService {
 //    }
 public Student findStudentByClerkId(String clerkId) {
     Student student = studentRepo.findStudentByClerkId(clerkId);
-    if(student == null) {
-        return null;
-    }
+    validateStudentExist(student);
+
     return student;
+}
+
+public boolean validateStudentExist(Student student) {
+        if(student == null) {
+            throw new StudentExistException("Student does not exist");
+        }
+    return true;
 }
 
 

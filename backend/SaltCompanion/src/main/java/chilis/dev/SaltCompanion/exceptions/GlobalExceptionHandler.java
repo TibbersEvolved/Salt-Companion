@@ -75,6 +75,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @ExceptionHandler({StudentExistException.class})
+    protected ResponseEntity handleStudentExist(
+            StudentExistException ex, WebRequest request) {
+
+        String message = "Not found " + ex.getMessage();
+        return handleExceptionInternal(ex, message,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
     @ExceptionHandler({UUIDException.class})
     protected ResponseEntity handleUUIDException(
             UUIDException ex, WebRequest request) {
