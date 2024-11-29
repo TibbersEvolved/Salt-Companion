@@ -4,24 +4,35 @@ import { mockedCourseData } from "../mocked/mocked-data";
 import Select from "react-select";
 import { useState } from "react";
 import { Flashcard } from "../flashcard/flashcard-container";
+import {
+  fetchBootcamps,
+  getQuizQuestions,
+  startFlashcardSession,
+} from "../services/api";
 
 export const LandingPage = () => {
   const { user } = useUser();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [page, setPage] = useState(1);
+  const [sessionId, setSessionId] = useState("");
 
   const handleChange = (selected) => {
     setSelectedOptions(selected);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    const response = await startFlashcardSession(
+      10,
+      [1, 2],
+      user?.id as string
+    );
+    setSessionId(response.id);
     setPage(2);
-    //post to back with selected options
     console.log(selectedOptions);
   };
 
   if (page === 2) {
-    return <Flashcard sessionId="" />;
+    return <Flashcard sessionId={sessionId} />;
   }
 
   return (
@@ -33,6 +44,7 @@ export const LandingPage = () => {
               Welcome, {user?.firstName}!
             </h2>
             <p className="text-[#424242]">User ID: {user?.id}</p>
+            <button></button>
           </div>
 
           <div className="text-center">
