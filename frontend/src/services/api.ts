@@ -53,3 +53,13 @@ export const fetchBootcamps = async () => {
     console.log("Error fetching bootcamps. Please try again later");
   }
 };
+
+export const getFlashcardQuestions = async (id: string) => {
+  try {
+    const response = await axios.get(`${base_url}/flashSession/${id}`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching quiz questions. Please try again later");
+  }
+};
