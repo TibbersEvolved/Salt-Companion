@@ -1,5 +1,6 @@
 package chilis.dev.SaltCompanion.controllers;
 
+import chilis.dev.SaltCompanion.controllers.dtoInput.StudentToBootCampDto;
 import chilis.dev.SaltCompanion.exceptions.BootCampIdException;
 import chilis.dev.SaltCompanion.controllers.dto.*;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateBootCampDto;
@@ -92,21 +93,21 @@ public class BootcampController {
         return new ListDetailedTopicsDto(payload);
     }
 
-    @PostMapping("/student/add/{clerkId}{bootCampId}")
-    public ResponseEntity addStudent(@PathVariable String clerkId, @PathVariable Long bootCampId) {
+    @PostMapping("/student/add")
+    public ResponseEntity addStudent(@RequestBody StudentToBootCampDto dto) {
 
-        Student student = studentService.findStudentByClerkId(clerkId);
-        bootcampService.addStudent(bootCampId,student);
+        Student student = studentService.findStudentByClerkId(dto.clerkId());
+        bootcampService.addStudent(dto.bootCampId(),student);
 
         return ResponseEntity.status(201).build();
 
     }
 
-    @DeleteMapping("/student/remove/{clerkId}{bootCampId}")
-    public ResponseEntity removeStudent(@PathVariable String clerkId, @PathVariable Long bootCampId) {
+    @DeleteMapping("/student/remove")
+    public ResponseEntity removeStudent(@RequestBody StudentToBootCampDto dto) {
 
-        Student student = studentService.findStudentByClerkId(clerkId);
-        bootcampService.removeStudent(bootCampId,student.getClerkId());
+        Student student = studentService.findStudentByClerkId(dto.clerkId());
+        bootcampService.removeStudent(dto.bootCampId(),student.getClerkId());
 
         return ResponseEntity.status(200).build();
 
