@@ -11,7 +11,7 @@ import LoadingScreen from "../services/loadingScreen";
 
 type FlashcardProps = {
   sessionId: string;
-  callBack: genericCallback
+  callBack: genericCallback;
 };
 
 export interface genericCallback {
@@ -65,7 +65,6 @@ export const Flashcard = (prop: FlashcardProps) => {
             >
               Go back to the main page
             </button>
-
           </div>
         </>
       ) : (
@@ -88,7 +87,6 @@ export const Flashcard = (prop: FlashcardProps) => {
                     <div className="flex items-center justify-center h-full">
                       <p className="text-2xl text-[#424242]">
                         Click to see the answer
-
                       </p>
                     </div>
                   }
