@@ -55,7 +55,7 @@ export const Flashcard = (prop: FlashcardProps) => {
         <>
           {/* <Confetti width={width} height={height} initialVelocityY={25} /> */}
           <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-3xl text-center mt-10">
+            <h1 className="text-3xl text-center">
               You've reached the end of the flashcards!
             </h1>
 
@@ -73,7 +73,9 @@ export const Flashcard = (prop: FlashcardProps) => {
             <div className="bg-[#eed1d6] h-[670px] w-[750px] rounded-2xl">
               <div className="text-center space-y-5 mt-5">
                 <p className="text-[#f36384]">{typeData.topic}</p>
-                <h2 className="text-3xl font-extrabold">{typeData.question}</h2>
+                <h2 className="text-3xl font-extrabold px-12">
+                  {typeData.question}
+                </h2>
                 {/* {currentCard && (
                 <h2 className="text-3xl font-extrabold">{currentCard.question}</h2>
               )} */}
