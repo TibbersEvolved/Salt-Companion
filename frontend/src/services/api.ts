@@ -35,6 +35,16 @@ export const getQuizQuestions = async () => {
   }
 };
 
+export const getStudentData = async (id: string) => {
+  try {
+    const response = await axios.get(`${base_url}/students/${id}`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching quiz questions. Please try again later");
+  }
+};
+
 export const fetchBootcamps = async () => {
   const payload = {
     name: "Sabine",
