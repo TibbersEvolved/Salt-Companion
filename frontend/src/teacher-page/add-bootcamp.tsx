@@ -3,15 +3,15 @@ import { CreateBootCampFetch } from "./fetch-create-bootcamp";
 import { BootCampData } from "./types";
 import { useState, useRef, createContext, useContext, useEffect } from "react";
 
-// interface Props{
-//     clerkId : string
-// }
+type Props = {
+  clerkId: string;
+};
 
-export function CreateBootCamp(clerkId: string) {
+export function CreateBootCamp(Prop: Props) {
   const [bootCampName, setBootCampName] = useState<string>("");
   const [requestBody, setRequestBody] = useState<BootCampData>({
     name: bootCampName,
-    clerkId: clerkId,
+    clerkId: Prop.clerkId,
   });
 
   const mutationCreateGame: UseMutationResult<string, Error, BootCampData> =
@@ -44,7 +44,7 @@ export function CreateBootCamp(clerkId: string) {
         onClick={() => {
           setRequestBody({
             name: bootCampName,
-            clerkId: clerkId,
+            clerkId: Prop.clerkId,
           });
           mutationCreateGame.mutate(requestBody);
         }}
