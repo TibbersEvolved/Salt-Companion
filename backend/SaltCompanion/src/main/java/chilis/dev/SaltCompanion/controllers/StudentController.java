@@ -64,10 +64,10 @@ public class StudentController {
             summary = "Gets user status",
             description = "0 = not registered, 1 = isStudent, 2= isTeacher")
     public ResponseEntity<ValidUserDto> checkUserType(@PathVariable String clerkId) {
-        if(studentService.isUserStudent(clerkId)) {
+        if(!studentService.isUserStudent(clerkId)) {
              return ResponseEntity.ok(new ValidUserDto(1));
         }
-        if(teacherService.isUserTeacher(clerkId)) {
+        if(!teacherService.isUserTeacher(clerkId)) {
             return ResponseEntity.ok(new ValidUserDto(2));
         }
         return ResponseEntity.ok(new ValidUserDto(0));
