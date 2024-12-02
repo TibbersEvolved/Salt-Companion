@@ -6,6 +6,7 @@ const POST_URL =
 export const CreateBootCampFetch = async (
   body: BootCampData
 ): Promise<string> => {
+  console.log("bootcamp data in fetch", body);
   try {
     const response = await fetch(POST_URL, {
       method: "POST",
@@ -19,7 +20,7 @@ export const CreateBootCampFetch = async (
       throw new Error(`Failed to create bootcamp. Status: ${response.status}`);
     }
 
-    return await response.text();
+    return await response.json();
   } catch (error) {
     console.error("Error creating bootcamp:", error);
     throw error;
