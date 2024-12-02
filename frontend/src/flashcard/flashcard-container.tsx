@@ -86,7 +86,7 @@ export const Flashcard = (prop: FlashcardProps) => {
                     <div className="flex items-center justify-center h-full">
                       <p className="text-2xl text-[#424242]">
                         Click to see the answer
-                        {prop.sessionId}
+
                       </p>
                     </div>
                   }
