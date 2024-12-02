@@ -7,6 +7,8 @@ import chilis.dev.SaltCompanion.controllers.dto.TeacherDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateTeacherDto;
 import chilis.dev.SaltCompanion.models.Teacher;
 import chilis.dev.SaltCompanion.services.TeacherService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +19,10 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/teachers")
+@Tag(name = "Teacher API", description = "Create, Delete Teacher")
 public class TeacherController {
 
     private TeacherService teacherService;
-
-
 
     public TeacherController(TeacherService teacherService, ValidateUUID validate) {
         this.teacherService = teacherService;
@@ -41,12 +42,13 @@ public class TeacherController {
         return new TeacherDto(teacher.getName());
     }
 
-    @GetMapping("/bootcamps/{id}")
-    public ResponseEntity<BootCampListDto> getTeacherBootCamps(@PathVariable String id) {
+    @GetMapping("/bootcamps/{clerkId}")
+    @Operation(
+            summary = "Gets all bootcamps of a teacher",
+            description = "path variable is the clerkId of the teacher")
+    public ResponseEntity<BootCampListDto> getTeacherBootCamps(@PathVariable String clerkId) {
 
-
-
-        Teacher teacher = teacherService.findTeacherByClerkId(id);
+        Teacher teacher = teacherService.findTeacherByClerkId(clerkId);
         List<BootCampDto> bootCampDtoList = new ArrayList<>();
         teacher.getBootCampList().forEach(s -> {
             bootCampDtoList.add(new BootCampDto(s.getName(),s.getId(),teacher.getName()));

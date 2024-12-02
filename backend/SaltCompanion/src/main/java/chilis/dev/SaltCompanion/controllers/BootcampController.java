@@ -80,7 +80,8 @@ public class BootcampController {
         bootcampService.addBootCamp(dto.name(), teacher);
         return ResponseEntity.status(201).build();
     }
-//    Not working
+
+    //    Not working
     @DeleteMapping("/delete/{bootCampId}")
     public ResponseEntity deleteBootCamp(@PathVariable Long bootCampId) {
 
@@ -132,19 +133,12 @@ public class BootcampController {
 
     public boolean validateBootCampId(Long bootCampId) {
 
-
         if (bootCampId == null) {
             throw new BootCampIdException("Bootcamp id must be a long");
         }
-
         if (bootCampId < 1) {
             throw new BootCampIdException("Bootcamp id must be a long greater than 1");
         }
-
-
         return true;
-
     }
-
-
 }
