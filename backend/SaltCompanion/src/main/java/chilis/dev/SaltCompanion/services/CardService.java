@@ -17,8 +17,17 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
-    private Topic getTopic(Long topicId) {
+    public Topic getTopic(Long topicId) {
         return topicRepository.findById(topicId).get();
+    }
+
+
+
+    public void updateCard(Long cardId, String question, String answer) {
+        Card card = cardRepository.findById(cardId).get();
+        card.setAnswer(answer);
+        card.setText(question);
+        cardRepository.save(card);
     }
 
     public void deleteCard(Long cardId) {

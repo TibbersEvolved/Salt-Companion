@@ -1,11 +1,18 @@
 package chilis.dev.SaltCompanion.controllers;
 
+import chilis.dev.SaltCompanion.controllers.dto.CardDto;
 import chilis.dev.SaltCompanion.controllers.dto.FlashCardDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateCardDto;
+import chilis.dev.SaltCompanion.controllers.dtoInput.UpdateCardDto;
+import chilis.dev.SaltCompanion.models.Card;
+import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.CardService;
 import chilis.dev.SaltCompanion.services.ZpplicationInitializer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/topic")
@@ -25,10 +32,24 @@ public class TopicController {
         return ResponseEntity.status(201).build();
     }
 
+    @PutMapping
+    public ResponseEntity updateCard(@RequestBody UpdateCardDto input) {
+        cardService.updateCard(input.cardId(),input.question(),input.answer());
+        return ResponseEntity.status(202).build();
+    }
+
     @DeleteMapping("/{cardId}")
     public ResponseEntity deleteCard(@PathVariable Long cardId) {
         cardService.deleteCard(cardId);
         return ResponseEntity.status(200).build();
+    }
+
+    @GetMapping("/{topicId}")
+    public List<CardDto> getCards(@PathVariable Long topicId) {
+        List<Card> cards = cardService.getTopic(topicId).getDeck().getDeckCards();
+        return cards.stream()
+                .map(card -> new CardDto(card.getText(),card.getAnswer(),card.getId()))
+                .toList();
     }
 
     @GetMapping("/init")
@@ -36,6 +57,7 @@ public class TopicController {
         initializer.initialize();
         return ResponseEntity.ok().build();
     }
+
 
 
 }
