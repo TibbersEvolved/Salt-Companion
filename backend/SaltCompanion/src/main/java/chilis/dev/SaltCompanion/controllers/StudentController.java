@@ -3,10 +3,14 @@ package chilis.dev.SaltCompanion.controllers;
 import chilis.dev.SaltCompanion.controllers.dto.ListDetailedTopicsDto;
 import chilis.dev.SaltCompanion.controllers.dto.ListTopicsDto;
 import chilis.dev.SaltCompanion.controllers.dto.StudentDetailedInfoDto;
+import chilis.dev.SaltCompanion.controllers.dto.ValidUserDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateStudentDto;
 import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import chilis.dev.SaltCompanion.services.StudentService;
+import chilis.dev.SaltCompanion.services.TeacherService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +22,14 @@ public class StudentController {
     private StudentService studentService;
     private BootcampService bootcampService;
     private BootcampController bootcampController;
+    private TeacherService teacherService;
 
-    public StudentController(StudentService studentService, BootcampService bootcampService, BootcampController bootcampController) {
+    public StudentController(StudentService studentService, BootcampService bootcampService,
+                             BootcampController bootcampController, TeacherService teacherService) {
         this.studentService = studentService;
         this.bootcampService = bootcampService;
         this.bootcampController = bootcampController;
+        this.teacherService = teacherService;
     }
 
     @GetMapping("/{id}")
@@ -49,6 +56,21 @@ public class StudentController {
         studentService.deleteStudentByClerkId(clerkId);
 
         return ResponseEntity.status(200).body("Student " + clerkId + " deleted");
+    }
+
+
+    @GetMapping("/user/{clerkId}")
+    @Operation(
+            summary = "Gets user status",
+            description = "0 = not registered, 1 = isStudent, 2= isTeacher")
+    public ResponseEntity<ValidUserDto> checkUserType(@PathVariable String clerkId) {
+        if(studentService.isUserStudent(clerkId)) {
+             return ResponseEntity.ok(new ValidUserDto(1));
+        }
+        if(teacherService.isUserTeacher(clerkId)) {
+            return ResponseEntity.ok(new ValidUserDto(2));
+        }
+        return ResponseEntity.ok(new ValidUserDto(0));
     }
 
 }

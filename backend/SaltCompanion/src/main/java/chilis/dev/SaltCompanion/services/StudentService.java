@@ -41,6 +41,11 @@ public Student findStudentByClerkId(String clerkId) {
     return student;
 }
 
+public boolean isUserStudent(String clerkId) {
+    Student student = studentRepo.findStudentByClerkId(clerkId);
+    return (student == null);
+}
+
 public void deleteStudentByClerkId(String clerkId){
         Student student = studentRepo.findStudentByClerkId(clerkId);
         validateStudentExist(student);

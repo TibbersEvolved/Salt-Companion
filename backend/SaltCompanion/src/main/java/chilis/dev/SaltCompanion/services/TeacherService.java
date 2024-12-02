@@ -26,6 +26,11 @@ public class TeacherService {
     public Teacher findTeacherByClerkId(String clerkId) {
         return teacherRepository.findTeacherByClerkId(clerkId);
     }
+
+    public boolean isUserTeacher(String clerkId) {
+        Teacher teacher = teacherRepository.findTeacherByClerkId(clerkId);
+        return (teacher == null);
+    }
     public boolean deleteTeacher(String clerkId){
         Teacher teacher = teacherRepository.findTeacherByClerkId(clerkId);
         if(teacher == null) {
