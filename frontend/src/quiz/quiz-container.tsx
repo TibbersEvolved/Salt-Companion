@@ -1,7 +1,7 @@
 import { SignedIn } from "@clerk/clerk-react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { mockedQuiz } from "../mocked/mocked-data";
+import EndQuestionsPage from "../shared/end-questions";
 
 export const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -43,28 +43,8 @@ export const Quiz = () => {
   return (
     <>
       <SignedIn>
-        {isQuizFinished ? (
-          <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-3xl text-center mt-10">Quiz Completed! 🎉</h1>
-            <p className="text-xl mt-4">
-              You scored {calculateScore()} out of {mockedQuiz.length}.
-            </p>
-            {difficultTopics.length > 0 && (
-              <div className="mt-6">
-                <h2 className="text-2xl text-red-600">Topics to review:</h2>
-                <ul className="text-lg mt-4 list-disc list-inside">
-                  {difficultTopics.map((topic, index) => (
-                    <li key={index}>{topic}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <Link to="/landing">
-              <button className="bg-rose-600 text-white px-6 py-3 rounded-md mt-6">
-                Go back to the main page
-              </button>
-            </Link>
-          </div>
+        {isEndReached ? (
+          <EndQuestionsPage />
         ) : (
           <div className="m-0 p-0 w-screen h-screen flex justify-center items-center">
             <div className=" bg-white rounded-2xl h-3/4 w-3/4 flex flex-col items-center shadow-lg p-8">

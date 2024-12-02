@@ -23,9 +23,7 @@ export function CreateBootCamp(Prop: Props) {
         return await CreateBootCampFetch(requestBody);
       },
       onSuccess: (data: string) => {
-        if (data) {
-          mutationCreateGame.mutate(requestBody);
-        }
+        console.log("Bootcamp created successfully:", data);
       },
       onError: (error) => {
         console.error("Error fetching the current game state:", error);
@@ -42,11 +40,11 @@ export function CreateBootCamp(Prop: Props) {
       />
       <button
         onClick={() => {
-          setRequestBody({
+          const updatedRequestBody = {
             name: bootCampName,
             clerkId: Prop.clerkId,
-          });
-          mutationCreateGame.mutate(requestBody);
+          };
+          mutationCreateGame.mutate(updatedRequestBody);
         }}
       >
         Create Bootcamp

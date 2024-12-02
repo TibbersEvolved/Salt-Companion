@@ -6,10 +6,12 @@ import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getFlashcardQuestions } from "../services/api";
+import LoadingSpinner from "../shared/loadingSpinner";
+import LoadingScreen from "../services/loadingScreen";
 
 type FlashcardProps = {
   sessionId: string;
-  callBack: genericCallback
+  callBack: genericCallback;
 };
 
 export interface genericCallback {
@@ -41,7 +43,7 @@ export const Flashcard = (prop: FlashcardProps) => {
     });
   };
 
-  if (isLoading) return <div>Loading pls add toast {prop.sessionId}</div>;
+  if (isLoading) return <LoadingScreen displayText="" />;
   if (isError) return <div>Error pls add toast</div>;
 
   const typeData: FlashcardQuestionsAndAnswers = data;
@@ -53,7 +55,7 @@ export const Flashcard = (prop: FlashcardProps) => {
         <>
           {/* <Confetti width={width} height={height} initialVelocityY={25} /> */}
           <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-3xl text-center mt-10">
+            <h1 className="text-3xl text-center">
               You've reached the end of the flashcards!
             </h1>
 
@@ -63,7 +65,6 @@ export const Flashcard = (prop: FlashcardProps) => {
             >
               Go back to the main page
             </button>
-
           </div>
         </>
       ) : (
@@ -72,7 +73,9 @@ export const Flashcard = (prop: FlashcardProps) => {
             <div className="bg-[#eed1d6] h-[670px] w-[750px] rounded-2xl">
               <div className="text-center space-y-5 mt-5">
                 <p className="text-[#f36384]">{typeData.topic}</p>
-                <h2 className="text-3xl font-extrabold">{typeData.question}</h2>
+                <h2 className="text-3xl font-extrabold px-12">
+                  {typeData.question}
+                </h2>
                 {/* {currentCard && (
                 <h2 className="text-3xl font-extrabold">{currentCard.question}</h2>
               )} */}
@@ -86,7 +89,6 @@ export const Flashcard = (prop: FlashcardProps) => {
                     <div className="flex items-center justify-center h-full">
                       <p className="text-2xl text-[#424242]">
                         Click to see the answer
-
                       </p>
                     </div>
                   }
