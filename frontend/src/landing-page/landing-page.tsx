@@ -12,6 +12,7 @@ import {
 } from "../services/api";
 import { useQuery } from "@tanstack/react-query";
 import LoadingScreen from "../services/loadingScreen";
+import UserStat from "./userStat";
 
 export const LandingPage = (prop: userProp) => {
   const { user, isLoaded } = useUser();
@@ -108,12 +109,12 @@ export const LandingPage = (prop: userProp) => {
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
           <h2 className="text-center text-3xl font-bold mb-4">Stats</h2>
           <div className="border border-gray-300 rounded-lg p-4">
-            <p className="text-[#424242] text-lg">
-              Here are some school stats:
-            </p>
-            <div>Current Streak: {data.currentStreak}</div>
-            <div>Record Streak: {data.streak}</div>
-            <div>Total Cards Flipped: {data.totalCardsFlipped}</div>
+            <section className="flex flex-wrap gap-5">
+              <UserStat text={"Current Streak " + data.currentStreak} tooltip="The amount of days you have used the app in a row" />
+              <UserStat text={"Record Streak " + data.streak} tooltip="Your lifetime highscore of days used in a row" />
+              <UserStat text={"Total Cards Flipped: " + data.totalCardsFlipped} tooltip="Lifetime total of cards flipped!" />
+
+            </section>
           </div>
         </div>
       </div>
