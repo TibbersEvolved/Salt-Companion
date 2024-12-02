@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as TeacherImport } from './routes/teacher'
 import { Route as QuizImport } from './routes/quiz'
 import { Route as LandingImport } from './routes/landing'
 import { Route as FlashcardImport } from './routes/flashcard'
@@ -18,6 +19,12 @@ import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const TeacherRoute = TeacherImport.update({
+  id: '/teacher',
+  path: '/teacher',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const QuizRoute = QuizImport.update({
   id: '/quiz',
@@ -88,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuizImport
       parentRoute: typeof rootRoute
     }
+    '/teacher': {
+      id: '/teacher'
+      path: '/teacher'
+      fullPath: '/teacher'
+      preLoaderRoute: typeof TeacherImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -99,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/flashcard': typeof FlashcardRoute
   '/landing': typeof LandingRoute
   '/quiz': typeof QuizRoute
+  '/teacher': typeof TeacherRoute
 }
 
 export interface FileRoutesByTo {
@@ -107,6 +122,7 @@ export interface FileRoutesByTo {
   '/flashcard': typeof FlashcardRoute
   '/landing': typeof LandingRoute
   '/quiz': typeof QuizRoute
+  '/teacher': typeof TeacherRoute
 }
 
 export interface FileRoutesById {
@@ -116,14 +132,22 @@ export interface FileRoutesById {
   '/flashcard': typeof FlashcardRoute
   '/landing': typeof LandingRoute
   '/quiz': typeof QuizRoute
+  '/teacher': typeof TeacherRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/flashcard' | '/landing' | '/quiz'
+  fullPaths: '/' | '/about' | '/flashcard' | '/landing' | '/quiz' | '/teacher'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/flashcard' | '/landing' | '/quiz'
-  id: '__root__' | '/' | '/about' | '/flashcard' | '/landing' | '/quiz'
+  to: '/' | '/about' | '/flashcard' | '/landing' | '/quiz' | '/teacher'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/flashcard'
+    | '/landing'
+    | '/quiz'
+    | '/teacher'
   fileRoutesById: FileRoutesById
 }
 
@@ -133,6 +157,7 @@ export interface RootRouteChildren {
   FlashcardRoute: typeof FlashcardRoute
   LandingRoute: typeof LandingRoute
   QuizRoute: typeof QuizRoute
+  TeacherRoute: typeof TeacherRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -141,6 +166,7 @@ const rootRouteChildren: RootRouteChildren = {
   FlashcardRoute: FlashcardRoute,
   LandingRoute: LandingRoute,
   QuizRoute: QuizRoute,
+  TeacherRoute: TeacherRoute,
 }
 
 export const routeTree = rootRoute
@@ -157,7 +183,8 @@ export const routeTree = rootRoute
         "/about",
         "/flashcard",
         "/landing",
-        "/quiz"
+        "/quiz",
+        "/teacher"
       ]
     },
     "/": {
@@ -174,6 +201,9 @@ export const routeTree = rootRoute
     },
     "/quiz": {
       "filePath": "quiz.tsx"
+    },
+    "/teacher": {
+      "filePath": "teacher.tsx"
     }
   }
 }
