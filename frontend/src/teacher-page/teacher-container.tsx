@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CreateBootCamp } from "./add-bootcamp";
 
 export const Teacher = () => {
   const [selectedBootcamp, setSelectedBootcamp] = useState("");
@@ -80,6 +81,7 @@ export const Teacher = () => {
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
             <h1>Add Bootcamp</h1>
+            <CreateBootCamp />
             <button
               className="mt-4 px-4 py-2 bg-black text-white rounded-md"
               onClick={closeAddBootcamp}

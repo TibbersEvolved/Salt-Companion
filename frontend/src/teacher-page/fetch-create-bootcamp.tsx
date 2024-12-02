@@ -3,7 +3,7 @@ import { BootCampData } from "./types";
 const POST_URL =
   "https://salt-companion-backend-876198057788.us-central1.run.app/api/bootcamps";
 
-export const createBootCampFetch = async (
+export const CreateBootCampFetch = async (
   body: BootCampData
 ): Promise<string> => {
   try {
