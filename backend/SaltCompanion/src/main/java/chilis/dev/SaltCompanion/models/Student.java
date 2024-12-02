@@ -3,6 +3,8 @@ package chilis.dev.SaltCompanion.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ManyToAny;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -125,7 +127,7 @@ public class Student {
 
     public void setCurrentStreak(int currentStreak) {
         this.currentStreak = currentStreak;
-        if(this.currentStreak > streakRecord) {
+        if(this.currentStreak > getStreakRecord()) {
             streakRecord = this.currentStreak;
         }
     }
@@ -148,17 +150,22 @@ public class Student {
         return quizScore;
     }
 
-    public void updateLastDay(int day) {
+    public void updateLastDay() {
+        int day = LocalDateTime.now().getDayOfYear();
+        System.out.println("day = " + day);
+        if(lastDayPlayed == null) {
+            lastDayPlayed = 0;
+        }
         if(day == lastDayPlayed){
             return;
         }
         if(day == lastDayPlayed+1) {
-            setCurrentStreak(currentStreak+1);
+            setCurrentStreak(getCurrentStreak()+1);
             lastDayPlayed = day;
             return;
         }
         if(day == 1 && lastDayPlayed == 365) {
-            setCurrentStreak(currentStreak+1);
+            setCurrentStreak(getCurrentStreak()+1);
             lastDayPlayed = day;
             return;
         }

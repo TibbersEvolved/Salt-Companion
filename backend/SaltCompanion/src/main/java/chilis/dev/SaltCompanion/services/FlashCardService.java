@@ -26,6 +26,7 @@ public class FlashCardService {
         Student student = studentService.findStudentByClerkId(session.getClerkId());
         Integer draw = student.getTotalCardsFlipped();
         student.setTotalCardsFlipped(draw+1);
+        student.updateLastDay();
         studentService.updateStudent(student);
         return session.drawNext();
     }
