@@ -38,7 +38,9 @@ export default function Navbar() {
                 </summary>
                 <ul className="bg-base-100 rounded-t-none p-2">
                   <li>
-                    <a>Link1</a>
+                    <Link to="/teacher">
+                      <a>Teacher Page</a>
+                    </Link>
                   </li>
                   <li>
                     <a>Link2</a>
