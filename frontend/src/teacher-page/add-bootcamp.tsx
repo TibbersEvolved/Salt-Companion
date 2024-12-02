@@ -1,9 +1,9 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { createBootCampFetch } from "./fetch-create-bootcamp";
+import { CreateBootCampFetch } from "./fetch-create-bootcamp";
 import { BootCampData } from "./types";
 import { useState, useRef, createContext, useContext, useEffect } from "react";
 
-export function createBootCamp() {
+export function CreateBootCamp() {
   const [bootCampName, setBootCampName] = useState<string>("");
   const [clerkId, setClerkId] = useState<string>("");
   const [requestBody, setRequestBody] = useState<BootCampData>({
@@ -17,7 +17,7 @@ export function createBootCamp() {
         if (!requestBody) {
           throw new Error("Request body is required");
         }
-        return await createBootCampFetch(requestBody);
+        return await CreateBootCampFetch(requestBody);
       },
       onSuccess: (data: string) => {
         if (data) {
