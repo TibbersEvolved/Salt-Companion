@@ -6,6 +6,8 @@ import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getFlashcardQuestions } from "../services/api";
+import LoadingSpinner from "../shared/loadingSpinner";
+import LoadingScreen from "../services/loadingScreen";
 
 type FlashcardProps = {
   sessionId: string;
@@ -41,7 +43,7 @@ export const Flashcard = (prop: FlashcardProps) => {
     });
   };
 
-  if (isLoading) return <div>Loading pls add toast {prop.sessionId}</div>;
+  if (isLoading) return <LoadingScreen displayText="" />;
   if (isError) return <div>Error pls add toast</div>;
 
   const typeData: FlashcardQuestionsAndAnswers = data;
