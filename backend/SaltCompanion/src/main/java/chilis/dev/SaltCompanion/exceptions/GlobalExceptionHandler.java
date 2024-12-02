@@ -93,6 +93,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
+    @ExceptionHandler({GptException.class})
+    protected ResponseEntity handleGptException(
+            GptException ex, WebRequest request) {
+
+        String message = "Unable to get ChatGpt response " + ex.getMessage();
+        return handleExceptionInternal(ex, message,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
 
 
 
