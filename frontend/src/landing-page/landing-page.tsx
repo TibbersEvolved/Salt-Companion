@@ -111,6 +111,9 @@ export const LandingPage = (prop: userProp) => {
             <p className="text-[#424242] text-lg">
               Here are some school stats:
             </p>
+            <div>Current Streak: {data.currentStreak}</div>
+            <div>Record Streak: {data.streak}</div>
+            <div>Total Cards Flipped: {data.totalCardsFlipped}</div>
           </div>
         </div>
       </div>
