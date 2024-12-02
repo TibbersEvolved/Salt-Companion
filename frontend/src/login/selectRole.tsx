@@ -4,18 +4,20 @@ import { useNavigate } from "@tanstack/react-router";
 
 import axios from "axios";
 
-export default function SelectRole() {
+
+export default function SelectRole(prop: props) {
   const { user } = useUser();
   const navigate = useNavigate();
 
-  const clerkId = user?.id;
+
   const name = user?.firstName;
   const base_url = import.meta.env.VITE_BASE_URL;
 
   const { isPending, error, data } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      axios.get(`${base_url}/students/user/${clerkId}`);
+      const response = await axios.get(`${base_url}/students/user/${prop.clerkId}`);
+      return response.data;
     },
   });
 
@@ -24,16 +26,16 @@ export default function SelectRole() {
     try {
       if (role === 1) {
         const response = await axios.post(`${base_url}/students`, {
-          name: data.name,
-          id: data.id,
+          name: name,
+          id: prop.clerkId,
         });
         console.log("Student role selected and user posted:", response.data);
         navigate({ to: "/landing" });
       } else if (role === 2) {
         const response = await axios.post(`${base_url}/teachers`, {
-          name: data.name,
-          id: data.id,
-          email: data.email,
+          name: name,
+          id: prop.clerkId,
+          email: "TBD",
         });
         console.log("Teacher role selected and user posted:", response.data);
         navigate({ to: "/teacher" });
@@ -46,16 +48,17 @@ export default function SelectRole() {
   if (isPending) return <div>Loading...</div>;
 
   if (error) return <div>Error: {error.message}</div>;
+  console.log("Data: " + data);
 
-  if (data.clerkId === 1) {
+  if (data.userType == 1) {
     navigate({ to: "/landing" });
-  } else if (data.clerkId === 2) {
+  } else if (data.userType == 2) {
     navigate({ to: "/teacher" });
   }
 
   const handleRoleSelection = async (role: number) => {
     console.log(`Role selected: ${role}`);
-    const url = `${base_url}/students/user/${clerkId}`;
+    const url = `${base_url}/students/user/${prop.clerkId}`;
 
     try {
       const response = await axios.get(url);
@@ -64,7 +67,7 @@ export default function SelectRole() {
       const { userType } = response.data;
 
       if (userType === 0) {
-        const createUser = { name, clerkId };
+        const createUser = { name: name, clerkId: prop.clerkId };
         await axios.post(`${base_url}/students`, createUser);
         console.log(`created user ${createUser}`);
       }
@@ -109,4 +112,8 @@ export default function SelectRole() {
       </div>
     </div>
   );
+}
+
+type props = {
+  clerkId: String;
 }
