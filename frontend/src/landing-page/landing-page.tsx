@@ -7,33 +7,56 @@ import { Flashcard } from "../flashcard/flashcard-container";
 import {
   fetchBootcamps,
   getQuizQuestions,
+  getStudentData,
   startFlashcardSession,
 } from "../services/api";
+import { useQuery } from "@tanstack/react-query";
 
-export const LandingPage = () => {
-  const { user } = useUser();
+export const LandingPage = (prop: userProp) => {
+  const { user, isLoaded } = useUser();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [page, setPage] = useState(1);
   const [sessionId, setSessionId] = useState("");
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["loadUser"],
+    queryFn: () => getStudentData(prop.userId),
+  });
 
   const handleChange = (selected) => {
     setSelectedOptions(selected);
   };
 
+  if (isLoading) return <div className="min-h-screen bg-gray-100">Loading with {user?.id as string}</div>;
+  if (isError) return <div>Server Error, user id: {user?.id as string}</div>;
+
   const handleClick = async () => {
+    let topics: number[] = new Array();
+    selectedOptions.forEach((index) => {
+      topics.push(index.value)
+    })
+    console.log("Topics:", topics)
+    if (topics.length === 0) {
+      return;
+    }
     const response = await startFlashcardSession(
       10,
-      [1, 2],
+      topics,
       user?.id as string
     );
     setSessionId(response.id);
     setPage(2);
-    console.log(selectedOptions);
   };
 
-  if (page === 2) {
-    return <Flashcard sessionId={sessionId} />;
+  const handleReturn = () => {
+    setPage(1)
   }
+
+  if (page === 2) {
+    return <Flashcard sessionId={sessionId} callBack={() => handleReturn()} />;
+  }
+
+  const topicData = data.topics.topics
+  console.log(topicData);
 
   return (
     <SignedIn>
@@ -66,7 +89,7 @@ export const LandingPage = () => {
           <div className="flex flex-col items-center">
             <Select
               isMulti
-              options={mockedCourseData}
+              options={topicData}
               className="text-[#424242] w-full max-w-md font-light"
               classNamePrefix="select"
               onChange={handleChange}
@@ -92,3 +115,7 @@ export const LandingPage = () => {
     </SignedIn>
   );
 };
+
+type userProp = {
+  userId: string
+}

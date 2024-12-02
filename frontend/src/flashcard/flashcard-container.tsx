@@ -9,7 +9,12 @@ import { getFlashcardQuestions } from "../services/api";
 
 type FlashcardProps = {
   sessionId: string;
+  callBack: genericCallback
 };
+
+export interface genericCallback {
+  (): void;
+}
 
 type FlashcardQuestionsAndAnswers = {
   topic: string;
@@ -51,14 +56,14 @@ export const Flashcard = (prop: FlashcardProps) => {
             <h1 className="text-3xl text-center mt-10">
               You've reached the end of the flashcards!
             </h1>
-            <Link to="/landing">
-              <button
-                className="bg-rose-600 text-white px-6 py-3 rounded-md mt-6"
-                onClick={() => setCurrentCardIndex(0)}
-              >
-                Go back to the main page
-              </button>
-            </Link>
+
+            <button
+              className="bg-rose-600 text-white px-6 py-3 rounded-md mt-6"
+              onClick={prop.callBack}
+            >
+              Go back to the main page
+            </button>
+
           </div>
         </>
       ) : (
