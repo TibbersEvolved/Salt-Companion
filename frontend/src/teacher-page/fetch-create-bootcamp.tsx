@@ -19,8 +19,8 @@ export const CreateBootCampFetch = async (
     if (!response.ok) {
       throw new Error(`Failed to create bootcamp. Status: ${response.status}`);
     }
-
-    return await response.json();
+    return "Bootcamp added to database";
+    // return await response.json();
   } catch (error) {
     console.error("Error creating bootcamp:", error);
     throw error;
