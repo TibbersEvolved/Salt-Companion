@@ -41,7 +41,7 @@ public class StudentController {
         ListDetailedTopicsDto studentTopics = bootcampController.
                 getListTopicsDto(student.getBootCamp().getId());
         return ResponseEntity.ok(new StudentDetailedInfoDto(student.getName(),
-                student.getBootCamp().getName(), studentTopics));
+                student.getBootCamp().getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped()));
     }
 
     @PostMapping
