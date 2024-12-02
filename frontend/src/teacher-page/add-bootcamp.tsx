@@ -3,9 +3,12 @@ import { CreateBootCampFetch } from "./fetch-create-bootcamp";
 import { BootCampData } from "./types";
 import { useState, useRef, createContext, useContext, useEffect } from "react";
 
-export function CreateBootCamp() {
+// interface Props{
+//     clerkId : string
+// }
+
+export function CreateBootCamp(clerkId: string) {
   const [bootCampName, setBootCampName] = useState<string>("");
-  const [clerkId, setClerkId] = useState<string>("");
   const [requestBody, setRequestBody] = useState<BootCampData>({
     name: bootCampName,
     clerkId: clerkId,
