@@ -8,7 +8,7 @@ export const FetchTeacherBootCamps = async (
 ): Promise<TeacherBootCampList> => {
   try {
     const response = await fetch(POST_URL + teacherClerkId, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },

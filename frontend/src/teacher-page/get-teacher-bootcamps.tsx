@@ -8,7 +8,7 @@ type Props = {
   clerkId: string;
 };
 
-export function GetTeacherBootCamp(clerkId: Props) {
+export function GetTeacherBootCamp({ clerkId }: Props) {
   const [bootCampName, setBootCampName] = useState<string>("");
   const [bootCampList, setBotCampList] = useState<TeacherBootCampList | null>(
     null
@@ -33,6 +33,10 @@ export function GetTeacherBootCamp(clerkId: Props) {
       console.error("Error fetching the current game state:", error);
     },
   });
+
+  useEffect(() => {
+    mutationGetTeacherBootCamps.mutate(clerkId);
+  }, [clerkId]);
 
   return (
     <div>
