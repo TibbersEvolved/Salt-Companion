@@ -3,6 +3,8 @@ package chilis.dev.SaltCompanion.controllers;
 import chilis.dev.SaltCompanion.exceptions.GptException;
 import chilis.dev.SaltCompanion.models.GptModels.ChatRequest;
 import chilis.dev.SaltCompanion.models.GptModels.ChatResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController("/api")
+@Tag(name = "GPT API", description = "API to interact with ChatGPT for generating responses")
 public class GptController {
 
     @Qualifier("openaiRestTemplate")
@@ -30,6 +33,9 @@ public class GptController {
     }
 
     @GetMapping("/gpt")
+    @Operation(
+            summary = "Get ChatGPT flash cards",
+            description = "request should be ?prompt=Topic")
     public ResponseEntity chat(@RequestParam String prompt) {
 
         ChatRequest request = new ChatRequest(model, prompt);
