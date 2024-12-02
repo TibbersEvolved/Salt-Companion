@@ -11,6 +11,7 @@ import {
   startFlashcardSession,
 } from "../services/api";
 import { useQuery } from "@tanstack/react-query";
+import LoadingScreen from "../services/loadingScreen";
 
 export const LandingPage = (prop: userProp) => {
   const { user, isLoaded } = useUser();
@@ -26,7 +27,7 @@ export const LandingPage = (prop: userProp) => {
     setSelectedOptions(selected);
   };
 
-  if (isLoading) return <div className="min-h-screen bg-gray-100">Loading with {user?.id as string}</div>;
+  if (isLoading) return <LoadingScreen displayText="User found! Fetching profile" />
   if (isError) return <div>Server Error, user id: {user?.id as string}</div>;
 
   const handleClick = async () => {
