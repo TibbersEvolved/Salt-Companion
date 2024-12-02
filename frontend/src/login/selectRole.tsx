@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 
 import axios from "axios";
+import LoadingScreen from "../services/loadingScreen";
 
 
 export default function SelectRole(prop: props) {
@@ -45,7 +46,7 @@ export default function SelectRole(prop: props) {
     }
   };
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <LoadingScreen displayText="" />
 
   if (error) return <div>Error: {error.message}</div>;
   console.log("Data: " + data);
