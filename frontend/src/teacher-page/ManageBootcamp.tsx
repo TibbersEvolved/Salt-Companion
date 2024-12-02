@@ -35,10 +35,27 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
               : "DNFS .Net/C# Bootcamp"}
           .
         </p>
+        <select name="" id="">
+          <option value="topic1">Topic 1</option>
+          <option value="topic2">Topic 2</option>
+          <option value="topic3">Topic 3</option>
+          <option value="topic4">Topic 4</option>
+          <option value="topic5">Topic 5</option>
+          <option value="topic6">Topic 6</option>
+        </select>
         <form action="submit">
           <input type="text" placeholder="Add topic" />
           <button type="submit">Submit</button>
         </form>
+
+        <div>
+          <button>Select flashcard</button>
+          <form action="">
+            <input type="text" name="" id="" placeholder="Question" />
+            <input type="text" placeholder="Answer" />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
         <br />
         <button
           className="mt-4 px-4 py-2 bg-black text-white rounded-md"
