@@ -22,6 +22,7 @@ function RootComponent() {
         <ClerkProvider
           publishableKey={PUBLISHABLE_KEY}
           afterSignOutUrl="/"
+          signInForceRedirectUrl="/role"
           signInFallbackRedirectUrl="/landing"
         >
           <Navbar />
