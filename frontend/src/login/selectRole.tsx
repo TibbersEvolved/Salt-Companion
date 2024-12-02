@@ -1,4 +1,5 @@
 import { useUser } from "@clerk/clerk-react";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 
 import axios from "axios";
@@ -10,6 +11,47 @@ export default function SelectRole() {
   const clerkId = user?.id;
   const name = user?.firstName;
   const base_url = import.meta.env.VITE_BASE_URL;
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      axios.get(`${base_url}/students/user/${clerkId}`);
+    },
+  });
+
+  // 1 = isStudent, 2= isTeacher
+  const handleRole2 = async (role: number) => {
+    try {
+      if (role === 1) {
+        const response = await axios.post(`${base_url}/students`, {
+          name: data.name,
+          id: data.id,
+        });
+        console.log("Student role selected and user posted:", response.data);
+        navigate({ to: "/landing" });
+      } else if (role === 2) {
+        const response = await axios.post(`${base_url}/teachers`, {
+          name: data.name,
+          id: data.id,
+          email: data.email,
+        });
+        console.log("Teacher role selected and user posted:", response.data);
+        navigate({ to: "/teacher" });
+      }
+    } catch (error) {
+      console.error("Error submitting role:", error);
+    }
+  };
+
+  if (isPending) return <div>Loading...</div>;
+
+  if (error) return <div>Error: {error.message}</div>;
+
+  if (data.clerkId === 1) {
+    navigate({ to: "/landing" });
+  } else if (data.clerkId === 2) {
+    navigate({ to: "/teacher" });
+  }
 
   const handleRoleSelection = async (role: number) => {
     console.log(`Role selected: ${role}`);

@@ -9,3 +9,4 @@ export const Route = createFileRoute("/role")({
 function RouteComponent() {
   return <SelectRole />;
 }
+``;
