@@ -16,6 +16,13 @@ public class Student {
 
     private String email;
 
+    private Integer streakRecord;
+
+    private Integer currentStreak ;
+    private Integer totalCardsFlipped ;
+    private Float quizScore ;
+    private Integer lastDayPlayed ;
+
     @Column(nullable = false)
     private String name;
 
@@ -96,5 +103,70 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getStreakRecord() {
+        if(streakRecord == null) {
+            streakRecord = 0;
+        }
+        return streakRecord;
+    }
+
+    public void setStreakRecord(int streakRecord) {
+        this.streakRecord = streakRecord;
+    }
+
+    public Integer getCurrentStreak() {
+        if(currentStreak == null) {
+            currentStreak = 0;
+        }
+        return currentStreak;
+    }
+
+    public void setCurrentStreak(int currentStreak) {
+        this.currentStreak = currentStreak;
+        if(this.currentStreak > streakRecord) {
+            streakRecord = this.currentStreak;
+        }
+    }
+
+    public Integer getTotalCardsFlipped() {
+        if(totalCardsFlipped== null) {
+            totalCardsFlipped = 0;
+        }
+        return totalCardsFlipped;
+    }
+
+    public void setTotalCardsFlipped(int totalCardsFlipped) {
+        this.totalCardsFlipped = totalCardsFlipped;
+    }
+
+    public Float getQuizScore() {
+        if(quizScore == null) {
+            quizScore = 0f;
+        }
+        return quizScore;
+    }
+
+    public void updateLastDay(int day) {
+        if(day == lastDayPlayed){
+            return;
+        }
+        if(day == lastDayPlayed+1) {
+            setCurrentStreak(currentStreak+1);
+            lastDayPlayed = day;
+            return;
+        }
+        if(day == 1 && lastDayPlayed == 365) {
+            setCurrentStreak(currentStreak+1);
+            lastDayPlayed = day;
+            return;
+        }
+        setCurrentStreak(1);
+        lastDayPlayed = day;
+    }
+
+    public void setQuizScore(float quizScore) {
+        this.quizScore = quizScore;
     }
 }

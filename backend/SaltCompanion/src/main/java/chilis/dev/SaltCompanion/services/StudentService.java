@@ -14,8 +14,8 @@ import java.util.Optional;
 @Service
 public class StudentService {
 
-    StudentRepo studentRepo;
-    BootCampRepository bootCampRepository;
+    private StudentRepo studentRepo;
+    private BootCampRepository bootCampRepository;
 
     public StudentService(StudentRepo studentRepo, BootCampRepository bootCampRepository) {
         this.studentRepo = studentRepo;
@@ -27,13 +27,11 @@ public class StudentService {
         studentRepo.save(student);
     }
 
-//    public Student findStudentByClerkId(String clerkId) {
-//        List<Student> optionalStudent = studentRepo.findAllByClerkId(clerkId);
-//        if(optionalStudent.isEmpty()) {
-//            return null;
-//        }
-//        return optionalStudent.get(0);
-//    }
+    public void updateStudent(Student student) {
+        studentRepo.save(student);
+    }
+
+
 public Student findStudentByClerkId(String clerkId) {
     Student student = studentRepo.findStudentByClerkId(clerkId);
     validateStudentExist(student);

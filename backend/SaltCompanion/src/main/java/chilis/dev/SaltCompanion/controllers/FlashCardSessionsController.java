@@ -43,7 +43,7 @@ public class FlashCardSessionsController {
                 }
             }
         }
-        UUID sessionId = flashCardService.startNewSession(mappedTopics,input.cards());
+        UUID sessionId = flashCardService.startNewSession(mappedTopics,input.cards(),input.userId());
         return ResponseEntity.ok(new FlashCardSessionDto(sessionId.toString()));
     }
 

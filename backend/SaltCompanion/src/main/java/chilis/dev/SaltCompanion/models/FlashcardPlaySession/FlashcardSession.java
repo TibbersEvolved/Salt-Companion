@@ -9,11 +9,13 @@ public class FlashcardSession {
     private UUID id;
     private List<FlashCard> flashDeck = new ArrayList<>();
     private int index ;
+    private String clerkId;
 
-    public FlashcardSession(List<FlashCard> flashDeck) {
+    public FlashcardSession(List<FlashCard> flashDeck, String clerkId) {
         this.flashDeck = flashDeck;
         id = UUID.randomUUID();
         index = -1;
+        this.clerkId = clerkId;
     }
 
     public FlashCard drawNext() {
@@ -35,5 +37,9 @@ public class FlashcardSession {
 
     public int getIndex() {
         return index;
+    }
+
+    public String getClerkId() {
+        return clerkId;
     }
 }
