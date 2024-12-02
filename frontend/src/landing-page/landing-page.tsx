@@ -27,15 +27,16 @@ export const LandingPage = (prop: userProp) => {
     setSelectedOptions(selected);
   };
 
-  if (isLoading) return <LoadingScreen displayText="User found! Fetching profile" />
+  if (isLoading)
+    return <LoadingScreen displayText="User found! Fetching profile" />;
   if (isError) return <div>Server Error, user id: {user?.id as string}</div>;
 
   const handleClick = async () => {
     let topics: number[] = new Array();
     selectedOptions.forEach((index) => {
-      topics.push(index.value)
-    })
-    console.log("Topics:", topics)
+      topics.push(index.value);
+    });
+    console.log("Topics:", topics);
     if (topics.length === 0) {
       return;
     }
@@ -49,14 +50,14 @@ export const LandingPage = (prop: userProp) => {
   };
 
   const handleReturn = () => {
-    setPage(1)
-  }
+    setPage(1);
+  };
 
   if (page === 2) {
     return <Flashcard sessionId={sessionId} callBack={() => handleReturn()} />;
   }
 
-  const topicData = data.topics.topics
+  const topicData = data.topics.topics;
   console.log(topicData);
 
   return (
@@ -118,5 +119,5 @@ export const LandingPage = (prop: userProp) => {
 };
 
 type userProp = {
-  userId: string
-}
+  userId: string;
+};
