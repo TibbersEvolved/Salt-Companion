@@ -1,6 +1,6 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { CreateBootCampFetch } from "./fetch-create-bootcamp";
-import { BootCampData } from "./types";
+import { BootCampPostData } from "./types";
 import { useState, useRef, createContext, useContext, useEffect } from "react";
 
 type Props = {
@@ -9,14 +9,14 @@ type Props = {
 
 export function CreateBootCamp(Prop: Props) {
   const [bootCampName, setBootCampName] = useState<string>("");
-  const [requestBody, setRequestBody] = useState<BootCampData>({
+  const [requestBody, setRequestBody] = useState<BootCampPostData>({
     name: bootCampName,
     clerkId: Prop.clerkId,
   });
 
-  const mutationCreateGame: UseMutationResult<string, Error, BootCampData> =
+  const mutationCreateGame: UseMutationResult<string, Error, BootCampPostData> =
     useMutation({
-      mutationFn: async (requestBody: BootCampData): Promise<string> => {
+      mutationFn: async (requestBody: BootCampPostData): Promise<string> => {
         if (!requestBody) {
           throw new Error("Request body is required");
         }
