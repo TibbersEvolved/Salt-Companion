@@ -98,7 +98,7 @@ public class BootcampController {
 
         List<TopicDto> payload = new ArrayList<>();
         bootcampService.getTopicsForBootCamp(bootCampId).forEach(s -> {
-            payload.add(new TopicDto(s.getId(), s.getName()));
+            payload.add(new TopicDto(s.getId(), s.getName(), s.getId()));
         });
         return new ListDetailedTopicsDto(payload);
     }
