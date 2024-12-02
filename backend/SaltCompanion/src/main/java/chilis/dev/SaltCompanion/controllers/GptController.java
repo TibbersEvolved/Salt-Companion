@@ -42,9 +42,6 @@ public class GptController {
 
         ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
 
-//        if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
-//            return ResponseEntity.status(400).body("Could not genererate ChatGpt flashcard");
-//        }
         validateResponse(response);
 
         return ResponseEntity.status(200).body(response.getChoices().get(0).getMessage().getContent());

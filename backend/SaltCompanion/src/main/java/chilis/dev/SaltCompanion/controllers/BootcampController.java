@@ -12,6 +12,8 @@ import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import chilis.dev.SaltCompanion.services.StudentService;
 import chilis.dev.SaltCompanion.services.TeacherService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/bootcamps")
+@Tag(name = "BootCamp API", description = "Create, Update, Delete Bootcamps")
 public class BootcampController {
 
     private BootcampService bootcampService;
@@ -69,6 +72,9 @@ public class BootcampController {
     }
 
     @PostMapping
+    @Operation(
+            summary = "Creates a new Bootcamp",
+            description = "request body with teacher clerkId and name")
     public ResponseEntity createBootCamp(@RequestBody CreateBootCampDto dto) {
         Teacher teacher = teacherService.findTeacherByClerkId(dto.clerkId());
         bootcampService.addBootCamp(dto.name(), teacher);
