@@ -109,7 +109,7 @@ export const LandingPage = (prop: userProp) => {
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
           <h2 className="text-center text-3xl font-bold mb-4">Stats</h2>
           <div className="border border-gray-300 rounded-lg p-4">
-            <section className="flex flex-wrap gap-5">
+            <section className="flex flex-wrap gap-5 justify-center">
               <UserStat text={"Current Streak " + data.currentStreak} tooltip="The amount of days you have used the app in a row" />
               <UserStat text={"Record Streak " + data.streak} tooltip="Your lifetime highscore of days used in a row" />
               <UserStat text={"Total Cards Flipped: " + data.totalCardsFlipped} tooltip="Lifetime total of cards flipped!" />
