@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from "daisyui";
-const flowbite = require("flowbite-react/tailwind");
+import flowbite from "flowbite-react/tailwind";
 export default {
   content: ["./src/**/*.{html,tsx}", flowbite.content()],
   theme: {
