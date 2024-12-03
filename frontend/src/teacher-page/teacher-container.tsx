@@ -48,7 +48,7 @@ export const Teacher = () => {
 
   return (
     <>
-      <div className="w-screen h-screen flex items-start flex-row justify-center bg-[#ebebeb]">
+      <div className="w-screen h-200 flex items-start flex-row justify-center bg-[#ebebeb]">
         {/* <select
           className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
           value={selectedBootcamp}
