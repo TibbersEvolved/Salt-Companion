@@ -1,16 +1,53 @@
-import { SignedIn } from "@clerk/clerk-react";
-import { useState } from "react";
-import { Link } from "@tanstack/react-router";
-import EndQuestionsPage from "../shared/end-questions";
+import React, { useState } from "react";
+import { mockedQuiz } from "../mocked/mocked-data";
 
+function getRandomQuestionsWithTopics(allQuestions, numberOfQuestions = 15) {
+  const groupedByTopic = allQuestions.reduce((acc, question) => {
+    if (!acc[question.topic]) acc[question.topic] = [];
+    acc[question.topic].push(question);
+    return acc;
+  }, {});
+
+  let selectedQuestions = [];
+  for (const topic in groupedByTopic) {
+    const topicQuestions = groupedByTopic[topic];
+    const randomIndex = Math.floor(Math.random() * topicQuestions.length);
+    selectedQuestions.push(topicQuestions[randomIndex]);
+  }
+
+  const remainingQuestions = numberOfQuestions - selectedQuestions.length;
+  if (remainingQuestions > 0) {
+    const remainingPool = allQuestions.filter(
+      (q) => !selectedQuestions.includes(q)
+    );
+    const additionalQuestions = [];
+    while (additionalQuestions.length < remainingQuestions) {
+      const randomIndex = Math.floor(Math.random() * remainingPool.length);
+      additionalQuestions.push(remainingPool.splice(randomIndex, 1)[0]);
+    }
+    selectedQuestions = [...selectedQuestions, ...additionalQuestions];
+  }
+
+  return selectedQuestions.sort(() => Math.random() - 0.5);
+}
+
+type UserAnswer = {
+  question: string;
+  selectedAnswer: string;
+  correct: boolean;
+};
+
+// Quiz Component
 export const Quiz = () => {
+  const [quizQuestions] = useState(
+    getRandomQuestionsWithTopics(mockedQuiz, 15)
+  );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<string[]>([]);
-  const [isQuizFinished, setIsQuizFinished] = useState(false);
+  const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [difficultTopics, setDifficultTopics] = useState<string[]>([]);
+  const [isQuizFinished, setIsQuizFinished] = useState(false);
 
-  const currentQuestion = mockedQuiz[currentQuestionIndex];
+  const currentQuestion = quizQuestions[currentQuestionIndex];
 
   const handleNextQuestion = () => {
     if (!selectedAnswer) {
@@ -18,16 +55,17 @@ export const Quiz = () => {
       return;
     }
 
-    setUserAnswers((prevAnswers) => [...prevAnswers, selectedAnswer]);
-
-    if (selectedAnswer !== currentQuestion.correctAnswer) {
-      setDifficultTopics((prevTopics) => [
-        ...new Set([...prevTopics, currentQuestion.topic]),
-      ]);
-    }
-
+    setUserAnswers((prev) => [
+      ...prev,
+      {
+        question: currentQuestion.question,
+        selectedAnswer,
+        correct: selectedAnswer === currentQuestion.correctAnswer,
+      },
+    ]);
     setSelectedAnswer(null);
-    if (currentQuestionIndex === mockedQuiz.length - 1) {
+
+    if (currentQuestionIndex === quizQuestions.length - 1) {
       setIsQuizFinished(true);
     } else {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -35,55 +73,89 @@ export const Quiz = () => {
   };
 
   const calculateScore = () => {
-    return mockedQuiz.filter(
-      (question, index) => question.correctAnswer === userAnswers[index]
-    ).length;
+    return userAnswers.filter((answer) => answer.correct).length;
   };
 
   return (
-    <>
-      <SignedIn>
-        {isEndReached ? (
-          <EndQuestionsPage />
-        ) : (
-          <div className="m-0 p-0 w-screen h-screen flex justify-center items-center">
-            <div className=" bg-white rounded-2xl h-3/4 w-3/4 flex flex-col items-center shadow-lg p-8">
-              <div className="w-full text-center text-lg font-semibold mb-4">
-                Question {currentQuestionIndex + 1} of {mockedQuiz.length}
-              </div>
-
-              <h2 className="text-4xl mb-6">{currentQuestion.question}</h2>
-
-              <div className="flex flex-col w-full items-start text-2xl space-y-4">
-                {currentQuestion.answers.map((answer, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center space-x-4 mx-32"
-                  >
-                    <input
-                      type="radio"
-                      name={`question-${currentQuestionIndex}`}
-                      id={`answer-${index}`}
-                      value={answer}
-                      checked={selectedAnswer === answer}
-                      onChange={() => setSelectedAnswer(answer)}
-                      className="appearance-none w-5 h-5 border-2 border-gray-500/50 rounded-full"
-                    />
-                    <label htmlFor={`answer-${index}`}>{answer}</label>
-                  </div>
-                ))}
-              </div>
-
-              <button
-                onClick={handleNextQuestion}
-                className="mt-6 bg-[#fc7961] text-white h-10 w-1/5 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
-              >
-                Next
-              </button>
-            </div>
+    <div className="quiz-container bg-gray-100 p-6 min-h-screen flex flex-col items-center justify-center">
+      {isQuizFinished ? (
+        <div className="result bg-white p-6 rounded-lg shadow-lg w-1/2 text-center">
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">
+            Quiz Completed!
+          </h1>
+          <p className="text-xl text-gray-600">
+            You scored{" "}
+            <span className="font-bold text-[#424242]">{calculateScore()}</span>{" "}
+            out of{" "}
+            <span className="font-bold text-[#424242]">
+              {quizQuestions.length}
+            </span>
+            .
+          </p>
+          <div className="mt-6">
+            <h2 className="text-2xl font-bold text-[#424242] mb-4">
+              Topics to Review:
+            </h2>
+            <ul className="text-center text-white space-y-2">
+              {[
+                ...new Set(
+                  userAnswers
+                    .filter((answer) => !answer.correct)
+                    .map(
+                      (answer) =>
+                        quizQuestions.find(
+                          (q) => q.question === answer.question
+                        )?.topic
+                    )
+                ),
+              ].map((topic, index) => (
+                <li key={index} className="p-2 rounded bg-[#fc7961]">
+                  {topic}
+                </li>
+              ))}
+            </ul>
           </div>
-        )}
-      </SignedIn>
-    </>
+        </div>
+      ) : (
+        <div className="question-container bg-white p-6 rounded-lg shadow-lg w-3/6 text-center">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            Question {currentQuestionIndex + 1} of {quizQuestions.length}
+          </h2>
+          <p className="text-gray-700 text-lg mb-4">
+            {currentQuestion.question}
+          </p>
+          <div className="answers space-y-3">
+            {currentQuestion.answers.map((answer, index) => (
+              <label
+                key={index}
+                className={`block bg-gray-200 p-2 rounded border-2 ${
+                  selectedAnswer === answer
+                    ? "border-blue-500"
+                    : "border-gray-200"
+                } cursor-pointer`}
+              >
+                <input
+                  type="radio"
+                  name={`question-${currentQuestionIndex}`}
+                  value={answer}
+                  checked={selectedAnswer === answer}
+                  onChange={() => setSelectedAnswer(answer)}
+                  className="hidden"
+                />
+                {answer}
+              </label>
+            ))}
+          </div>
+          <button
+            onClick={handleNextQuestion}
+            className="mt-6 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
+          >
+            {currentQuestionIndex === quizQuestions.length - 1
+              ? "Finish"
+              : "Next"}
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
