@@ -1,9 +1,7 @@
 import * as React from "react";
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import { ClerkProvider, SignedIn } from "@clerk/clerk-react";
-import Navbar from "../shared/navbar";
-import Footer from "../shared/footer";
+import { ClerkProvider } from "@clerk/clerk-react";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -18,20 +16,30 @@ if (!PUBLISHABLE_KEY) {
 function RootComponent() {
   return (
     <>
-      <div className="min-h-screen flex flex-col">
-        <ClerkProvider
-          publishableKey={PUBLISHABLE_KEY}
-          afterSignOutUrl="/"
-          signInForceRedirectUrl="/role"
-          signInFallbackRedirectUrl="/landing"
-        >
-          <Navbar />
-          <div className="flex-grow bg-gray-100/50">
-            <Outlet />
-          </div>
-          <Footer />
-        </ClerkProvider>
-      </div>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+        <div className="p-2 flex gap-2 text-lg">
+          <Link
+            to="/"
+            activeProps={{
+              className: "font-bold",
+            }}
+            activeOptions={{ exact: true }}
+          >
+            Home
+          </Link>{" "}
+          <Link
+            to="/about"
+            activeProps={{
+              className: "font-bold",
+            }}
+          >
+            About
+          </Link>
+        </div>
+        <hr />
+        <Outlet />
+        <TanStackRouterDevtools position="bottom-right" />
+      </ClerkProvider>
     </>
   );
 }
