@@ -10,11 +10,12 @@ import {
   getStudentData,
   startFlashcardSession,
 } from "../services/api";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingScreen from "../services/loadingScreen";
 import UserStat from "./userStat";
 
 export const LandingPage = (prop: userProp) => {
+  const client = useQueryClient()
   const { user, isLoaded } = useUser();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [page, setPage] = useState(1);
@@ -37,7 +38,6 @@ export const LandingPage = (prop: userProp) => {
     selectedOptions.forEach((index) => {
       topics.push(index.value);
     });
-    console.log("Topics:", topics);
     if (topics.length === 0) {
       return;
     }
@@ -51,6 +51,10 @@ export const LandingPage = (prop: userProp) => {
   };
 
   const handleReturn = () => {
+    client.invalidateQueries({
+      queryKey: ["loadUser"],
+      refetchType: "all",
+    });
     setPage(1);
   };
 
