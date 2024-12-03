@@ -81,7 +81,10 @@ export const Teacher = () => {
           </button>
         </div>
       </div>
-
+      <ManageBootcamp
+        selectedBootcamp={selectedBootcamp}
+        onClose={closeManageBootcamp}
+      />
       {showManageBootcamp && (
         <ManageBootcamp
           selectedBootcamp={selectedBootcamp}
