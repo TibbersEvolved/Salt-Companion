@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { TopicSelect } from "./topic-select";
 import { TopicPostData } from "./types";
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { CreateTopicFetch } from "./fetch-create-topic";
 
 interface ManageBootcampProps {
@@ -16,6 +20,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   bootCampId,
 }) => {
   const [newTopicName, setNewTopicName] = useState("");
+  const queryClient = useQueryClient();
 
   const mutationCreateTopic: UseMutationResult<string, Error, TopicPostData> =
     useMutation({
@@ -27,6 +32,9 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
       },
       onSuccess: (data: string) => {
         console.log("Topic created successfully:", data);
+        queryClient.invalidateQueries({
+          queryKey: ["topics", bootCampId],
+        });
       },
       onError: (error) => {
         console.error("Error creating topic:", error);
@@ -38,6 +46,12 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const updatedRequestBody: TopicPostData = {
+      name: newTopicName,
+      id: bootCampId,
+    };
+    console.log("updatedRequestBody", updatedRequestBody);
+    mutationCreateTopic.mutate(updatedRequestBody);
   };
 
   return (

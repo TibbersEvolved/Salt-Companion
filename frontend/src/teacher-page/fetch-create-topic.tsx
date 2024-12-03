@@ -6,6 +6,7 @@ const POST_URL =
 export const CreateTopicFetch = async (
   body: TopicPostData
 ): Promise<string> => {
+  console.log("topic data in fetch", body);
   try {
     const response = await fetch(POST_URL, {
       method: "POST",
