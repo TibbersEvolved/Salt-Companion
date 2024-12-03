@@ -98,6 +98,9 @@ public class BootcampController {
     }
 
     @PostMapping("/topic/add")
+    @Operation(
+            summary = "Adds a new topic to a bootcamp",
+            description = "request body with topic name and bootcamp id")
     public ResponseEntity addTopic(@RequestBody CreateTopicDto dto) {
         Topic topic = new Topic(dto.name());
         bootcampService.addTopicToBootCamp(dto.id(), topic);
