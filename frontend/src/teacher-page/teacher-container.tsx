@@ -65,11 +65,12 @@ export const Teacher = () => {
         >
           Handle bootcamp
         </button> */}
-        <TopicSelect bootCampId={selectedBootcampId} />
+        {/* <TopicSelect bootCampId={selectedBootcampId} /> */}
 
         <GetTeacherBootCamp
           clerkId={user?.id as string}
           setSelectedBootCampId={setSelectedBootcampId}
+          setSelectedBootCampName={setSelectedBootcamp}
         />
 
         <button

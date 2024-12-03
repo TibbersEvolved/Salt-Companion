@@ -7,9 +7,14 @@ import { FetchTeacherBootCamps } from "./fetch-teacher-bootcamps";
 type Props = {
   clerkId: string;
   setSelectedBootCampId: (bootCampId: number) => void;
+  setSelectedBootCampName: (bootCampName: string) => void;
 };
 
-export function GetTeacherBootCamp({ clerkId, setSelectedBootCampId }: Props) {
+export function GetTeacherBootCamp({
+  clerkId,
+  setSelectedBootCampId,
+  setSelectedBootCampName,
+}: Props) {
   const [bootCampName, setBootCampName] = useState<string>("");
   const [bootCampList, setBotCampList] = useState<TeacherBootCampList | null>(
     null
@@ -41,6 +46,7 @@ export function GetTeacherBootCamp({ clerkId, setSelectedBootCampId }: Props) {
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedBootCampId(parseInt(event.target.value));
+    setSelectedBootCampName(event.target.selectedOptions[0].text);
   };
 
   return (

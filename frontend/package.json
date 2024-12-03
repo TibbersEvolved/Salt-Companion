@@ -32,6 +32,7 @@
     "@tanstack/react-router": "^1.82.8",
     "@tanstack/router-devtools": "^1.82.8",
     "axios": "^1.7.8",
+    "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
     "react": "^18.3.1",
     "react-card-flip": "^1.2.3",
