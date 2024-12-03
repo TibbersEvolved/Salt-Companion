@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface StudentRepo extends ListCrudRepository<Student, Long> {
 
-    public List<Student> findAllByClerkId(String clerkId);
+    List<Student> findAllByClerkId(String clerkId);
 
     Student findStudentByClerkId(String clerkId);
 }

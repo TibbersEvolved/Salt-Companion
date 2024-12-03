@@ -55,10 +55,12 @@ public class StudentService {
 
 
 public Student findStudentByClerkId(String clerkId) {
-    Student student = studentRepo.findStudentByClerkId(clerkId);
-    validateStudentExist(student);
-
-    return student;
+        List<Student> students = studentRepo.findAllByClerkId(clerkId);
+        if(students.isEmpty() || students == null){
+            throw new StudentExistException("Not found");
+        }
+        Student student = students.get(0);
+        return student;
 }
 
 public boolean isUserStudent(String clerkId) {
