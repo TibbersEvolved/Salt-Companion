@@ -13,9 +13,10 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingScreen from "../services/loadingScreen";
 import UserStat from "./userStat";
+import TopicsChart from "./topics-chart";
 
 export const LandingPage = (prop: userProp) => {
-  const client = useQueryClient()
+  const client = useQueryClient();
   const { user, isLoaded } = useUser();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [page, setPage] = useState(1);
@@ -112,12 +113,23 @@ export const LandingPage = (prop: userProp) => {
         </div>
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
           <h2 className="text-center text-3xl font-bold mb-4">Stats</h2>
-          <div className="border border-gray-300 rounded-lg p-4">
+          <div className="border border-gray-300 rounded-lg p-4 space-y-10">
             <section className="flex flex-wrap gap-5 justify-center">
-              <UserStat text={"Current Streak " + data.currentStreak} tooltip="The amount of days you have used the app in a row" />
-              <UserStat text={"Record Streak " + data.streak} tooltip="Your lifetime highscore of days used in a row" />
-              <UserStat text={"Total Cards Flipped: " + data.totalCardsFlipped} tooltip="Lifetime total of cards flipped!" />
-
+              <UserStat
+                text={"Current Streak " + data.currentStreak}
+                tooltip="The amount of days you have used the app in a row"
+              />
+              <UserStat
+                text={"Record Streak " + data.streak}
+                tooltip="Your lifetime highscore of days used in a row"
+              />
+              <UserStat
+                text={"Total Cards Flipped: " + data.totalCardsFlipped}
+                tooltip="Lifetime total of cards flipped!"
+              />
+            </section>
+            <section className="">
+              <TopicsChart />
             </section>
           </div>
         </div>
