@@ -5,7 +5,6 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
-import RoleContainer from "./roleContainer";
 
 export default function Login() {
   return (
@@ -14,7 +13,7 @@ export default function Login() {
         <SignIn />
       </SignedOut>
       <SignedIn>
-        <RoleContainer />
+        <UserButton />
       </SignedIn>
     </header>
   );
