@@ -131,10 +131,7 @@ export const LandingPage = (prop: userProp) => {
               />
             </section>
             <section>
-              <TopicsChart
-                topicName={data.topicStats.topicName}
-                topicConfidence={data.topicStats.topicConfidence}
-              />
+              <TopicsChart topicStats={data.topicStats} />
             </section>
             <section>
               <p className="text-center mb-6">Your progress so far</p>
