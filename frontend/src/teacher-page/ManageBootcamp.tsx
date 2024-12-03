@@ -7,6 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { CreateTopicFetch } from "./fetch-create-topic";
+import TopicCards from "./topic-cards";
 
 interface ManageBootcampProps {
   selectedBootcamp: string;
@@ -21,6 +22,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
 }) => {
   const [newTopicName, setNewTopicName] = useState("");
   const [showNewTopicForm, setShowNewTopicForm] = useState(false);
+  const [topicId, setTopicId] = useState(0);
 
   const queryClient = useQueryClient();
 
@@ -64,7 +66,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           Here you can manage flashcards for the {selectedBootcamp} bootcamp.
         </p>
 
-        <TopicSelect bootCampId={bootCampId} />
+        <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
 
         <a href="#" onClick={() => setShowNewTopicForm(!showNewTopicForm)}>
           Add Topic
@@ -102,12 +104,13 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           <button type="submit">Submit</button>
         </form> */}
 
-        <button
+        {/* <button
           className="mt-4 px-4 py-2 bg-black text-white rounded-md"
           onClick={onClose}
         >
           Close
-        </button>
+        </button> */}
+        <TopicCards topicId={1} />
       </div>
     </div>
   );

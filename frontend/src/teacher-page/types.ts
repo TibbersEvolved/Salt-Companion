@@ -27,3 +27,9 @@ export type TopicPostData = {
   name: string;
   id: number;
 };
+
+export type Card = {
+  question: string;
+  answer: string;
+  id: number;
+};
