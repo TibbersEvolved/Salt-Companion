@@ -39,18 +39,13 @@ export function GetTeacherBootCamp({ clerkId }: Props) {
   }, [clerkId]);
 
   return (
-    <div>
-      <select
-        className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-        value="select Bootcamp"
-      >
-        <option value="">Select bootcamp</option>
-        {bootCampList?.bootcamps.map((bootcamp) => (
-          <option key={bootcamp.id} value={bootcamp.id}>
-            {bootcamp.name}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md">
+      <option value="">Select bootcamp</option>
+      {bootCampList?.bootcamps.map((bootcamp) => (
+        <option key={bootcamp.id} value={bootcamp.id}>
+          {bootcamp.name}
+        </option>
+      ))}
+    </select>
   );
 }

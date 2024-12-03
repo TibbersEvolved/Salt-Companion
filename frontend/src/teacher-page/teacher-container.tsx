@@ -46,11 +46,8 @@ export const Teacher = () => {
 
   return (
     <>
-      <div>
-        <GetTeacherBootCamp clerkId={user?.id as string} />
-      </div>
       <div className="w-screen h-screen flex items-start flex-row justify-center bg-[#ebebeb]">
-        <select
+        {/* <select
           className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
           value={selectedBootcamp}
           onChange={handleSelectChange}
@@ -65,7 +62,9 @@ export const Teacher = () => {
           onClick={handleManageBootcamp}
         >
           Handle bootcamp
-        </button>
+        </button> */}
+
+        <GetTeacherBootCamp clerkId={user?.id as string} />
 
         <button
           className="mt-10 ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
