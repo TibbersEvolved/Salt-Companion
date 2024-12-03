@@ -8,9 +8,14 @@ type chartProps = {
 export default function TopicsChart({ topicStats }: chartProps) {
   const topicNames = topicStats.map((topic) => topic.topicName);
   const topicConfidence = topicStats.map((topic) => topic.topicConfidence);
+
   return (
     <div className="w-full max-w-4xl m-auto">
       <BarChart
+        slotProps={{
+          loadingOverlay: { message: "Loading data" },
+          noDataOverlay: { message: "No data to display" },
+        }}
         xAxis={[
           {
             id: "barCategories",
