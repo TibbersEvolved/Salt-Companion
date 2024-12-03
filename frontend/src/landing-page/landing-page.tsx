@@ -14,6 +14,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingScreen from "../services/loadingScreen";
 import UserStat from "./userStat";
 import TopicsChart from "./topics-chart";
+import FlowbiteBtn from "./progress-bar";
+import ProgressBar from "./progress-bar";
 
 export const LandingPage = (prop: userProp) => {
   const client = useQueryClient();
@@ -128,8 +130,12 @@ export const LandingPage = (prop: userProp) => {
                 tooltip="Lifetime total of cards flipped!"
               />
             </section>
-            <section className="">
+            <section>
               <TopicsChart />
+            </section>
+            <section>
+              <p className="text-center mb-6">Your progress so far</p>
+              <ProgressBar />
             </section>
           </div>
         </div>
