@@ -52,7 +52,7 @@ public class BootcampController {
 
 
 
-    @GetMapping("/topic/{id}")
+    @GetMapping("/topic/{bootCampId}")
     @Operation(
             summary = "Gets all topics for a bootcamp",
             description = "response body with topic id, label ( name of topic ) and value")
