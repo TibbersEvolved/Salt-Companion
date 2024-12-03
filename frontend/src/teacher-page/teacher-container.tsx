@@ -10,6 +10,7 @@ export const Teacher = () => {
   const [showManageBootcamp, setShowManageBootcamp] = useState(false);
   const [showAddBootcamp, setShowAddBootcamp] = useState(false);
   const [showManageStudent, setShowMAnageStudent] = useState(false);
+  const [selectedBootcampId, setSelectedBootcampId] = useState<number>(0);
 
   const { user } = useUser();
 
@@ -44,7 +45,7 @@ export const Teacher = () => {
   const closeShowManageStudent = () => {
     setShowMAnageStudent(false);
   };
-
+  console.log(selectedBootcampId);
   return (
     <>
       <div className="w-screen h-screen flex items-start flex-row justify-center bg-[#ebebeb]">
@@ -64,9 +65,12 @@ export const Teacher = () => {
         >
           Handle bootcamp
         </button> */}
-        <TopicSelect bootCampId={1} />
+        <TopicSelect bootCampId={selectedBootcampId} />
 
-        <GetTeacherBootCamp clerkId={user?.id as string} />
+        <GetTeacherBootCamp
+          clerkId={user?.id as string}
+          setSelectedBootCampId={setSelectedBootcampId}
+        />
 
         <button
           className="mt-10 ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"

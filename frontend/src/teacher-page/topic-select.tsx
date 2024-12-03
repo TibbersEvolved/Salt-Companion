@@ -4,6 +4,19 @@ import { topicFetcher } from "./topic-select-fetch";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function TopicSelect({ bootCampId }: { bootCampId: number }) {
+  if (bootCampId === 0) {
+    return (
+      <select
+        className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+        value="No Topics"
+      >
+        <option value="No Topics" disabled>
+          No Topics
+        </option>
+      </select>
+    );
+  }
+
   const queryClient = useQueryClient();
   const { data, isPending, isError, error } = useQuery<TopicList>({
     queryKey: ["topics", bootCampId],
@@ -19,18 +32,19 @@ export function TopicSelect({ bootCampId }: { bootCampId: number }) {
   }
 
   return (
-    <div>
-      <select
-        className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-        value="select topic"
-      >
-        <option value="">Select topic</option>
-        {data.topics.map((topic: Topic) => (
-          <option key={topic.id} value={topic.value}>
-            {topic.label}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select
+      className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+      defaultValue=""
+    >
+      <option value="" disabled>
+        {data.topics.length === 0 ? "No Topics" : "Select Topic"}
+      </option>
+
+      {data.topics.map((topic: Topic) => (
+        <option key={topic.id} value={topic.value}>
+          {topic.label}
+        </option>
+      ))}
+    </select>
   );
 }

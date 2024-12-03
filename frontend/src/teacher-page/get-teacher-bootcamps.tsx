@@ -6,9 +6,10 @@ import { FetchTeacherBootCamps } from "./fetch-teacher-bootcamps";
 
 type Props = {
   clerkId: string;
+  setSelectedBootCampId: (bootCampId: number) => void;
 };
 
-export function GetTeacherBootCamp({ clerkId }: Props) {
+export function GetTeacherBootCamp({ clerkId, setSelectedBootCampId }: Props) {
   const [bootCampName, setBootCampName] = useState<string>("");
   const [bootCampList, setBotCampList] = useState<TeacherBootCampList | null>(
     null
@@ -38,8 +39,15 @@ export function GetTeacherBootCamp({ clerkId }: Props) {
     mutationGetTeacherBootCamps.mutate(clerkId);
   }, [clerkId]);
 
+  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedBootCampId(parseInt(event.target.value));
+  };
+
   return (
-    <select className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md">
+    <select
+      className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+      onChange={handleSelect}
+    >
       <option value="">Select bootcamp</option>
       {bootCampList?.bootcamps.map((bootcamp) => (
         <option key={bootcamp.id} value={bootcamp.id}>
