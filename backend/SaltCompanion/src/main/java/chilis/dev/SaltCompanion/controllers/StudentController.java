@@ -2,6 +2,7 @@ package chilis.dev.SaltCompanion.controllers;
 
 import chilis.dev.SaltCompanion.controllers.dto.*;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateStudentDto;
+import chilis.dev.SaltCompanion.models.BootCamp;
 import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
@@ -39,10 +40,11 @@ public class StudentController {
         if(student == null) {
             return ResponseEntity.status(400).build();
         }
+        BootCamp bootcamp = student.getBootCamp();
         ListDetailedTopicsDto studentTopics = bootcampController.
-                getListTopicsDto(student.getBootCamp().getId());
+                getListTopicsDto(bootcamp.getId());
         return ResponseEntity.ok(new StudentDetailedInfoDto(student.getName(),
-                student.getBootCamp().getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped(), getStudentTopicStats(student)));
+                bootcamp.getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped(), getStudentTopicStats(student)));
     }
 
     @PostMapping
