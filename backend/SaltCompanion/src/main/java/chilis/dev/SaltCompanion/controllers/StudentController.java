@@ -1,11 +1,9 @@
 package chilis.dev.SaltCompanion.controllers;
 
-import chilis.dev.SaltCompanion.controllers.dto.ListDetailedTopicsDto;
-import chilis.dev.SaltCompanion.controllers.dto.ListTopicsDto;
-import chilis.dev.SaltCompanion.controllers.dto.StudentDetailedInfoDto;
-import chilis.dev.SaltCompanion.controllers.dto.ValidUserDto;
+import chilis.dev.SaltCompanion.controllers.dto.*;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateStudentDto;
 import chilis.dev.SaltCompanion.models.Student;
+import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.BootcampService;
 import chilis.dev.SaltCompanion.services.StudentService;
 import chilis.dev.SaltCompanion.services.TeacherService;
@@ -13,6 +11,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -41,7 +42,7 @@ public class StudentController {
         ListDetailedTopicsDto studentTopics = bootcampController.
                 getListTopicsDto(student.getBootCamp().getId());
         return ResponseEntity.ok(new StudentDetailedInfoDto(student.getName(),
-                student.getBootCamp().getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped()));
+                student.getBootCamp().getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped(), getStudentTopicStats(student)));
     }
 
     @PostMapping
@@ -71,6 +72,14 @@ public class StudentController {
             return ResponseEntity.ok(new ValidUserDto(2));
         }
         return ResponseEntity.ok(new ValidUserDto(0));
+    }
+
+    private List<TopicStats> getStudentTopicStats(Student student) {
+        List<TopicStats> stats = new ArrayList<>();
+        studentService.getTopicStats(student).forEach(s -> {
+            stats.add(new TopicStats(s.getTopicName(),s.getCertainty()));
+        });
+        return stats;
     }
 
 }

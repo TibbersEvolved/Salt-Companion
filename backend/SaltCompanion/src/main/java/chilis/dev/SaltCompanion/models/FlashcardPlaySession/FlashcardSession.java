@@ -23,6 +23,10 @@ public class FlashcardSession {
         return flashDeck.get(index);
     }
 
+    public FlashCard getCurrentCard() {
+        return flashDeck.get(index);
+    }
+
     public UUID getId() {
         return id;
     }

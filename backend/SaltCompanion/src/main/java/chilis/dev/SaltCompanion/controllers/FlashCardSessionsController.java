@@ -3,6 +3,7 @@ package chilis.dev.SaltCompanion.controllers;
 import chilis.dev.SaltCompanion.controllers.dto.FlashCardDto;
 import chilis.dev.SaltCompanion.controllers.dto.FlashCardSessionDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.CreateFlashSessionDto;
+import chilis.dev.SaltCompanion.controllers.dtoInput.SessionsPostAnswerDto;
 import chilis.dev.SaltCompanion.models.FlashcardPlaySession.FlashCard;
 import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.models.Topic;
@@ -45,6 +46,12 @@ public class FlashCardSessionsController {
         }
         UUID sessionId = flashCardService.startNewSession(mappedTopics,input.cards(),input.userId());
         return ResponseEntity.ok(new FlashCardSessionDto(sessionId.toString()));
+    }
+
+    @PostMapping("/answer")
+    public ResponseEntity postAnswer(@RequestBody SessionsPostAnswerDto input) {
+        flashCardService.answerFlashCardDifficulty(input.answer(),UUID.fromString(input.sessionId()));
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")

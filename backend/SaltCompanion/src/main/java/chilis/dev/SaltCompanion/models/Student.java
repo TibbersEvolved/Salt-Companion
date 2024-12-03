@@ -5,6 +5,7 @@ import org.hibernate.annotations.ManyToAny;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +25,9 @@ public class Student {
     private Integer totalCardsFlipped ;
     private Float quizScore ;
     private Integer lastDayPlayed ;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<StudentTopicStat> studentStats;
 
     @Column(nullable = false)
     private String name;
@@ -150,6 +154,10 @@ public class Student {
         return quizScore;
     }
 
+    public List<StudentTopicStat> getStudentStats() {
+        return studentStats;
+    }
+
     public void updateLastDay() {
         int day = LocalDateTime.now().getDayOfYear();
         System.out.println("day = " + day);
@@ -175,5 +183,9 @@ public class Student {
 
     public void setQuizScore(float quizScore) {
         this.quizScore = quizScore;
+    }
+
+    public void setStudentStats(List<StudentTopicStat> studentStats) {
+        this.studentStats = studentStats;
     }
 }

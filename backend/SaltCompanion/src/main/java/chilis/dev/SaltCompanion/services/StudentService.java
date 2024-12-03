@@ -4,10 +4,12 @@ import chilis.dev.SaltCompanion.controllers.BootcampController;
 import chilis.dev.SaltCompanion.exceptions.StudentExistException;
 import chilis.dev.SaltCompanion.models.BootCamp;
 import chilis.dev.SaltCompanion.models.Student;
+import chilis.dev.SaltCompanion.models.StudentTopicStat;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
 import chilis.dev.SaltCompanion.repositories.StudentRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +18,12 @@ public class StudentService {
 
     private StudentRepo studentRepo;
     private BootCampRepository bootCampRepository;
+    private BootcampService bootcampService;
 
-    public StudentService(StudentRepo studentRepo, BootCampRepository bootCampRepository) {
+    public StudentService(StudentRepo studentRepo, BootCampRepository bootCampRepository, BootcampService bootcampService) {
         this.studentRepo = studentRepo;
         this.bootCampRepository = bootCampRepository;
+        this.bootcampService = bootcampService;
     }
 
     public void createStudent(String name, String clerkId) {
@@ -29,6 +33,24 @@ public class StudentService {
 
     public void updateStudent(Student student) {
         studentRepo.save(student);
+    }
+
+    public List<StudentTopicStat> getTopicStats(Student student) {
+        List<StudentTopicStat> stats = student.getStudentStats();
+        if(stats == null || stats.isEmpty()) {
+            return initCardStats(student);
+        }
+        return stats;
+    }
+
+    private List<StudentTopicStat> initCardStats(Student student) {
+        List<StudentTopicStat> stats = new ArrayList<>();
+        bootcampService.getTopicsForBootCamp(student.getBootCamp().getId()).forEach(s -> {
+            stats.add(new StudentTopicStat(s,student));
+        });
+        student.setStudentStats(stats);
+        studentRepo.save(student);
+        return stats;
     }
 
 

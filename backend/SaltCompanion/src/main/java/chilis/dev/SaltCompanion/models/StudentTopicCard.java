@@ -1,18 +1,29 @@
 package chilis.dev.SaltCompanion.models;
 
+import jakarta.persistence.*;
+
+@Entity
 public class StudentTopicCard {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Card card;
     private Integer userDifficulty;
+    private Long cardId;
 
-    public Card getCard() {
-        return card;
+    @ManyToOne
+    @JoinColumn(name = "studentStat_id")
+    private StudentTopicStat studentTopicStat;
+
+    public StudentTopicCard(Long cardId, StudentTopicStat studentTopicStat) {
+        this.cardId = cardId;
+        this.userDifficulty = 0;
+        this.studentTopicStat = studentTopicStat;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public StudentTopicCard() {
     }
+    
 
     public Integer getUserDifficulty() {
         if(userDifficulty == null) {
@@ -23,5 +34,13 @@ public class StudentTopicCard {
 
     public void setUserDifficulty(Integer userDifficulty) {
         this.userDifficulty = userDifficulty;
+    }
+
+    public Long getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(Long cardId) {
+        this.cardId = cardId;
     }
 }

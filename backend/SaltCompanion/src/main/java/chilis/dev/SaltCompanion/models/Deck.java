@@ -75,6 +75,10 @@ public class Deck {
         return id == deck.id;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
