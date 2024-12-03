@@ -53,8 +53,11 @@ public class BootcampController {
 
 
     @GetMapping("/topic/{id}")
-    public ResponseEntity<ListDetailedTopicsDto> getCoursesFromBootcamp(@PathVariable Long id) {
-        return ResponseEntity.ok(getListTopicsDto(id));
+    @Operation(
+            summary = "Gets all topics for a bootcamp",
+            description = "response body with topic id, label ( name of topic ) and value")
+    public ResponseEntity<ListDetailedTopicsDto> getCoursesFromBootcamp(@PathVariable Long bootCampId) {
+        return ResponseEntity.ok(getListTopicsDto(bootCampId));
     }
 
     @GetMapping("/teacher/{id}")
