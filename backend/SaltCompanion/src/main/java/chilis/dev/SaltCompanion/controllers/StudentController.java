@@ -23,14 +23,12 @@ public class StudentController {
 
     private StudentService studentService;
     private BootcampService bootcampService;
-    private BootcampController bootcampController;
     private TeacherService teacherService;
 
     public StudentController(StudentService studentService, BootcampService bootcampService,
-                             BootcampController bootcampController, TeacherService teacherService) {
+                             TeacherService teacherService) {
         this.studentService = studentService;
         this.bootcampService = bootcampService;
-        this.bootcampController = bootcampController;
         this.teacherService = teacherService;
     }
 
@@ -41,8 +39,7 @@ public class StudentController {
             return ResponseEntity.status(400).build();
         }
         BootCamp bootcamp = student.getBootCamp();
-        ListDetailedTopicsDto studentTopics = bootcampController.
-                getListTopicsDto(bootcamp.getId());
+        ListDetailedTopicsDto studentTopics = getListTopicsDto(bootcamp.getId());
         return ResponseEntity.ok(new StudentDetailedInfoDto(student.getName(),
                 bootcamp.getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped(), getStudentTopicStats(student)));
     }
@@ -82,6 +79,14 @@ public class StudentController {
             stats.add(new TopicStats(s.getTopicName(),s.getCertainty()));
         });
         return stats;
+    }
+
+    public ListDetailedTopicsDto getListTopicsDto(Long bootCampId) {
+        List<TopicDto> payload = new ArrayList<>();
+        bootcampService.getTopicsForBootCamp(bootCampId).forEach(s -> {
+            payload.add(new TopicDto(s.getId(), s.getName(), s.getId()));
+        });
+        return new ListDetailedTopicsDto(payload);
     }
 
 }
