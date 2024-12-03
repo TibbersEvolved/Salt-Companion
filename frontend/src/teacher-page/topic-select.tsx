@@ -30,10 +30,30 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
   });
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return (
+      <select
+        className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+        defaultValue=""
+        onChange={(e) => setTopicId(parseInt(e.target.value))}
+      >
+        <option value="" disabled>
+          Loading...
+        </option>
+      </select>
+    );
   }
   if (isError) {
-    return <div>Error loading topics!</div>;
+    return (
+      <select
+        className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+        defaultValue=""
+        onChange={(e) => setTopicId(parseInt(e.target.value))}
+      >
+        <option value="" disabled>
+          Error loading!
+        </option>
+      </select>
+    );
   }
 
   return (

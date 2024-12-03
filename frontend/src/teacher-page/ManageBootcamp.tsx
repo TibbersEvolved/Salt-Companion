@@ -58,6 +58,11 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
     mutationCreateTopic.mutate(updatedRequestBody);
   };
 
+  const inActive =
+    selectedBootcamp === "No Bootcamp Selected" ||
+    bootCampId === 0 ||
+    selectedBootcamp === "Select bootcamp";
+
   return (
     <div className="top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
@@ -68,22 +73,36 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
 
         <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
 
-        <a href="#" onClick={() => setShowNewTopicForm(!showNewTopicForm)}>
+        <a
+          href="#"
+          className={`ml-5 text-blue-500 hover:text-blue-700 ${
+            inActive ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
+          onClick={(e) => {
+            if (inActive) e.preventDefault();
+            else setShowNewTopicForm(!showNewTopicForm);
+          }}
+        >
           Add Topic
         </a>
 
         {showNewTopicForm && (
-          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
+          <div className="fixed top-0 left-0 w-full h-600 flex justify-center items-center z-10">
+            <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6 ">
               <h1>Add Topic</h1>
               <form onSubmit={submitHandler}>
                 <input
                   type="text"
-                  placeholder="Add topic"
+                  placeholder="Topic name"
                   value={newTopicName}
                   onChange={inputHandler}
                 />
-                <button type="submit">Submit</button>
+                <button
+                  className="ml-5  text-blue-500 hover:text-blue-700"
+                  type="submit"
+                >
+                  Submit
+                </button>
               </form>
               <button
                 className="mt-4 px-4 py-2 bg-black text-white rounded-md"

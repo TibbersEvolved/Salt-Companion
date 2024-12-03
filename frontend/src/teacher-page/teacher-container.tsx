@@ -6,7 +6,9 @@ import { GetTeacherBootCamp } from "./get-teacher-bootcamps";
 import { TopicSelect } from "./topic-select";
 
 export const Teacher = () => {
-  const [selectedBootcamp, setSelectedBootcamp] = useState("");
+  const [selectedBootcamp, setSelectedBootcamp] = useState(
+    "No Bootcamp Selected"
+  );
   const [showManageBootcamp, setShowManageBootcamp] = useState(false);
   const [showAddBootcamp, setShowAddBootcamp] = useState(false);
   const [showManageStudent, setShowMAnageStudent] = useState(false);
