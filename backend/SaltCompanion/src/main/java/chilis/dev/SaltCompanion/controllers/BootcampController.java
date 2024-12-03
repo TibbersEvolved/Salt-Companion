@@ -50,6 +50,11 @@ public class BootcampController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/topics/{bootcampId}")
+    public ResponseEntity<ListDetailedTopicsDto> getAllTopicsFromBootCamp(@PathVariable Long bootcampId) {
+        return ResponseEntity.ok(getListTopicsDto(bootcampId));
+    }
+
     @GetMapping("/topic/{id}")
     public ResponseEntity<ListDetailedTopicsDto> getCoursesFromBootcamp(@PathVariable Long id) {
         return ResponseEntity.ok(getListTopicsDto(id));
