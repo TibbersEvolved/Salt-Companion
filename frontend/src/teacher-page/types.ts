@@ -22,3 +22,8 @@ export type Topic = {
 export type TopicList = {
   topics: Topic[];
 };
+
+export type TopicPostData = {
+  name: string;
+  id: number;
+};
