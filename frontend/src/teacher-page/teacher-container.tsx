@@ -3,6 +3,7 @@ import { CreateBootCamp } from "./add-bootcamp";
 import { ManageBootcamp } from "./ManageBootcamp";
 import { useUser } from "@clerk/clerk-react";
 import { GetTeacherBootCamp } from "./get-teacher-bootcamps";
+import { TopicSelect } from "./topic-select";
 
 export const Teacher = () => {
   const [selectedBootcamp, setSelectedBootcamp] = useState("");
@@ -63,6 +64,7 @@ export const Teacher = () => {
         >
           Handle bootcamp
         </button> */}
+        <TopicSelect bootCampId={1} />
 
         <GetTeacherBootCamp clerkId={user?.id as string} />
 

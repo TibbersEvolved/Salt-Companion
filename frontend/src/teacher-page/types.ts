@@ -12,3 +12,13 @@ export type BootCampGetData = {
 export type TeacherBootCampList = {
   bootcamps: BootCampGetData[];
 };
+
+export type Topic = {
+  id: 0;
+  label: "string";
+  value: 0;
+};
+
+export type TopicList = {
+  topics: Topic[];
+};
