@@ -8,6 +8,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getFlashcardQuestions } from "../services/api";
 import LoadingSpinner from "../shared/loadingSpinner";
 import LoadingScreen from "../services/loadingScreen";
+import axios from "axios";
 
 type FlashcardProps = {
   sessionId: string;
@@ -34,6 +35,20 @@ export const Flashcard = (prop: FlashcardProps) => {
     queryKey: ["flashCards"],
     queryFn: () => getFlashcardQuestions(prop.sessionId),
   });
+
+  const base_url = import.meta.env.VITE_BASE_URL;
+  const sendAnswer = async (answer: number) => {
+    try {
+      await axios.post(`${base_url}/flashSession/answer`, {
+        sessionId: prop.sessionId,
+        answer,
+      });
+      console.log(`answer is number ${answer}`);
+      nextCard();
+    } catch (error) {
+      console.log("Error sending answer");
+    }
+  };
 
   const nextCard = () => {
     setCurrentCardIndex((prevIndex) => prevIndex + 1);
@@ -109,25 +124,25 @@ export const Flashcard = (prop: FlashcardProps) => {
                       <div className="space-x-3 text-white flex-grow flex items-center justify-center mt-5">
                         <button
                           className="bg-red-800 w-24 p-2 rounded-md"
-                          onClick={() => nextCard()}
+                          onClick={() => sendAnswer(0)}
                         >
                           Difficult
                         </button>
                         <button
                           className="bg-yellow-500 w-24 p-2 rounded-md"
-                          onClick={() => nextCard()}
+                          onClick={() => sendAnswer(1)}
                         >
                           Moderate
                         </button>
                         <button
                           className="bg-sky-600 w-24 p-2 rounded-md"
-                          onClick={() => nextCard()}
+                          onClick={() => sendAnswer(2)}
                         >
                           Easy
                         </button>
                         <button
                           className="bg-green-700 w-24 p-2 rounded-md"
-                          onClick={() => nextCard()}
+                          onClick={() => sendAnswer(3)}
                         >
                           Very easy
                         </button>
