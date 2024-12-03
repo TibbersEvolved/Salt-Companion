@@ -8,6 +8,7 @@ import chilis.dev.SaltCompanion.models.Card;
 import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.services.CardService;
 import chilis.dev.SaltCompanion.services.ZpplicationInitializer;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ public class TopicController {
 
     @PutMapping
     public ResponseEntity updateCard(@RequestBody UpdateCardDto input) {
-        cardService.updateCard(input.cardId(),input.question(),input.answer());
+        cardService.updateCard(input.cardId(), input.question(), input.answer());
         return ResponseEntity.status(202).build();
     }
 
@@ -44,20 +45,22 @@ public class TopicController {
         return ResponseEntity.status(200).build();
     }
 
-    @GetMapping("/{topicId}")
+    @GetMapping("/card/{topicId}")
+    @Operation(
+            summary = "Gets all cards for a topic",
+            description = "response body with card id, question and answer")
     public List<CardDto> getCards(@PathVariable Long topicId) {
         List<Card> cards = cardService.getTopic(topicId).getDeck().getDeckCards();
         return cards.stream()
-                .map(card -> new CardDto(card.getText(),card.getAnswer(),card.getId()))
+                .map(card -> new CardDto(card.getText(), card.getAnswer(), card.getId()))
                 .toList();
     }
 
     @GetMapping("/init")
-    public ResponseEntity initDB () {
+    public ResponseEntity initDB() {
         initializer.initialize();
         return ResponseEntity.ok().build();
     }
-
 
 
 }
