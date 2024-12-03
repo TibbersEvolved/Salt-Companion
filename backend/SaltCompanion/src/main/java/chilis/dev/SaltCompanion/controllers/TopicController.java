@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/topic")
+@CrossOrigin
 public class TopicController {
 
     private CardService cardService;
