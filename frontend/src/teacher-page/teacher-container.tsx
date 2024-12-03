@@ -45,7 +45,7 @@ export const Teacher = () => {
   const closeShowManageStudent = () => {
     setShowMAnageStudent(false);
   };
-  console.log(selectedBootcampId);
+
   return (
     <>
       <div className="w-screen h-screen flex items-start flex-row justify-center bg-[#ebebeb]">
@@ -90,11 +90,13 @@ export const Teacher = () => {
       <ManageBootcamp
         selectedBootcamp={selectedBootcamp}
         onClose={closeManageBootcamp}
+        bootCampId={selectedBootcampId}
       />
       {showManageBootcamp && (
         <ManageBootcamp
           selectedBootcamp={selectedBootcamp}
           onClose={closeManageBootcamp}
+          bootCampId={selectedBootcampId}
         />
       )}
 
