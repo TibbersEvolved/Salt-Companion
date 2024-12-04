@@ -138,6 +138,11 @@ public class BootcampController {
 
     }
 
+    @GetMapping("/student/{bootCampId}")
+    public ResponseEntity getStudentsFromBootCamp(@PathVariable Long bootCampId) {
+        return ResponseEntity.ok(bootcampService.getStudentsFromBootCamp(bootCampId));
+    }
+
 
     public boolean validateBootCampId(Long bootCampId) {
 
