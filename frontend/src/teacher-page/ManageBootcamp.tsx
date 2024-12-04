@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TopicSelect } from "./topic-select";
 import { TopicPostData } from "./types";
 import {
@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 import { CreateTopicFetch } from "./fetch-create-topic";
 import TopicCards from "./topic-cards";
+import { DeleteTopicCard } from "./fetch-delete-card";
 
 interface ManageBootcampProps {
   selectedBootcamp: string;
@@ -23,6 +24,10 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   const [newTopicName, setNewTopicName] = useState("");
   const [showNewTopicForm, setShowNewTopicForm] = useState(false);
   const [topicId, setTopicId] = useState(0);
+
+  useEffect(() => {
+    setTopicId(0);
+  }, [bootCampId]);
 
   const queryClient = useQueryClient();
 
@@ -45,6 +50,25 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
       },
     });
 
+  const mutationDeleteTopic: UseMutationResult<string, Error, number> =
+    useMutation({
+      mutationFn: async (topicId: number): Promise<string> => {
+        if (!topicId) {
+          throw new Error("Topic id is required");
+        }
+        return await DeleteTopicCard(topicId);
+      },
+      onSuccess: (data: string) => {
+        console.log("Topic deleted successfully:", data);
+        queryClient.invalidateQueries({
+          queryKey: ["topics", bootCampId],
+        });
+      },
+      onError: (error) => {
+        console.error("Error deleting topic:", error);
+      },
+    });
+
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTopicName(e.target.value);
   };
@@ -63,29 +87,47 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
     bootCampId === 0 ||
     selectedBootcamp === "Select bootcamp";
 
+  const handleDeleteTopic = (topicId: number) => {
+    mutationDeleteTopic.mutate(topicId);
+  };
+
   return (
-    <div className="top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
+    <div className="top-0 left-0 w-full h-screen flex justify-center items-center bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded-md shadow-md w-full h-full">
         <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
         <p className="mt-4">
-          Here you can manage flashcards for the {selectedBootcamp} bootcamp.
+          Select or add a topic to manage flashcards for the {selectedBootcamp}{" "}
+          bootcamp.
         </p>
 
-        <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
-
-        <a
-          href="#"
-          className={`ml-5 text-blue-500 hover:text-blue-700 ${
-            inActive ? "cursor-not-allowed" : "cursor-pointer"
-          }`}
-          onClick={(e) => {
-            if (inActive) e.preventDefault();
-            else setShowNewTopicForm(!showNewTopicForm);
-          }}
-        >
-          Add Topic
-        </a>
-
+        <div className="mt-4 border border-solid border-black">
+          <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
+          <a
+            href="#"
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${
+              inActive ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+            onClick={(e) => {
+              if (inActive) e.preventDefault();
+              else setShowNewTopicForm(!showNewTopicForm);
+            }}
+          >
+            Add Topic
+          </a>
+          <a
+            href="#"
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${
+              inActive ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+            onClick={(e) => {
+              if (inActive) e.preventDefault();
+              else handleDeleteTopic(topicId);
+            }}
+          >
+            Delete Topic
+          </a>
+          ManageBootcamp///////////////////////////////////////////////
+        </div>
         {showNewTopicForm && (
           <div className="fixed top-0 left-0 w-full h-600 flex justify-center items-center z-10">
             <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6 ">
@@ -113,23 +155,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
             </div>
           </div>
         )}
-        {/* <form onSubmit={submitHandler}>
-          <input
-            type="text"
-            placeholder="Add topic"
-            value={newTopicName}
-            onChange={inputHandler}
-          />
-          <button type="submit">Submit</button>
-        </form> */}
-
-        {/* <button
-          className="mt-4 px-4 py-2 bg-black text-white rounded-md"
-          onClick={onClose}
-        >
-          Close
-        </button> */}
-        <TopicCards topicId={1} />
+        <TopicCards topicId={topicId} />
       </div>
     </div>
   );

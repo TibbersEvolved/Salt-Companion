@@ -54,30 +54,11 @@ export const Teacher = () => {
   return (
     <>
       <div className="w-screen h-200 flex items-start flex-row justify-center bg-[#ebebeb]">
-        {/* <select
-          className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-          value={selectedBootcamp}
-          onChange={handleSelectChange}
-        >
-          <option value="">Select bootcamp</option>
-          <option value="jfs">JFS Java</option>
-          <option value="jsfs">JFSF JavaScript</option>
-          <option value="dnfs">DNFS .Net/C#</option>
-        </select>
-        <button
-          className="mt-10 ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-          onClick={handleManageBootcamp}
-        >
-          Handle bootcamp
-        </button> */}
-        {/* <TopicSelect bootCampId={selectedBootcampId} /> */}
-
         <GetTeacherBootCamp
           clerkId={user?.id as string}
           setSelectedBootCampId={setSelectedBootcampId}
           setSelectedBootCampName={setSelectedBootcamp}
         />
-
         <button
           className="mt-10 ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
           onClick={handleAddBootcamp}
@@ -92,6 +73,7 @@ export const Teacher = () => {
             Handle students
           </button>
         </div>
+        teacher-container ////////////
       </div>
       <ManageBootcamp
         selectedBootcamp={selectedBootcamp}

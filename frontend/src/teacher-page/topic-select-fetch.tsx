@@ -1,4 +1,7 @@
 import { TopicList } from "./types";
+import { base_url } from "../services/api";
+
+const GET_URL = `${base_url}/bootcamps/topic/`;
 
 export async function topicFetcher(bootCampId: number): Promise<TopicList> {
   if (bootCampId === 0) {
@@ -6,7 +9,8 @@ export async function topicFetcher(bootCampId: number): Promise<TopicList> {
   } else {
     try {
       const response = await fetch(
-        `https://salt-companion-backend-876198057788.us-central1.run.app/api/bootcamps/topic/${bootCampId}`
+        GET_URL + bootCampId
+        //   `https://salt-companion-backend-876198057788.us-central1.run.app/api/bootcamps/topic/${bootCampId}`
       );
 
       if (!response.ok) {

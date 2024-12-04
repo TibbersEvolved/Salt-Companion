@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TopicList, Topic } from "./types";
 import { topicFetcher } from "./topic-select-fetch";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -9,18 +9,25 @@ interface Props {
 }
 
 export function TopicSelect({ bootCampId, setTopicId }: Props) {
-  if (bootCampId === 0) {
-    return (
-      <select
-        className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-        value="No Topics"
-      >
-        <option value="No Topics" disabled>
-          No Topics
-        </option>
-      </select>
-    );
-  }
+  const [selectedTopicThis, setSelectedTopicThis] = useState<number | "">("");
+
+  useEffect(() => {
+    setSelectedTopicThis("");
+    setTopicId(0);
+  }, [bootCampId, setTopicId]);
+
+  //   if (bootCampId === 0) {
+  //     return (
+  //       <select
+  //         className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+  //         value="No Topics"
+  //       >
+  //         <option value="No Topics" disabled>
+  //           No Topics
+  //         </option>
+  //       </select>
+  //     );
+  //   }
 
   const queryClient = useQueryClient();
   const { data, isPending, isError, error } = useQuery<TopicList>({
@@ -29,12 +36,23 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
     enabled: bootCampId !== 0,
   });
 
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const topicId = parseInt(e.target.value, 10);
+
+    setTopicId(topicId);
+    if (topicId === 0) {
+      setSelectedTopicThis("");
+    } else {
+      setSelectedTopicThis(topicId);
+    }
+  };
+
   if (isPending) {
     return (
       <select
         className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
         defaultValue=""
-        onChange={(e) => setTopicId(parseInt(e.target.value))}
+        onChange={handleSelect}
       >
         <option value="" disabled>
           Loading...
@@ -47,7 +65,7 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
       <select
         className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
         defaultValue=""
-        onChange={(e) => setTopicId(parseInt(e.target.value))}
+        onChange={handleSelect}
       >
         <option value="" disabled>
           Error loading!
@@ -58,9 +76,9 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
 
   return (
     <select
-      className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-      defaultValue=""
-      onChange={(e) => setTopicId(parseInt(e.target.value))}
+      className=" w-100 h-10 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+      value={selectedTopicThis}
+      onChange={handleSelect}
     >
       <option value="" disabled>
         {data.topics.length === 0 ? "No Topics" : "Select Topic"}
