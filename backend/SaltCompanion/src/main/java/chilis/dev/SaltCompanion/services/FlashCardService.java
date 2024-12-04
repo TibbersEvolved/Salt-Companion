@@ -170,7 +170,6 @@ public class FlashCardService {
     }
 
     private List<Card> getDifficulty(int index) {
-        System.out.println("Difficulties: " + difficulties);
         if(difficulties.get(index).isEmpty()){
             for(int i = 0; i < difficulties.size(); i++) {
                 if(difficulties.get(i).isEmpty() == false) {
@@ -181,10 +180,11 @@ public class FlashCardService {
         return difficulties.get(index);
     }
     private FlashCard getCard(List<Card> cards, Random random) {
-        System.out.println("cards = " + cards);
-        System.out.println("Testing with arraysize: " + cards.size());
+
         int index = random.nextInt(0,cards.size());
         Card card = cards.get(index);
-        return new FlashCard(card.getDeck().getTopic(),card);
+        FlashCard flashCard = new FlashCard(card.getDeck().getTopic(),card);
+        cards.remove(card);
+        return flashCard;
     }
 }
