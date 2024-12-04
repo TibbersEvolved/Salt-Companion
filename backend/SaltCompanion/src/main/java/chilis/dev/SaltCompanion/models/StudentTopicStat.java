@@ -99,6 +99,7 @@ public class StudentTopicStat {
     }
 
     public String getTopicName() {
+        topicName = getDeck().getTopic().getName();
         return topicName;
     }
 
