@@ -86,6 +86,7 @@ public class StudentController {
         studentService.getTopicStats(student).forEach(s -> {
             stats.add(new TopicStats(s.getTopicName(),s.getCertainty()));
         });
+        studentService.updateStudent(student);
         return stats;
     }
 
