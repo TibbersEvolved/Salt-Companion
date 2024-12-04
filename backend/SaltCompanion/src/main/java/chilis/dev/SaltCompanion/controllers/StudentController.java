@@ -59,6 +59,13 @@ public class StudentController {
         return ResponseEntity.status(200).body("Student " + clerkId + " deleted");
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<StudentSimpleDto>> getAllStudents() {
+
+        return ResponseEntity.status(200).body(studentService.getAllStudents());
+
+    }
+
 
     @GetMapping("/user/{clerkId}")
     @Operation(

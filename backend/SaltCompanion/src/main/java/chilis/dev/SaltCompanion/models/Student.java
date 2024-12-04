@@ -63,6 +63,10 @@ public class Student {
         return bootCamp;
     }
 
+    public String getBootCampName() {
+        return bootCamp.getName();
+    }
+
     public void setBootCamp(BootCamp bootCamp) {
         this.bootCamp = bootCamp;
     }

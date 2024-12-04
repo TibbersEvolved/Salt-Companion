@@ -1,5 +1,7 @@
 package chilis.dev.SaltCompanion.services;
 
+import chilis.dev.SaltCompanion.controllers.dto.StudentDetailedInfoDto;
+import chilis.dev.SaltCompanion.controllers.dto.StudentSimpleDto;
 import chilis.dev.SaltCompanion.exceptions.BootCampExistException;
 import chilis.dev.SaltCompanion.models.*;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
@@ -115,10 +117,16 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
         return false;
     }
 
-    public List<Student> getStudentsFromBootCamp(Long bootCampId){
+    public List<StudentSimpleDto> getStudentsFromBootCamp(Long bootCampId) {
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
         validateBootCampExist(bootCamp);
-        return bootCamp.getStudents();
+        List<Student> students = bootCamp.getStudents();
+        List<StudentSimpleDto> studentSimpleList = new java.util.ArrayList<>();
+        for (Student student : students) {
+            studentSimpleList.add(new StudentSimpleDto(student.getClerkId(), student.getName(), bootCamp.getId(), student.getBootCampName()));
+
+        }
+        return studentSimpleList;
     }
 
     public boolean validateBootCampExist(BootCamp bootCamp) {

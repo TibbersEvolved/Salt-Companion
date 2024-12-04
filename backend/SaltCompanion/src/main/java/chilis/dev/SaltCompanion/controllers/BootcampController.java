@@ -142,8 +142,9 @@ public class BootcampController {
     @Operation(
             summary = "Gets all students for a bootcamp",
             description = "response body with list of student clerkId, name and email")
-    public ResponseEntity getStudentsFromBootCamp(@PathVariable Long bootCampId) {
-        return ResponseEntity.ok(bootcampService.getStudentsFromBootCamp(bootCampId));
+    public ResponseEntity<List<StudentSimpleDto>> getStudentsFromBootCamp(@PathVariable Long bootCampId) {
+
+        return ResponseEntity.status(200).body(bootcampService.getStudentsFromBootCamp(bootCampId));
     }
 
 

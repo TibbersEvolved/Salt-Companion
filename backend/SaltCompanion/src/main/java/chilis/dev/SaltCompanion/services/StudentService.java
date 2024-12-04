@@ -1,6 +1,7 @@
 package chilis.dev.SaltCompanion.services;
 
 import chilis.dev.SaltCompanion.controllers.BootcampController;
+import chilis.dev.SaltCompanion.controllers.dto.StudentSimpleDto;
 import chilis.dev.SaltCompanion.exceptions.StudentExistException;
 import chilis.dev.SaltCompanion.models.BootCamp;
 import chilis.dev.SaltCompanion.models.Student;
@@ -41,6 +42,13 @@ public class StudentService {
             return initCardStats(student);
         }
         return stats;
+    }
+
+    public List<StudentSimpleDto> getAllStudents() {
+        List<Student> students = studentRepo.findAll();
+        List<StudentSimpleDto> studentSimpleDtos = new ArrayList<>();
+        students.forEach(s -> studentSimpleDtos.add(new StudentSimpleDto(s.getClerkId(), s.getName(), s.getBootCamp().getId(), s.getBootCamp().getName())));
+        return studentSimpleDtos;
     }
 
     private List<StudentTopicStat> initCardStats(Student student) {
