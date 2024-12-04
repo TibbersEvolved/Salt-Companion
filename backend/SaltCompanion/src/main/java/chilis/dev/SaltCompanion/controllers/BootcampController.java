@@ -139,6 +139,9 @@ public class BootcampController {
     }
 
     @GetMapping("/student/{bootCampId}")
+    @Operation(
+            summary = "Gets all students for a bootcamp",
+            description = "response body with list of student clerkId, name and email")
     public ResponseEntity getStudentsFromBootCamp(@PathVariable Long bootCampId) {
         return ResponseEntity.ok(bootcampService.getStudentsFromBootCamp(bootCampId));
     }
