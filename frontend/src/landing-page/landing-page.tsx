@@ -76,10 +76,7 @@ export const LandingPage = (prop: userProp) => {
             <h2 className="text-4xl font-bold mb-2">
               Welcome, {user?.firstName}!
             </h2>
-            <p className="text-[#424242]">User ID: {user?.id}</p>
-            <button></button>
           </div>
-
           <div className="text-center">
             <h3 className="text-2xl font-semibold mb-2">
               Not sure what to study?
