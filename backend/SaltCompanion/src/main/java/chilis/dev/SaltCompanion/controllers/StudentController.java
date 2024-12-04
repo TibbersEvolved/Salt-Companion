@@ -40,8 +40,9 @@ public class StudentController {
         }
         BootCamp bootcamp = student.getBootCamp();
         ListDetailedTopicsDto studentTopics = getListTopicsDto(bootcamp.getId());
+        List<TopicStats> topicStats = getStudentTopicStats(student);
         return ResponseEntity.ok(new StudentDetailedInfoDto(student.getName(),
-                bootcamp.getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped(), getStudentTopicStats(student)));
+                bootcamp.getName(), studentTopics,student.getStreakRecord(),student.getCurrentStreak(), student.getTotalCardsFlipped(),topicStats, getAverageCardCertainty(topicStats) ));
     }
 
     @PostMapping
@@ -87,6 +88,19 @@ public class StudentController {
             payload.add(new TopicDto(s.getId(), s.getName(), s.getId()));
         });
         return new ListDetailedTopicsDto(payload);
+    }
+
+    private float getAverageCardCertainty(List<TopicStats> input ) {
+        float avg = 0;
+        for(int i = 0; i < input.size(); i++) {
+            avg += input.get(i).topicConfidence();
+        }
+        if(avg == 0) {
+            return avg;
+        }
+        avg /= input.size();
+        return avg;
+
     }
 
 }
