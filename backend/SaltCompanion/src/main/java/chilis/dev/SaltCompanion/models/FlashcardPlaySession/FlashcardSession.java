@@ -20,10 +20,13 @@ public class FlashcardSession {
 
     public FlashCard drawNext() {
         index += 1;
-        return flashDeck.get(index);
+        return getCurrentCard();
     }
 
     public FlashCard getCurrentCard() {
+        if(flashDeck.size() < index) {
+            return flashDeck.get(flashDeck.size() -1);
+        }
         return flashDeck.get(index);
     }
 
