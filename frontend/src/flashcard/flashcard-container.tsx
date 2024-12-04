@@ -60,7 +60,7 @@ export const Flashcard = (prop: FlashcardProps) => {
   };
 
   if (isLoading) return <LoadingScreen displayText="" />;
-  if (isError) return toast.error("Something went wrong");
+  if (isError) toast.error("Something went wrong");
 
   const typeData: FlashcardQuestionsAndAnswers = data;
   const isEndReached = 0 >= typeData.cardLeft;

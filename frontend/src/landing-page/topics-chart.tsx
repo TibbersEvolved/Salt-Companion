@@ -21,6 +21,10 @@ export default function TopicsChart({ topicStats }: chartProps) {
         }}
         xAxis={[
           {
+            colorMap: {
+              type: "ordinal",
+              colors: ["#640D5F", "#D91656", "#EB5B00"],
+            },
             id: "barCategories",
             data: topicNames,
             scaleType: "band",
@@ -33,7 +37,7 @@ export default function TopicsChart({ topicStats }: chartProps) {
         ]}
         height={300}
         borderRadius={8}
-        // colors={cheerfulFiestaPalette}
+        colors={cheerfulFiestaPalette}
       />
     </div>
   );
