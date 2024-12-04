@@ -39,3 +39,9 @@ export type CardUpdateData = {
   answer: string;
   id: number;
 };
+
+export type CardNewData = {
+  question: string;
+  answer: string;
+  topicId: number;
+};

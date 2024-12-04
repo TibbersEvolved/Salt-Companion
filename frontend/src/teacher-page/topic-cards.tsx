@@ -4,6 +4,10 @@ import { Card, CardUpdateData } from "./types";
 import { FetchTopicCards } from "./fetch-topic-cards";
 import { UpdateCardsFetch } from "./fetch-cards-update";
 import DeleteCardButton from "./delete-card-button";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
+import { CreateCardsFetch } from "./fetch-card-add-new-";
+import { CardNewData } from "./types";
+import { create } from "@mui/material/styles/createTransitions";
 
 interface Props {
   topicId: number;
@@ -14,6 +18,7 @@ export default function TopicCards({ topicId }: Props) {
     return <div>No topic selected</div>;
   }
   const [cardList, setCardList] = useState<Card[]>([]);
+  const [newCards, setNewCards] = useState<CardNewData[]>([]);
 
   const mutationGetTopicCards: UseMutationResult<Card[], Error, number> =
     useMutation({
@@ -54,11 +59,30 @@ export default function TopicCards({ topicId }: Props) {
       },
     });
 
+  const mutationAddCard: UseMutationResult<string, Error, CardNewData[]> =
+    useMutation({
+      mutationFn: async (newCards: CardNewData[]): Promise<string> => {
+        if (!newCards) {
+          throw new Error("List of cards required");
+        }
+
+        return await CreateCardsFetch(newCards);
+      },
+      onSuccess: (data: string) => {
+        console.log("Cards created successfully:", data);
+        mutationGetTopicCards.mutate(topicId);
+      },
+      onError: (error) => {
+        console.error("Error creating cards:", error);
+      },
+    });
+
   const handleTableChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
     thisCard: Card
   ) => {
     const { name, value } = event.target;
+
     setCardList((prev) =>
       prev.map((card) => {
         if (card.cardId === thisCard.cardId) {
@@ -70,13 +94,58 @@ export default function TopicCards({ topicId }: Props) {
     );
   };
 
-  const updateHandler = () => {
+  const updateHandler = async () => {
+    for (let card of cardList) {
+      if (card.question === "" || card.answer === "") {
+        toast.error("No card question or answer cannot be empty");
+
+        return;
+      }
+    }
+    const localNewCards: CardNewData[] = [];
+
+    for (let card of cardList) {
+      if (card.cardId === 0) {
+        const createdCard: CardNewData = {
+          topicId: topicId,
+          question: card.question,
+          answer: card.answer,
+        };
+        console.log("New card:", createdCard);
+        localNewCards.push(createdCard);
+        // await setNewCards([...newCards, createdCard]);
+      }
+    }
+    if (localNewCards.length > 0) {
+      await mutationAddCard.mutate(localNewCards);
+    } else {
+      console.log("No new cards to add");
+    }
+
     console.log("Updated cards:", cardList);
-    mutationUpdateCards.mutate(cardList);
+    await mutationUpdateCards.mutate(cardList);
+  };
+
+  const addCardHandler = () => {
+    for (let card of cardList) {
+      if (card.cardId === 0) {
+        toast.error("Please fill the current card before adding a new card");
+        return;
+      }
+    }
+    const newCard: Card = {
+      cardId: 0,
+      question: "",
+      answer: "",
+    };
+
+    setCardList([...cardList, newCard]);
+    // mutationUpdateCards.mutate(cardList);
   };
 
   return (
     <div className="card-container ">
+      <Toaster />
       <button
         className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
         onClick={updateHandler}
@@ -97,6 +166,26 @@ export default function TopicCards({ topicId }: Props) {
           />
         </svg>{" "}
       </button>
+      <button
+        className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
+        onClick={addCardHandler}
+      >
+        Add Card
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </button>
       <div className="overflow-x-auto">
         <table className="table w-full ">
           <thead>
@@ -110,7 +199,7 @@ export default function TopicCards({ topicId }: Props) {
           <tbody>
             {cardList.map((card, index) => (
               <tr className="hover" key={card.cardId}>
-                <td>{card.cardId}</td>
+                <td className="sort">{card.cardId}</td>
                 <td>
                   <textarea
                     className="textarea textarea-bordered w-full"

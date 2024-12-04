@@ -1,11 +1,19 @@
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { DeleteTopicCard } from "./fetch-delete-card";
 
 interface Props {
   cardId: number;
 }
 
+// const queryClient = useQueryClient();
+
 export default function DeleteCardButton({ cardId }: Props) {
+  const queryClient = useQueryClient();
+
   const mutationDeleteCard: UseMutationResult<string, Error, number, unknown> =
     useMutation<string, Error, number, unknown>({
       mutationFn: async (cardId: number): Promise<string> => {
@@ -17,6 +25,9 @@ export default function DeleteCardButton({ cardId }: Props) {
       },
       onSuccess: (data: string) => {
         console.log("Card deleted successfully:", data);
+        queryClient.invalidateQueries({
+          queryKey: ["topicCards", cardId],
+        });
       },
       onError: (error: unknown) => {
         console.error("Error deleting card:", error);
