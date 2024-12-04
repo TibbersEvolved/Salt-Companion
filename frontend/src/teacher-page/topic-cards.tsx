@@ -3,6 +3,7 @@ import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { Card, CardUpdateData } from "./types";
 import { FetchTopicCards } from "./fetch-topic-cards";
 import { UpdateCardsFetch } from "./fetch-cards-update";
+import DeleteCardButton from "./delete-card-button";
 
 interface Props {
   topicId: number;
@@ -103,6 +104,7 @@ export default function TopicCards({ topicId }: Props) {
               <th>ID</th>
               <th>Question</th>
               <th>Answer</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -127,6 +129,9 @@ export default function TopicCards({ topicId }: Props) {
                     onChange={(event) => handleTableChange(event, card)}
                     name="answer"
                   />
+                </td>
+                <td>
+                  <DeleteCardButton cardId={card.cardId} />
                 </td>
               </tr>
             ))}
