@@ -13,7 +13,6 @@ export default function TopicCards({ topicId }: Props) {
     return <div>No topic selected</div>;
   }
   const [cardList, setCardList] = useState<Card[]>([]);
-  const [updatedCards, setUpdatedCards] = useState<CardUpdateData[]>([]);
 
   const mutationGetTopicCards: UseMutationResult<Card[], Error, number> =
     useMutation({
@@ -37,68 +36,42 @@ export default function TopicCards({ topicId }: Props) {
     mutationGetTopicCards.mutate(topicId);
   }, [topicId]);
 
+  const mutationUpdateCards: UseMutationResult<string, Error, Card[]> =
+    useMutation({
+      mutationFn: async (updatedCards: Card[]): Promise<string> => {
+        if (!updatedCards) {
+          throw new Error("List of cards required");
+        }
+
+        return await UpdateCardsFetch(updatedCards);
+      },
+      onSuccess: (data: string) => {
+        console.log("Cards updated successfully:", data);
+      },
+      onError: (error) => {
+        console.error("Error updating cards:", error);
+      },
+    });
+
   const handleTableChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
     thisCard: Card
   ) => {
     const { name, value } = event.target;
-
     setCardList((prev) =>
-      prev.map((card) =>
-        card.id === thisCard.id ? { ...card, [name]: value } : card
-      )
+      prev.map((card) => {
+        if (card.cardId === thisCard.cardId) {
+          return { ...card, [name]: value };
+        }
+
+        return card;
+      })
     );
-
-    setUpdatedCards((prev) => {
-      const updatedCard: CardUpdateData = {
-        question: name === "question" ? value : thisCard.question,
-        answer: name === "answer" ? value : thisCard.answer,
-        topicId: topicId,
-      };
-
-      const existingIndex = prev.findIndex(
-        (card) =>
-          card.question === thisCard.question &&
-          card.answer === thisCard.answer &&
-          card.topicId === updatedCard.topicId
-      );
-
-      if (existingIndex !== -1) {
-        return [
-          ...prev.slice(0, existingIndex),
-          updatedCard,
-          ...prev.slice(existingIndex + 1),
-        ];
-      }
-
-      return [...prev, updatedCard];
-    });
   };
 
-  const mutationUpdateCards: UseMutationResult<
-    string,
-    Error,
-    CardUpdateData[]
-  > = useMutation({
-    mutationFn: async (updatedCards: CardUpdateData[]): Promise<string> => {
-      if (!updatedCards) {
-        throw new Error("List of cards required");
-      }
-
-      return await UpdateCardsFetch(updatedCards);
-    },
-    onSuccess: (data: string) => {
-      console.log("Cards updated successfully:", data);
-      setUpdatedCards([]);
-    },
-    onError: (error) => {
-      console.error("Error updating cards:", error);
-    },
-  });
-
   const updateHandler = () => {
-    console.log("Updated cards:", updatedCards);
-    mutationUpdateCards.mutate(updatedCards);
+    console.log("Updated cards:", cardList);
+    mutationUpdateCards.mutate(cardList);
   };
 
   return (
@@ -115,14 +88,15 @@ export default function TopicCards({ topicId }: Props) {
           </thead>
           <tbody>
             {cardList.map((card, index) => (
-              <tr className="hover" key={index}>
-                <td>{card.id}</td>
+              <tr className="hover" key={card.cardId}>
+                <td>{card.cardId}</td>
                 <td>
                   <textarea
                     className="textarea textarea-bordered w-full"
                     value={card.question}
                     readOnly={false}
                     onChange={(event) => handleTableChange(event, card)}
+                    name="question"
                   />
                 </td>
                 <td>
@@ -131,6 +105,8 @@ export default function TopicCards({ topicId }: Props) {
                     className="textarea textarea-bordered w-full"
                     value={card.answer}
                     readOnly={false}
+                    onChange={(event) => handleTableChange(event, card)}
+                    name="answer"
                   />
                 </td>
               </tr>

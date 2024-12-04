@@ -1,11 +1,9 @@
-import { CardUpdateData } from "./types";
+import { Card } from "./types";
 
 const PUT_URL =
   "https://salt-companion-backend-876198057788.us-central1.run.app/api/topic/cards";
 
-export const UpdateCardsFetch = async (
-  body: CardUpdateData[]
-): Promise<string> => {
+export const UpdateCardsFetch = async (body: Card[]): Promise<string> => {
   try {
     const response = await fetch(PUT_URL, {
       method: "PUT",

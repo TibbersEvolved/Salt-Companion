@@ -31,11 +31,11 @@ export type TopicPostData = {
 export type Card = {
   question: string;
   answer: string;
-  id: number;
+  cardId: number;
 };
 
 export type CardUpdateData = {
   question: string;
   answer: string;
-  topicId: number;
+  id: number;
 };
