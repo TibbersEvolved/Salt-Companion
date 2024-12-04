@@ -65,15 +65,15 @@ export const LandingPage = (prop: userProp) => {
     <SignedIn>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 grid grid-cols-1 gap-8">
-          <div className="space-y-5">
+          <div className="space-y-6">
             <h2 className="text-4xl font-bold mb-2 text-center">
               Welcome, {user?.firstName}!
             </h2>
-            <p className="text-center">
+            <p className="text-center text-lg">
               This is your dashboard. Here you can practice what you've learned
               with flashcards or quiz.
             </p>
-            <h3 className="text-2xl font-semibold mb-2 text-center">
+            <h3 className="text-3xl font-semibold mb-2 text-center">
               Practice with flashcards
             </h3>
             <div className="flex flex-col items-center">
@@ -94,10 +94,10 @@ export const LandingPage = (prop: userProp) => {
             </div>
             <hr />
             <div className="text-center">
-              <h3 className="text-2xl font-semibold mb-2">
+              <h3 className="text-3xl font-semibold mb-2">
                 Not sure what to study?
               </h3>
-              <p className="text-[#424242]">
+              <p className="text-[#424242] text-lg">
                 Take our quiz to find your focus!
               </p>
               <button
