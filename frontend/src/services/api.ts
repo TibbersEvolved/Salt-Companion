@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const base_url = import.meta.env.VITE_BASE_URL;
+export const base_url = import.meta.env.VITE_BASE_URL;
 
 export const startFlashcardSession = async (
   cards: number,

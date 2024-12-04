@@ -33,3 +33,10 @@ export type Card = {
   answer: string;
   id: number;
 };
+
+export type Student = {
+  clerkId: string;
+  name: string;
+  bootCampId: number;
+  bootcamp: string;
+};

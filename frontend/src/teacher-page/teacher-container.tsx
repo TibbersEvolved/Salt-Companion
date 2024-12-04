@@ -4,6 +4,8 @@ import { ManageBootcamp } from "./ManageBootcamp";
 import { useUser } from "@clerk/clerk-react";
 import { GetTeacherBootCamp } from "./get-teacher-bootcamps";
 import { TopicSelect } from "./topic-select";
+import { Students } from "./studentManagement";
+import { GetAllStudents } from "./fetchGetAllStudents";
 
 export const Teacher = () => {
   const [selectedBootcamp, setSelectedBootcamp] = useState(
@@ -123,13 +125,8 @@ export const Teacher = () => {
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
             <h1>Manage Student</h1>
-            <ul>
-              <li>Lisa</li>
-              <li>Clara</li>
-              <li>Benny</li>
-              <li>Ptheven</li>
-            </ul>
-
+            <Students />
+            <br />
             <button
               className="mt-4 px-4 py-2 bg-black text-white rounded-md"
               onClick={closeShowManageStudent}
