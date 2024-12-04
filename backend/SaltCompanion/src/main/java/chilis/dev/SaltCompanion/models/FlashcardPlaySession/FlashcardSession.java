@@ -24,7 +24,7 @@ public class FlashcardSession {
     }
 
     public FlashCard getCurrentCard() {
-        if(flashDeck.size() < index) {
+        if(flashDeck.size() <= index) {
             return flashDeck.get(flashDeck.size() -1);
         }
         return flashDeck.get(index);
