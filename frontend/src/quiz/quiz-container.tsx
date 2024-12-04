@@ -85,10 +85,8 @@ export const Quiz = () => {
       <Toaster />
       {isQuizFinished ? (
         <div className="result bg-white p-6 rounded-lg shadow-lg w-1/2 text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Quiz Completed!
-          </h1>
-          <p className="text-xl text-gray-600">
+          <h1 className="text-3xl font-bold mb-4">Quiz Completed!</h1>
+          <p className="text-xl text-[#424242]">
             You scored{" "}
             <span className="font-bold text-[#424242]">{calculateScore()}</span>{" "}
             out of{" "}
@@ -101,7 +99,7 @@ export const Quiz = () => {
             <h2 className="text-2xl font-bold text-[#424242] mb-4">
               Topics to Review:
             </h2>
-            <ul className="text-center text-white space-y-2 space-x-5 grid grid-cols-4">
+            <ul className="text-center text-white space-y-2 space-x-2 flex flex-wrap justify-center gap-2">
               {[
                 ...new Set(
                   userAnswers
@@ -116,7 +114,7 @@ export const Quiz = () => {
               ].map((topic, index) => (
                 <li
                   key={index}
-                  className="p-2 text-center content-center rounded bg-[#fc7961]"
+                  className="p-2 text-center content-center rounded-md bg-[#fc7961] w-28"
                 >
                   {topic}
                 </li>
