@@ -111,9 +111,11 @@ export const LandingPage = (prop: userProp) => {
         </div>
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
           <h2 className="text-center text-3xl font-bold mb-4">Stats</h2>
-          <div className="border border-gray-300 rounded-lg p-4 space-y-10">
+          <div className="border border-gray-300 rounded-lg p-6 space-y-10">
             <section>
-              <p className="text-center mb-6 text-2xl">Your progress so far</p>
+              <p className="mb-3 text-xl font-light font-[#424242]">
+                Your progress on flashcards so far
+              </p>
               <ProgressBar average={data.studentAverage} />
             </section>
             <section className="flex flex-wrap gap-5 justify-center w-full">
