@@ -38,6 +38,7 @@
     "react-card-flip": "^1.2.3",
     "react-confetti": "^6.1.0",
     "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.4.1",
     "react-select": "^5.8.3",
     "react-use": "^17.5.1",
     "reactjs-flip-card": "^2.0.3",

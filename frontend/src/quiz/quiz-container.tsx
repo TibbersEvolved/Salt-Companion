@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { mockedQuiz } from "../mocked/mocked-data";
 import { funnyQuiz } from "../mocked/mocked-data";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
 
 function getRandomQuestionsWithTopics(allQuestions, numberOfQuestions = 15) {
   const groupedByTopic = allQuestions.reduce((acc, question) => {
@@ -52,8 +53,9 @@ export const Quiz = () => {
 
   const handleNextQuestion = () => {
     if (!selectedAnswer) {
-      alert("Please select an answer before proceeding.");
-      return;
+      toast.error(
+        "Please select an answer before continuing to the next question"
+      );
     }
 
     setUserAnswers((prev) => [
@@ -79,6 +81,7 @@ export const Quiz = () => {
 
   return (
     <div className="quiz-container bg-gray-100 p-6 min-h-screen flex flex-col items-center justify-center">
+      <Toaster />
       {isQuizFinished ? (
         <div className="result bg-white p-6 rounded-lg shadow-lg w-1/2 text-center">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
