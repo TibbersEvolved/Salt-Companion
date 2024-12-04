@@ -108,7 +108,7 @@ public class BootcampController {
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping("/bootcamps/topic/changeName")
+    @PutMapping("/topic/changeName")
     public ResponseEntity changeTopicName(@RequestBody ChangeTopicNameDto input) {
         bootcampService.changeTopicName(input.newName(),input.topicId());
         return ResponseEntity.status(204).build();
