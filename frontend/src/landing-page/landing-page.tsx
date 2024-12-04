@@ -72,8 +72,8 @@ export const LandingPage = (prop: userProp) => {
     <SignedIn>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 grid grid-cols-1 gap-8">
-          <div className="text-center space-y-5">
-            <h2 className="text-4xl font-bold mb-2">
+          <div className="space-y-5">
+            <h2 className="text-4xl font-bold mb-2 text-center">
               Welcome, {user?.firstName}!
             </h2>
             <h3 className="text-2xl font-semibold mb-2 text-center">
@@ -96,16 +96,20 @@ export const LandingPage = (prop: userProp) => {
               </button>
             </div>
             <hr />
-            <h3 className="text-2xl font-semibold mb-2">
-              Not sure what to study?
-            </h3>
-            <p className="text-[#424242]">Take our quiz to find your focus!</p>
-            <button
-              onClick={handleClick}
-              className="m-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
-            >
-              <Link to="/quiz">Quiz</Link>
-            </button>
+            <div className="text-center">
+              <h3 className="text-2xl font-semibold mb-2">
+                Not sure what to study?
+              </h3>
+              <p className="text-[#424242]">
+                Take our quiz to find your focus!
+              </p>
+              <button
+                onClick={handleClick}
+                className="m-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
+              >
+                <Link to="/quiz">Quiz</Link>
+              </button>
+            </div>
           </div>
         </div>
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
