@@ -6,6 +6,7 @@ import chilis.dev.SaltCompanion.exceptions.StudentExistException;
 import chilis.dev.SaltCompanion.models.BootCamp;
 import chilis.dev.SaltCompanion.models.Student;
 import chilis.dev.SaltCompanion.models.StudentTopicStat;
+import chilis.dev.SaltCompanion.models.Topic;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
 import chilis.dev.SaltCompanion.repositories.StudentRepo;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class StudentService {
         if(stats == null || stats.isEmpty()) {
             return initCardStats(student);
         }
+        if(stats.size() != student.getBootCamp().getTopics().size()) {
+            return updateMissingStats(student, stats);
+        }
         return stats;
     }
 
@@ -49,6 +53,23 @@ public class StudentService {
         List<StudentSimpleDto> studentSimpleDtos = new ArrayList<>();
         students.forEach(s -> studentSimpleDtos.add(new StudentSimpleDto(s.getClerkId(), s.getName(), s.getBootCamp().getId(), s.getBootCamp().getName())));
         return studentSimpleDtos;
+    }
+
+    private List<StudentTopicStat> updateMissingStats(Student student, List<StudentTopicStat> stats ) {
+        List<Topic> topicList = student.getBootCamp().getTopics();
+        topicList.forEach(s ->{
+            boolean found = false;
+            for(int i = 0; i < stats.size(); i++) {
+                if(stats.get(i).getDeckId() == s.getDeck().getId()){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                stats.add(new StudentTopicStat(s,student));
+            }
+        });
+        return stats;
     }
 
     private List<StudentTopicStat> initCardStats(Student student) {

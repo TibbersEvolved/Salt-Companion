@@ -52,9 +52,9 @@ public class StudentTopicStat {
                     found = true;
                     break;
                 }
-                if(!found){
-                    studentTopicCards.add(new StudentTopicCard(card.getId(),this));
-                }
+            }
+            if(!found){
+                studentTopicCards.add(new StudentTopicCard(card.getId(),this));
             }
         });
     }
