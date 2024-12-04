@@ -12,6 +12,7 @@ export default function ProgressBar({ average }: ProgressBarProps) {
       size="lg"
       color="lime"
       labelProgress
+      className="shadow-sm"
     />
   );
 }
