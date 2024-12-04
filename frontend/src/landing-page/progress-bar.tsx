@@ -1,5 +1,9 @@
 import { Progress } from "flowbite-react";
 
-export default function ProgressBar() {
-  return <Progress progress={75} size="lg" color="lime" />;
+interface ProgressBarProps {
+  average: number;
+}
+
+export default function ProgressBar({ average }: ProgressBarProps) {
+  return <Progress progress={average} size="lg" color="lime" />;
 }

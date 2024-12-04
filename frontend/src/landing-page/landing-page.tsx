@@ -16,6 +16,7 @@ import UserStat from "./userStat";
 import TopicsChart from "./topics-chart";
 import FlowbiteBtn from "./progress-bar";
 import ProgressBar from "./progress-bar";
+import { darkScrollbar } from "@mui/material";
 
 export const LandingPage = (prop: userProp) => {
   const client = useQueryClient();
@@ -134,7 +135,7 @@ export const LandingPage = (prop: userProp) => {
             </section>
             <section>
               <p className="text-center mb-6">Your progress so far</p>
-              <ProgressBar />
+              <ProgressBar average={data.studentAverage} />
             </section>
           </div>
         </div>
