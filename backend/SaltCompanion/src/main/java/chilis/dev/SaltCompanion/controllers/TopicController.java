@@ -28,19 +28,41 @@ public class TopicController {
         this.initializer = init;
     }
 
-    @PostMapping
+    @PostMapping("/card")
     public ResponseEntity createCard(@RequestBody CreateCardDto input) {
         cardService.addCard(input.topicId(), input.question(), input.answer());
         return ResponseEntity.status(201).build();
     }
 
-    @PutMapping
+    @PostMapping("/cards")
+    @Operation(
+            summary = "Add a list of cards for a topic",
+            description = "requestbody with card id, question and answer")
+    public ResponseEntity addMultipleCards(@RequestBody List<CreateCardDto> input) {
+        for (CreateCardDto card : input) {
+            cardService.addCard(card.topicId(), card.question(), card.answer());
+        }
+        return ResponseEntity.status(201).build();
+    }
+
+    @PutMapping("/cards")
+    @Operation(
+            summary = "Update a list of cards for a topic",
+            description = "requestbody with list of cards with id, question and answer")
+    public ResponseEntity updateMultipleCards(@RequestBody List<UpdateCardDto> input) {
+        for (UpdateCardDto card : input) {
+            cardService.updateCard(card.cardId(), card.question(), card.answer());
+        }
+        return ResponseEntity.status(202).build();
+    }
+
+    @PutMapping("/card")
     public ResponseEntity updateCard(@RequestBody UpdateCardDto input) {
         cardService.updateCard(input.cardId(), input.question(), input.answer());
         return ResponseEntity.status(202).build();
     }
 
-    @DeleteMapping("/{cardId}")
+    @DeleteMapping("card/{cardId}")
     public ResponseEntity deleteCard(@PathVariable Long cardId) {
         cardService.deleteCard(cardId);
         return ResponseEntity.status(200).build();
