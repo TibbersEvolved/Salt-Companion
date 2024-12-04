@@ -45,11 +45,11 @@ input:checked {
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid #0f2d45;
+  border: 5px solid #424242;
   animation: prixClipFix 2s linear infinite;
 }
 .loader::after {
-  border-color: #ff3d00;
+  border-color: #f35b7e;
   animation:
     prixClipFix 2s linear infinite,
     rotate 0.5s linear infinite reverse;
