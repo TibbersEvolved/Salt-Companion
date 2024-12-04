@@ -1,7 +1,7 @@
 import { Topic, TopicPostData } from "./types";
+import { base_url } from "../services/api";
 
-const POST_URL =
-  "https://salt-companion-backend-876198057788.us-central1.run.app/api/bootcamps/topic/add";
+const POST_URL = `${base_url}/bootcamps/topic/add`;
 
 export const CreateTopicFetch = async (
   body: TopicPostData

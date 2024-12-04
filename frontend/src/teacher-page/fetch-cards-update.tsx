@@ -1,7 +1,7 @@
 import { Card } from "./types";
+import { base_url } from "../services/api";
 
-const PUT_URL =
-  "https://salt-companion-backend-876198057788.us-central1.run.app/api/topic/cards";
+const PUT_URL = `${base_url}/topic/cards`;
 
 export const UpdateCardsFetch = async (body: Card[]): Promise<string> => {
   try {

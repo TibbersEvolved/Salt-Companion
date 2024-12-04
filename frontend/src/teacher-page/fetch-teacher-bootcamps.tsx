@@ -1,7 +1,7 @@
 import { TeacherBootCampList } from "./types";
+import { base_url } from "../services/api";
 
-const POST_URL =
-  "https://salt-companion-backend-876198057788.us-central1.run.app/api/teachers/bootcamps/";
+const POST_URL = `${base_url}/teachers/bootcamps/`;
 
 export const FetchTeacherBootCamps = async (
   teacherClerkId: string

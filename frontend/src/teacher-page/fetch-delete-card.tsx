@@ -1,8 +1,8 @@
 import { TeacherBootCampList } from "./types";
 import { Card } from "./types";
+import { base_url } from "../services/api";
 
-const GET_URL =
-  "https://salt-companion-backend-876198057788.us-central1.run.app/api/topic/card/";
+const GET_URL = `${base_url}/topic/card/`;
 
 export const DeleteTopicCard = async (cardId: number): Promise<string> => {
   try {
