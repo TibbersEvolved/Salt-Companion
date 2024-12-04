@@ -5,5 +5,13 @@ interface ProgressBarProps {
 }
 
 export default function ProgressBar({ average }: ProgressBarProps) {
-  return <Progress progress={average} size="lg" color="lime" className="shadow-sm" />;
+  return (
+    <Progress
+      progress={average}
+      progressLabelPosition="inside"
+      size="lg"
+      color="lime"
+      labelProgress
+    />
+  );
 }
