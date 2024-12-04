@@ -111,7 +111,7 @@ export const LandingPage = (prop: userProp) => {
         </div>
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl mt-8 p-6">
           <h2 className="text-center text-3xl font-bold mb-4">Stats</h2>
-          <div className="border border-gray-300 rounded-lg p-6 space-y-10">
+          <div className="border border-gray-300 rounded-lg p-6 space-y-12">
             <section>
               <p className="mb-3 text-xl font-light font-[#424242]">
                 Your progress on flashcards so far
