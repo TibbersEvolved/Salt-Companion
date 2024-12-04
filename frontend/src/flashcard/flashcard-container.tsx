@@ -69,18 +69,18 @@ export const Flashcard = (prop: FlashcardProps) => {
     <>
       {isEndReached ? (
         <>
-          {/* <Confetti width={width} height={height} initialVelocityY={25} /> */}
           <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-3xl text-center">
+            <h1 className="text-3xl text-center font-light">
               You've reached the end of the flashcards!
             </h1>
-
-            <button
-              className="bg-rose-600 text-white px-6 py-3 rounded-md mt-6"
-              onClick={prop.callBack}
-            >
-              Go back to the main page
-            </button>
+            <Link to="/landing">
+              <button
+                className="m-6 bg-[#fc7961] text-white h-10 w-56 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
+                onClick={prop.callBack}
+              >
+                Back to main page
+              </button>
+            </Link>
           </div>
         </>
       ) : (
@@ -118,27 +118,27 @@ export const Flashcard = (prop: FlashcardProps) => {
                         How difficult was this card? Select an option to
                         continue
                       </p>
-                      <div className="space-x-3 text-white flex-grow flex items-center justify-center mt-5">
+                      <div className="space-x-1 text-white flex-grow flex items-center justify-center mt-5">
                         <button
-                          className="bg-red-800 w-24 p-2 rounded-md"
+                          className="bg-red-700 w-24 p-2 rounded-l-full"
                           onClick={() => sendAnswer(0)}
                         >
                           Difficult
                         </button>
                         <button
-                          className="bg-yellow-500 w-24 p-2 rounded-md"
+                          className="bg-yellow-400 w-24 p-2 "
                           onClick={() => sendAnswer(1)}
                         >
                           Moderate
                         </button>
                         <button
-                          className="bg-sky-600 w-24 p-2 rounded-md"
+                          className="bg-sky-600 w-24 p-2 "
                           onClick={() => sendAnswer(2)}
                         >
                           Easy
                         </button>
                         <button
-                          className="bg-green-700 w-24 p-2 rounded-md"
+                          className="bg-green-600 w-24 p-2 rounded-r-full"
                           onClick={() => sendAnswer(3)}
                         >
                           Very easy
