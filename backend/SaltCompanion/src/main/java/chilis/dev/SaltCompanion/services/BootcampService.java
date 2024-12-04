@@ -56,6 +56,10 @@ public class BootcampService {
         topicRepository.save(topic);
     }
 
+    public void deleteTopic(Long topicId) {
+        topicRepository.deleteById(topicId);
+    }
+
 public Topic findBootCampTopic(Long bootCampId, String topicName){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
         validateBootCampExist(bootCamp);

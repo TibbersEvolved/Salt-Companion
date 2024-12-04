@@ -114,6 +114,15 @@ public class BootcampController {
         return ResponseEntity.status(204).build();
     }
 
+    @DeleteMapping("/topic/delete/{topicId}")
+    @Operation(
+            summary = "Deletes a topic",
+            description = "topic id to delete")
+    public ResponseEntity deleteTopic(@PathVariable Long topicId) {
+        bootcampService.deleteTopic(topicId);
+        return ResponseEntity.status(200).build();
+    }
+
     public ListDetailedTopicsDto getListTopicsDto(Long bootCampId) {
 
         validateBootCampId(bootCampId);
