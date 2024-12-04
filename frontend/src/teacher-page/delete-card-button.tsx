@@ -5,7 +5,7 @@ interface Props {
   cardId: number;
 }
 
-export default function DeleteCardButton(cardId: Props) {
+export default function DeleteCardButton({ cardId }: Props) {
   const mutationDeleteCard: UseMutationResult<string, Error, number, unknown> =
     useMutation<string, Error, number, unknown>({
       mutationFn: async (cardId: number): Promise<string> => {
@@ -29,7 +29,12 @@ export default function DeleteCardButton(cardId: Props) {
 
   return (
     <div>
-      <button onClick={() => handleDeleteCard(1)}>Delete</button>
+      <button
+        className="btn bg-transparent text-blue-500 hover:text-blue-700"
+        onClick={() => handleDeleteCard(cardId)}
+      >
+        Delete
+      </button>
     </div>
   );
 }

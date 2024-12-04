@@ -76,9 +76,9 @@ export default function TopicCards({ topicId }: Props) {
   };
 
   return (
-    <div className="card-container relative">
+    <div className="card-container ">
       <button
-        className="btn absolute right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
+        className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
         onClick={updateHandler}
       >
         Update/save cards{" "}
