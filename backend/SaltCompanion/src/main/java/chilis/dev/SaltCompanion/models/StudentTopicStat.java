@@ -36,6 +36,14 @@ public class StudentTopicStat {
         this.studentTopicCards = cards;
     }
 
+    private StudentTopicCard addMissingStat(Long id) {
+        StudentTopicCard card = new StudentTopicCard(id,this);
+        studentTopicCards.add(card);
+        return card;
+    }
+
+
+
     public float getCertainty() {
         float certainty = 0;
         float threshHold = studentTopicCards.size()*3;
@@ -58,8 +66,7 @@ public class StudentTopicStat {
                 .filter(c -> c.getCardId() == cardId)
                 .findFirst();
         if(card.isEmpty()) {
-            System.out.println("Card not found");
-            return null;
+            return addMissingStat(cardId);
         }
         return card.get();
     }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface TopicRepository extends ListCrudRepository<Topic, Long> {
 
     public List<Topic> findAllByBootCamp_Id(long id);
+
+    public List<Topic> findAllByDeck_Id(long id);
 }

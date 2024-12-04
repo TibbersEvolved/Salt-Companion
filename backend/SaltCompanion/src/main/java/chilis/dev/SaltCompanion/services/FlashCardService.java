@@ -4,6 +4,7 @@ import chilis.dev.SaltCompanion.models.*;
 import chilis.dev.SaltCompanion.models.FlashcardPlaySession.FlashCard;
 import chilis.dev.SaltCompanion.models.FlashcardPlaySession.FlashcardSession;
 import chilis.dev.SaltCompanion.repositories.StudentRepo;
+import chilis.dev.SaltCompanion.repositories.TopicRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,6 +16,7 @@ public class FlashCardService {
     private StudentService studentService;
     private BootcampService bootcampService;
     private StudentRepo studentRepo;
+    private TopicRepository topicRepository;
     private List<Card> cardsEasy = new ArrayList<>();
     private List<Card> cardsMedium = new ArrayList<>();
     private List<Card> cardsHard = new ArrayList<>();
@@ -22,10 +24,11 @@ public class FlashCardService {
     private List<List<Card>> difficulties = new ArrayList<List<Card>>();
 
 
-    public FlashCardService(StudentService studentService, BootcampService bootcampService, StudentRepo studentRepo) {
+    public FlashCardService(StudentService studentService, BootcampService bootcampService, StudentRepo studentRepo, TopicRepository topicRepository) {
         this.studentService = studentService;
         this.bootcampService = bootcampService;
         this.studentRepo = studentRepo;
+        this.topicRepository = topicRepository;
         difficulties.add(cardsImpossible);
         difficulties.add(cardsHard);
         difficulties.add(cardsMedium);
@@ -45,6 +48,16 @@ public class FlashCardService {
                 studentTopicCard.setUserDifficulty(answer);
                 studentRepo.save(student);
             }
+        }
+        else {
+            Optional<Deck> deck = student.getBootCamp().getTopics().stream()
+                    .map(s -> s.getDeck())
+                    .filter(d -> d.getId() == flashCard.getDeckId())
+                    .findFirst();
+            StudentTopicStat statToAdd = new StudentTopicStat(deck.get().getTopic(),student);
+            StudentTopicCard studentTopicCard = statToAdd.getCardByCardId(flashCard.getCardId());
+            studentTopicCard.setUserDifficulty(answer);
+            studentRepo.save(student);
         }
     }
 
