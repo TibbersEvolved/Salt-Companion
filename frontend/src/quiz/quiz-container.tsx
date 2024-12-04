@@ -117,21 +117,21 @@ export const Quiz = () => {
           </div>
         </div>
       ) : (
-        <div className="question-container bg-white p-6 rounded-lg shadow-lg w-3/6 text-center">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
+        <div className="question-container bg-[#eed1d6] p-6 rounded-2xl shadow-md w-full max-w-4xl text-center">
+          <h2 className="text-2xl font-bold mb-2">
             Question {currentQuestionIndex + 1} of {quizQuestions.length}
           </h2>
-          <p className="text-gray-700 text-lg mb-4">
+          <p className="text-[#424242] text-lg mb-4">
             {currentQuestion.question}
           </p>
           <div className="answers space-y-3">
             {currentQuestion.answers.map((answer, index) => (
               <label
                 key={index}
-                className={`block bg-gray-200 p-2 rounded border-2 ${
+                className={`block bg-gray-100 p-2 rounded-lg border-2 ${
                   selectedAnswer === answer
-                    ? "border-blue-500"
-                    : "border-gray-200"
+                    ? "border-[#0f2d45] bg-[#0f2e48] text-white"
+                    : "border-gray-100"
                 } cursor-pointer`}
               >
                 <input
@@ -148,7 +148,7 @@ export const Quiz = () => {
           </div>
           <button
             onClick={handleNextQuestion}
-            className="mt-6 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
+            className="mt-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
           >
             {currentQuestionIndex === quizQuestions.length - 1
               ? "Finish"
