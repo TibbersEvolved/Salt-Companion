@@ -13,8 +13,12 @@ export default function Navbar() {
     <SignedIn>
       <div className="navbar bg-base-100">
         <div className="flex-1 ml-4">
-          <Link to="/landing">
-            <img src="public/salt-logo-dark.svg" alt="salt logo" />
+          <Link draggable="false" to="/landing">
+            <img
+              draggable="false"
+              src="public/salt-logo-dark.svg"
+              alt="salt logo"
+            />
           </Link>
         </div>
         <div className="flex-none">
