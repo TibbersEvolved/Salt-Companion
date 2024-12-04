@@ -42,10 +42,36 @@ public class StudentTopicStat {
         return card;
     }
 
+    private void findMissingStats() {
+        Deck deck = getDeck();
+        deck.getDeckCards().forEach(card -> {
+            boolean found = false;
+            for(int i = 0; i < studentTopicCards.size(); i++) {
+                if(studentTopicCards.get(i).getCardId() == card.getId())
+                {
+                    found = true;
+                    break;
+                }
+                if(!found){
+                    studentTopicCards.add(new StudentTopicCard(card.getId(),this));
+                }
+            }
+        });
+    }
+
+    private Deck getDeck() {
+        return student.getBootCamp().getTopics().stream()
+                .map(s -> s.getDeck())
+                .filter(s -> s.getId() == getDeckId())
+                .findFirst().get();
+    }
 
 
     public float getCertainty() {
         float certainty = 0;
+        if (getDeck().getDeckCards().size() != studentTopicCards.size()) {
+            findMissingStats();
+        }
         float threshHold = studentTopicCards.size()*3;
         for(int i = 0; i < studentTopicCards.size(); i++) {
             certainty += studentTopicCards.get(i).getUserDifficulty();
