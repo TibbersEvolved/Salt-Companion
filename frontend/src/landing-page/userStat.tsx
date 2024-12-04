@@ -25,7 +25,9 @@ export default function Stat(prop: props) {
           </svg>
         </div>
         <div className="stat-title text-[#424242]">Current Streak</div>
-        <div className="stat-value text-[#424242]">{prop.currentStreak}</div>
+        <div className="stat-value text-[#424242]">
+          {prop.currentStreak} <span className="text-2xl">days</span>
+        </div>
       </div>
 
       <div className="stat">
@@ -48,7 +50,9 @@ export default function Stat(prop: props) {
           </svg>
         </div>
         <div className="stat-title text-[#424242]">Record Streak</div>
-        <div className="stat-value text-[#424242]">{prop.recordStreak}</div>
+        <div className="stat-value text-[#424242]">
+          {prop.recordStreak} days
+        </div>
       </div>
 
       <div className="stat">
