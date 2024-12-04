@@ -19,6 +19,7 @@ export default function TopicCards({ topicId }: Props) {
   }
   const [cardList, setCardList] = useState<Card[]>([]);
   const [newCards, setNewCards] = useState<CardNewData[]>([]);
+  const [updateGate, setUpdateGate] = useState(false);
 
   const mutationGetTopicCards: UseMutationResult<Card[], Error, number> =
     useMutation({
@@ -26,11 +27,9 @@ export default function TopicCards({ topicId }: Props) {
         if (!topicId) {
           throw new Error("Topic id is required");
         }
-        console.log("Fetching cards for topic ID:", topicId);
         return await FetchTopicCards(topicId);
       },
       onSuccess: (data: Card[]) => {
-        console.log("Cards Fetched successfully:", data);
         setCardList(data);
       },
       onError: (error) => {
@@ -97,7 +96,7 @@ export default function TopicCards({ topicId }: Props) {
   const updateHandler = async () => {
     for (let card of cardList) {
       if (card.question === "" || card.answer === "") {
-        toast.error("No card question or answer cannot be empty");
+        toast.error("No card question or answer may be empty");
 
         return;
       }
@@ -126,22 +125,34 @@ export default function TopicCards({ topicId }: Props) {
     await mutationUpdateCards.mutate(cardList);
   };
 
-  const addCardHandler = () => {
+  const addCardHandler = async () => {
     for (let card of cardList) {
       if (card.cardId === 0) {
         toast.error("Please fill the current card before adding a new card");
         return;
       }
     }
+    // const tempCardList = cardList;
+
     const newCard: Card = {
       cardId: 0,
       question: "",
       answer: "",
     };
+    // tempCardList.push(newCard);
 
-    setCardList([...cardList, newCard]);
-    // mutationUpdateCards.mutate(cardList);
+    await setCardList([newCard, ...cardList]);
+    setUpdateGate(true);
+    // await mutationUpdateCards.mutate(cardList);
   };
+
+  useEffect(() => {
+    if (updateGate) {
+      mutationUpdateCards.mutate(cardList);
+      //   mutationGetTopicCards.mutate(topicId);
+      setUpdateGate(false);
+    }
+  }, [updateGate, cardList]);
 
   return (
     <div className="card-container ">
@@ -150,7 +161,7 @@ export default function TopicCards({ topicId }: Props) {
         className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
         onClick={updateHandler}
       >
-        Update/save cards{" "}
+        Save cards{" "}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -170,7 +181,7 @@ export default function TopicCards({ topicId }: Props) {
         className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
         onClick={addCardHandler}
       >
-        Add Card
+        New Card
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -199,7 +210,7 @@ export default function TopicCards({ topicId }: Props) {
           <tbody>
             {cardList.map((card, index) => (
               <tr className="hover" key={card.cardId}>
-                <td className="sort">{card.cardId}</td>
+                <td className="sort">{index}</td>
                 <td>
                   <textarea
                     className="textarea textarea-bordered w-full"
@@ -220,7 +231,10 @@ export default function TopicCards({ topicId }: Props) {
                   />
                 </td>
                 <td>
-                  <DeleteCardButton cardId={card.cardId} />
+                  <DeleteCardButton
+                    cardId={card.cardId}
+                    refresh={() => mutationGetTopicCards.mutate(topicId)}
+                  />
                 </td>
               </tr>
             ))}

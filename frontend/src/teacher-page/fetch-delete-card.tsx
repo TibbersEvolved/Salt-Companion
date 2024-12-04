@@ -16,7 +16,8 @@ export const DeleteTopicCard = async (cardId: number): Promise<string> => {
     if (!response.ok) {
       throw new Error(`Failed to delete card. Status: ${response.status}`);
     }
-    return await response.json();
+    // await response.json();
+    return "Card deleted from database";
   } catch (error) {
     console.error("Error deleting card: ", error);
     throw error;
