@@ -9,6 +9,7 @@ import LoadingScreen from "../services/loadingScreen";
 import UserStat from "./userStat";
 import TopicsChart from "./topics-chart";
 import ProgressBar from "./progress-bar";
+import Stat from "./userStat";
 
 export const LandingPage = (prop: userProp) => {
   const client = useQueryClient();
@@ -111,18 +112,11 @@ export const LandingPage = (prop: userProp) => {
               <p className="text-center mb-6">Your progress so far</p>
               <ProgressBar average={data.studentAverage} />
             </section>
-            <section className="flex flex-wrap gap-5 justify-center">
-              <UserStat
-                text={"Current Streak " + data.currentStreak}
-                tooltip="The amount of days you have used the app in a row"
-              />
-              <UserStat
-                text={"Record Streak " + data.streak}
-                tooltip="Your lifetime highscore of days used in a row"
-              />
-              <UserStat
-                text={"Total Cards Flipped: " + data.totalCardsFlipped}
-                tooltip="Lifetime total of cards flipped!"
+            <section className="flex flex-wrap gap-5 justify-center w-full">
+              <Stat
+                currentStreak={data.currentStreak}
+                recordStreak={data.streak}
+                cardsFlipped={data.totalCardsFlipped}
               />
             </section>
             <section>
