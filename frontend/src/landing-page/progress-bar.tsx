@@ -5,9 +5,11 @@ interface ProgressBarProps {
 }
 
 export default function ProgressBar({ average }: ProgressBarProps) {
+  const roundedAverage = Math.round(average);
+
   return (
     <Progress
-      progress={average}
+      progress={roundedAverage}
       progressLabelPosition="inside"
       size="lg"
       color="lime"
