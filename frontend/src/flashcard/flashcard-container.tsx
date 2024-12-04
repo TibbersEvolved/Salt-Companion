@@ -111,10 +111,7 @@ export const Flashcard = (prop: FlashcardProps) => {
                           <p className="font-bold">{typeData.answer}</p>
                         </div>
                       </div>
-                      <p
-                        className="text-center mt-5 text-[#424242]"
-                        onClick={() => nextCard()}
-                      >
+                      <p className="text-center mt-5 text-[#424242]">
                         How difficult was this card? Select an option to
                         continue
                       </p>
