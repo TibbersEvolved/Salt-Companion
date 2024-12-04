@@ -61,7 +61,7 @@ export default function TopicCards({ topicId }: Props) {
         </thead>
         <tbody>
           {cardList.map((card, index) => (
-            <tr key={index}>
+            <tr className="hover" key={index}>
               <td>{card.id}</td>
               <td>
                 <textarea
