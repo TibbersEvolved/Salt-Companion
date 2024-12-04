@@ -1,22 +1,14 @@
-import { SignedIn, UserProfile, useUser } from "@clerk/clerk-react";
+import { SignedIn, useUser } from "@clerk/clerk-react";
 import { Link } from "@tanstack/react-router";
-import { mockedCourseData } from "../mocked/mocked-data";
 import Select from "react-select";
 import { useState } from "react";
 import { Flashcard } from "../flashcard/flashcard-container";
-import {
-  fetchBootcamps,
-  getQuizQuestions,
-  getStudentData,
-  startFlashcardSession,
-} from "../services/api";
+import { getStudentData, startFlashcardSession } from "../services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingScreen from "../services/loadingScreen";
 import UserStat from "./userStat";
 import TopicsChart from "./topics-chart";
-import FlowbiteBtn from "./progress-bar";
 import ProgressBar from "./progress-bar";
-import { darkScrollbar } from "@mui/material";
 
 export const LandingPage = (prop: userProp) => {
   const client = useQueryClient();
@@ -67,7 +59,6 @@ export const LandingPage = (prop: userProp) => {
   }
 
   const topicData = data.topics.topics;
-  console.log(topicData);
 
   return (
     <SignedIn>
