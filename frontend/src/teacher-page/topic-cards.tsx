@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { Card } from "./types";
+import { Card, CardUpdateData } from "./types";
 import { FetchTopicCards } from "./fetch-topic-cards";
+import { UpdateCardsFetch } from "./fetch-cards-update";
 
 interface Props {
   topicId: number;
@@ -12,6 +13,7 @@ export default function TopicCards({ topicId }: Props) {
     return <div>No topic selected</div>;
   }
   const [cardList, setCardList] = useState<Card[]>([]);
+  const [updatedCards, setUpdatedCards] = useState<CardUpdateData[]>([]);
 
   const mutationGetTopicCards: UseMutationResult<Card[], Error, number> =
     useMutation({
@@ -39,67 +41,103 @@ export default function TopicCards({ topicId }: Props) {
     event: React.ChangeEvent<HTMLTextAreaElement>,
     thisCard: Card
   ) => {
-    setCardList((prev) => {
-      return prev.map((card) => {
-        if (card.id === thisCard.id) {
-          return { ...card, question: event.target.value };
-        }
-        return card;
-      });
+    const { name, value } = event.target;
+
+    setCardList((prev) =>
+      prev.map((card) =>
+        card.id === thisCard.id ? { ...card, [name]: value } : card
+      )
+    );
+
+    setUpdatedCards((prev) => {
+      const updatedCard: CardUpdateData = {
+        question: name === "question" ? value : thisCard.question,
+        answer: name === "answer" ? value : thisCard.answer,
+        topicId: topicId,
+      };
+
+      const existingIndex = prev.findIndex(
+        (card) =>
+          card.question === thisCard.question &&
+          card.answer === thisCard.answer &&
+          card.topicId === updatedCard.topicId
+      );
+
+      if (existingIndex !== -1) {
+        return [
+          ...prev.slice(0, existingIndex),
+          updatedCard,
+          ...prev.slice(existingIndex + 1),
+        ];
+      }
+
+      return [...prev, updatedCard];
     });
   };
 
-  return (
-    <div className="overflow-x-auto">
-      <table className="table w-full ">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Question</th>
-            <th>Answer</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cardList.map((card, index) => (
-            <tr className="hover" key={index}>
-              <td>{card.id}</td>
-              <td>
-                <textarea
-                  className="textarea textarea-bordered w-full"
-                  value={card.question}
-                  readOnly={false}
-                  onChange={(event) => handleTableChange(event, card)}
-                />
-              </td>
-              <td>
-                {" "}
-                <textarea
-                  className="textarea textarea-bordered w-full"
-                  value={card.answer}
-                  readOnly={false}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+  const mutationUpdateCards: UseMutationResult<
+    string,
+    Error,
+    CardUpdateData[]
+  > = useMutation({
+    mutationFn: async (updatedCards: CardUpdateData[]): Promise<string> => {
+      if (!updatedCards) {
+        throw new Error("List of cards required");
+      }
 
-    // <div>
-    //   {cardList.map((card, index) => (
-    //     <div
-    //       key={card.id}
-    //       tabIndex={0}
-    //       className="collapse collapse-arrow border-base-300 bg-base-200 border"
-    //     >
-    //       <div className="collapse-title text-xl font-medium">
-    //         {card.question}
-    //       </div>
-    //       <div className="collapse-content">
-    //         <p>{card.answer}</p>
-    //       </div>
-    //     </div>
-    //   ))}
-    // </div>
+      return await UpdateCardsFetch(updatedCards);
+    },
+    onSuccess: (data: string) => {
+      console.log("Cards updated successfully:", data);
+      setUpdatedCards([]);
+    },
+    onError: (error) => {
+      console.error("Error updating cards:", error);
+    },
+  });
+
+  const updateHandler = () => {
+    console.log("Updated cards:", updatedCards);
+    mutationUpdateCards.mutate(updatedCards);
+  };
+
+  return (
+    <div className="card-container">
+      <button onClick={updateHandler}>Update edited cards </button>
+      <div className="overflow-x-auto">
+        <table className="table w-full ">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Question</th>
+              <th>Answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cardList.map((card, index) => (
+              <tr className="hover" key={index}>
+                <td>{card.id}</td>
+                <td>
+                  <textarea
+                    className="textarea textarea-bordered w-full"
+                    value={card.question}
+                    readOnly={false}
+                    onChange={(event) => handleTableChange(event, card)}
+                  />
+                </td>
+                <td>
+                  {" "}
+                  <textarea
+                    className="textarea textarea-bordered w-full"
+                    value={card.answer}
+                    readOnly={false}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

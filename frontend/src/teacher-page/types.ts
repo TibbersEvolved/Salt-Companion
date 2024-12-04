@@ -34,9 +34,8 @@ export type Card = {
   id: number;
 };
 
-export type Student = {
-  clerkId: string;
-  name: string;
-  bootCampId: number;
-  bootcamp: string;
+export type CardUpdateData = {
+  question: string;
+  answer: string;
+  topicId: number;
 };
