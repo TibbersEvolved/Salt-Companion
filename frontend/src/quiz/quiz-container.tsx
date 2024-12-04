@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { mockedQuiz } from "../mocked/mocked-data";
+import { funnyQuiz } from "../mocked/mocked-data";
 
 function getRandomQuestionsWithTopics(allQuestions, numberOfQuestions = 15) {
   const groupedByTopic = allQuestions.reduce((acc, question) => {
@@ -37,11 +38,11 @@ type UserAnswer = {
   correct: boolean;
 };
 
-// Quiz Component
 export const Quiz = () => {
-  const [quizQuestions] = useState(
-    getRandomQuestionsWithTopics(mockedQuiz, 15)
-  );
+  // const [quizQuestions] = useState(
+  //   getRandomQuestionsWithTopics(mockedQuiz, 15)
+  // );
+  const [quizQuestions] = useState(getRandomQuestionsWithTopics(funnyQuiz, 3));
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
