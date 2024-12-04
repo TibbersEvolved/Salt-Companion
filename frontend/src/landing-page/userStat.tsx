@@ -74,7 +74,7 @@ export default function Stat(prop: props) {
             ></path>
           </svg>
         </div>
-        <div className="stat-title text-[#424242]">Total Cards Flipped</div>
+        <div className="stat-title text-[#424242]">Cards Flipped</div>
         <div className="stat-value text-[#424242]">{prop.cardsFlipped}</div>
       </div>
     </div>
