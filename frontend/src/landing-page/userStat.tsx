@@ -19,7 +19,7 @@ export default function Stat(prop: props) {
               strokeLinecap="round"
               strokeLinejoin="round"
               stroke="#f35b7e"
-              strokeWidth="2"
+              strokeWidth="3"
               d="M12,21c-3.9,0-7-2-7-7s5-5,5-11c3,2,4.37,4.1,5,8a5,5,0,0,0,2-3c1,1,2,4,2,6C19,17.14,17.72,21,12,21Z"
             ></path>
           </svg>
