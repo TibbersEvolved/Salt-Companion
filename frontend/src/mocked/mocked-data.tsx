@@ -571,3 +571,39 @@ export const flashCard = [
       "A bean is a Java class that is used to encapsulate data and provide methods to access and manipulate that data.",
   },
 ];
+
+export const funnyQuiz = [
+  {
+    topic: "Debugging",
+    question: "What is the first step of debugging?",
+    answers: [
+      "Yell at your screen",
+      "Blame the code you wrote last week",
+      "Read the error message carefully",
+      "Delete everything and start over",
+    ],
+    correctAnswer: "Read the error message carefully",
+  },
+  {
+    topic: "Programming Languages",
+    question: "Why did the programmer quit his job?",
+    answers: [
+      "He didn't get arrays",
+      "He had too many bugs",
+      "He lost his class",
+      "He couldn't find the source of his problems",
+    ],
+    correctAnswer: "He didn't get arrays",
+  },
+  {
+    topic: "Frontend Development",
+    question: "Why do frontend developers hate nature?",
+    answers: [
+      "Because they hate bugs",
+      "Because trees have too many branches",
+      "Because CSS has no rules",
+      "Because they can't center divs in real life",
+    ],
+    correctAnswer: "Because they can't center divs in real life",
+  },
+];

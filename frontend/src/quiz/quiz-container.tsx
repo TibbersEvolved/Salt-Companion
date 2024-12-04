@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { mockedQuiz } from "../mocked/mocked-data";
+import { funnyQuiz } from "../mocked/mocked-data";
 
 function getRandomQuestionsWithTopics(allQuestions, numberOfQuestions = 15) {
   const groupedByTopic = allQuestions.reduce((acc, question) => {
@@ -37,11 +38,11 @@ type UserAnswer = {
   correct: boolean;
 };
 
-// Quiz Component
 export const Quiz = () => {
-  const [quizQuestions] = useState(
-    getRandomQuestionsWithTopics(mockedQuiz, 15)
-  );
+  // const [quizQuestions] = useState(
+  //   getRandomQuestionsWithTopics(mockedQuiz, 15)
+  // );
+  const [quizQuestions] = useState(getRandomQuestionsWithTopics(funnyQuiz, 3));
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -96,7 +97,7 @@ export const Quiz = () => {
             <h2 className="text-2xl font-bold text-[#424242] mb-4">
               Topics to Review:
             </h2>
-            <ul className="text-center text-white space-y-2">
+            <ul className="text-center text-white space-y-2 space-x-5 grid grid-cols-4">
               {[
                 ...new Set(
                   userAnswers
@@ -109,7 +110,10 @@ export const Quiz = () => {
                     )
                 ),
               ].map((topic, index) => (
-                <li key={index} className="p-2 rounded bg-[#fc7961]">
+                <li
+                  key={index}
+                  className="p-2 text-center content-center rounded bg-[#fc7961]"
+                >
                   {topic}
                 </li>
               ))}
