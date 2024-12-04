@@ -9,6 +9,7 @@ import { getFlashcardQuestions } from "../services/api";
 import LoadingSpinner from "../shared/loadingSpinner";
 import LoadingScreen from "../services/loadingScreen";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 type FlashcardProps = {
   sessionId: string;
@@ -59,7 +60,7 @@ export const Flashcard = (prop: FlashcardProps) => {
   };
 
   if (isLoading) return <LoadingScreen displayText="" />;
-  if (isError) return <div>Error pls add toast</div>;
+  if (isError) return toast.error("Something went wrong");
 
   const typeData: FlashcardQuestionsAndAnswers = data;
   const isEndReached = 0 >= typeData.cardLeft;
@@ -67,6 +68,7 @@ export const Flashcard = (prop: FlashcardProps) => {
 
   return (
     <>
+      <Toaster />
       {isEndReached ? (
         <>
           <div className="flex flex-col items-center justify-center h-screen">

@@ -56,6 +56,7 @@ export const Quiz = () => {
       toast.error(
         "Please select an answer before continuing to the next question"
       );
+      return;
     }
 
     setUserAnswers((prev) => [
