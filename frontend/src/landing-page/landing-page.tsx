@@ -69,6 +69,10 @@ export const LandingPage = (prop: userProp) => {
             <h2 className="text-4xl font-bold mb-2 text-center">
               Welcome, {user?.firstName}!
             </h2>
+            <p className="text-center">
+              This is your dashboard. Here you can practice what you've learned
+              with flashcards or quiz.
+            </p>
             <h3 className="text-2xl font-semibold mb-2 text-center">
               Practice with flashcards
             </h3>
@@ -109,7 +113,7 @@ export const LandingPage = (prop: userProp) => {
           <h2 className="text-center text-3xl font-bold mb-4">Stats</h2>
           <div className="border border-gray-300 rounded-lg p-4 space-y-10">
             <section>
-              <p className="text-center mb-6">Your progress so far</p>
+              <p className="text-center mb-6 text-2xl">Your progress so far</p>
               <ProgressBar average={data.studentAverage} />
             </section>
             <section className="flex flex-wrap gap-5 justify-center w-full">
