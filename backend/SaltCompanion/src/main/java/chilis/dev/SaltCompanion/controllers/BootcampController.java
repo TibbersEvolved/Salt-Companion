@@ -1,5 +1,6 @@
 package chilis.dev.SaltCompanion.controllers;
 
+import chilis.dev.SaltCompanion.controllers.dtoInput.ChangeTopicNameDto;
 import chilis.dev.SaltCompanion.controllers.dtoInput.StudentToBootCampDto;
 import chilis.dev.SaltCompanion.exceptions.BootCampIdException;
 import chilis.dev.SaltCompanion.controllers.dto.*;
@@ -105,6 +106,12 @@ public class BootcampController {
         Topic topic = new Topic(dto.name());
         bootcampService.addTopicToBootCamp(dto.id(), topic);
         return ResponseEntity.status(201).build();
+    }
+
+    @PutMapping("/bootcamps/topic/changeName")
+    public ResponseEntity changeTopicName(@RequestBody ChangeTopicNameDto input) {
+        bootcampService.changeTopicName(input.newName(),input.topicId());
+        return ResponseEntity.status(204).build();
     }
 
     public ListDetailedTopicsDto getListTopicsDto(Long bootCampId) {

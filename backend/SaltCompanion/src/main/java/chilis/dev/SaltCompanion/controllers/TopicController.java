@@ -68,6 +68,7 @@ public class TopicController {
         return ResponseEntity.status(200).build();
     }
 
+
     @GetMapping("/card/{topicId}")
     @Operation(
             summary = "Gets all cards for a topic",

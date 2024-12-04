@@ -50,6 +50,12 @@ public class BootcampService {
         bootCampRepository.save(bootCamp);
     }
 
+    public void changeTopicName(String name, Long id) {
+        Topic topic = topicRepository.findById(id).get();
+        topic.setName(name);
+        topicRepository.save(topic);
+    }
+
 public Topic findBootCampTopic(Long bootCampId, String topicName){
         BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
         validateBootCampExist(bootCamp);
