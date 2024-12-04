@@ -63,6 +63,7 @@ export const Flashcard = (prop: FlashcardProps) => {
 
   const typeData: FlashcardQuestionsAndAnswers = data;
   const isEndReached = 0 >= typeData.cardLeft;
+  const topic = typeData.topic.toUpperCase();
 
   return (
     <>
@@ -85,24 +86,20 @@ export const Flashcard = (prop: FlashcardProps) => {
       ) : (
         <>
           <div className="flex items-center justify-center h-screen">
-            <div className="bg-[#eed1d6] h-[670px] w-[750px] rounded-2xl">
-              <div className="text-center space-y-5 mt-5">
-                <p className="text-[#f36384]">{typeData.topic}</p>
-                <h2 className="text-3xl font-extrabold px-12">
+            <div className="bg-[#eed1d6] min-h-[620px] w-[750px] rounded-2xl">
+              <div className="text-center space-y-3 mt-5">
+                <p className="text-[#f36384]">{topic}</p>
+                <h2 className="text-2xl font-extrabold px-12">
                   {typeData.question}
                 </h2>
-                {/* {currentCard && (
-                <h2 className="text-3xl font-extrabold">{currentCard.question}</h2>
-              )} */}
               </div>
-              <div className="flex justify-center mt-10 space-y-36">
-                {/* {currentCard && (whole ReactFlipCard component)} */}
+              <div className="flex justify-center mt-10 space-y-5">
                 <ReactFlipCard
                   flipTrigger="onClick"
-                  containerCss="w-[600px] h-96 bg-white shadow-md flex items-center justify-center relative rounded-2xl"
+                  containerCss="w-[600px] h-80 bg-white shadow-md flex items-center justify-center relative rounded-2xl"
                   frontComponent={
                     <div className="flex items-center justify-center h-full">
-                      <p className="text-2xl text-[#424242]">
+                      <p className="text-xl text-[#424242]">
                         Click to see the answer
                       </p>
                     </div>
@@ -110,7 +107,7 @@ export const Flashcard = (prop: FlashcardProps) => {
                   backComponent={
                     <>
                       <div className="flex flex-col  bg-[#0f2d45] text-white justify-between h-full items-center rounded-2xl">
-                        <div className="flex-grow flex items-center justify-center p-12 text-center text-2xl">
+                        <div className="flex-grow flex items-center justify-center p-12 text-center text-xl">
                           <p className="font-bold">{typeData.answer}</p>
                         </div>
                       </div>
