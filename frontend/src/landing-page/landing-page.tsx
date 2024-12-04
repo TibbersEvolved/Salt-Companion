@@ -72,12 +72,30 @@ export const LandingPage = (prop: userProp) => {
     <SignedIn>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
         <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 grid grid-cols-1 gap-8">
-          <div className="text-center">
+          <div className="text-center space-y-5">
             <h2 className="text-4xl font-bold mb-2">
               Welcome, {user?.firstName}!
             </h2>
-          </div>
-          <div className="text-center">
+            <h3 className="text-2xl font-semibold mb-2 text-center">
+              Practice with flashcards
+            </h3>
+            <div className="flex flex-col items-center">
+              <Select
+                isMulti
+                options={topicData}
+                className="text-[#424242] w-full max-w-md font-light"
+                classNamePrefix="select"
+                onChange={handleChange}
+                placeholder="Select topics to practice"
+              />
+              <button
+                onClick={handleClick}
+                className="mt-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
+              >
+                Next
+              </button>
+            </div>
+            <hr />
             <h3 className="text-2xl font-semibold mb-2">
               Not sure what to study?
             </h3>
@@ -87,26 +105,6 @@ export const LandingPage = (prop: userProp) => {
               className="m-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
             >
               <Link to="/quiz">Quiz</Link>
-            </button>
-            <div className="h-20 w-54 border border-black  mx-auto">
-              Stuff to practice{" "}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <Select
-              isMulti
-              options={topicData}
-              className="text-[#424242] w-full max-w-md font-light"
-              classNamePrefix="select"
-              onChange={handleChange}
-              placeholder="Select topics to practice"
-            />
-            <button
-              onClick={handleClick}
-              className="mt-6 bg-[#fc7961] text-white h-10 w-24 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
-            >
-              Next
             </button>
           </div>
         </div>
