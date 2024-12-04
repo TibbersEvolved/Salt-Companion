@@ -23,7 +23,15 @@ export default function TopicsChart({ topicStats }: chartProps) {
           {
             colorMap: {
               type: "ordinal",
-              colors: ["#640D5F", "#D91656", "#EB5B00"],
+              colors: [
+                "#640D5F",
+                "#26547C",
+                "#8B4E76",
+                "#BD4B73",
+                "#EF476F",
+                "#F78C6B",
+                "#FBAF69",
+              ],
             },
             id: "barCategories",
             data: topicNames,
