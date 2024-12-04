@@ -69,6 +69,19 @@ public class StudentService {
                 stats.add(new StudentTopicStat(s,student));
             }
         });
+        List<StudentTopicStat> idsToRemove = new ArrayList<>();
+        for(int i = 0; i < stats.size(); i++) {
+            boolean found = false;
+            for(int j = 0; j < topicList.size(); j++) {
+                if(stats.get(i).getDeckId() == topicList.get(j).getDeck().getId()) {
+                    found = true;
+                }
+            }
+            if(!found) {
+                idsToRemove.add(stats.get(i));
+            }
+        }
+        idsToRemove.forEach(stat -> stats.remove(stat));
         return stats;
     }
 

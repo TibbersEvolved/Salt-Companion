@@ -37,7 +37,6 @@ public class Deck {
     public boolean removeCard(Long cardId){
         for(Card c: deckCards){
             if(c.getId()==cardId) {
-                c.setDeck(null);
                 this.deckCards.remove(c);
                 return true;
             }

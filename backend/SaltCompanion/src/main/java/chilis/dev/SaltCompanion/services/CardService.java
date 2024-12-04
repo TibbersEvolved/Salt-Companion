@@ -34,6 +34,7 @@ public class CardService {
         Card card = cardRepository.findById(cardId).get();
         Topic topic = card.getDeck().getTopic();
         card.getDeck().removeCard(cardId);
+        cardRepository.delete(card);
         topicRepository.save(topic);
     }
 

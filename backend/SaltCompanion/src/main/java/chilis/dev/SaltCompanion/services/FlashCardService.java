@@ -102,13 +102,11 @@ public class FlashCardService {
         }
         Random random = new Random();
         separateCards(selectableCards,clerkId);
-        System.out.println("CardsImpossible size: " + cardsImpossible.size() );
         for(int i = 0; i < cardAmount; i++ ) {
             flashCardList.add(getCard(randomDifficulty(random),random));
         }
         FlashcardSession newSession = new FlashcardSession(flashCardList, clerkId);
         UUID identifier = newSession.getId();
-        System.out.println("New Deck size: " + newSession.getFlashDeck().size());
         sessions.add(newSession);
         return identifier;
     }
@@ -133,7 +131,6 @@ public class FlashCardService {
                     StudentTopicStat actStat = stats.get(i);
                     if(actStat.getCardByCardId(s.getId()) != null) {
                         sortCardByDifficulty(s, actStat.getCardByCardId(s.getId()).getUserDifficulty());
-                        System.out.println("Added card: " + s + " with difficulty: " + actStat.getCardByCardId(s.getId()).getUserDifficulty());
                     }
                 }
             }

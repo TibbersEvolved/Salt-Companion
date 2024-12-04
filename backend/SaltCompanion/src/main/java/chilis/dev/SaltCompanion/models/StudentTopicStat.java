@@ -44,7 +44,8 @@ public class StudentTopicStat {
 
     private void findMissingStats() {
         Deck deck = getDeck();
-        deck.getDeckCards().forEach(card -> {
+        List<Card> dbCards = deck.getDeckCards();
+        dbCards.forEach(card -> {
             boolean found = false;
             for(int i = 0; i < studentTopicCards.size(); i++) {
                 if(studentTopicCards.get(i).getCardId() == card.getId())
@@ -57,6 +58,20 @@ public class StudentTopicStat {
                 studentTopicCards.add(new StudentTopicCard(card.getId(),this));
             }
         });
+        List<StudentTopicCard> cardsToRemove = new ArrayList<>();
+        for(int i = 0; i < studentTopicCards.size(); i++) {
+            boolean found = false;
+            for(int j = 0; j < dbCards.size(); j++) {
+                if(studentTopicCards.get(i).getCardId() == dbCards.get(j).getId()) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                cardsToRemove.add(studentTopicCards.get(i));
+            }
+        }
+        cardsToRemove.forEach(s -> studentTopicCards.remove(s));
     }
 
     private Deck getDeck() {
