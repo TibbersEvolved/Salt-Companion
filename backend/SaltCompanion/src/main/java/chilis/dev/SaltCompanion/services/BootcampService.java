@@ -115,6 +115,12 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
         return false;
     }
 
+    public List<Student> getStudentsFromBootCamp(Long bootCampId){
+        BootCamp bootCamp = bootCampRepository.findById(bootCampId).get();
+        validateBootCampExist(bootCamp);
+        return bootCamp.getStudents();
+    }
+
     public boolean validateBootCampExist(BootCamp bootCamp) {
 
         if (bootCamp == null) {
