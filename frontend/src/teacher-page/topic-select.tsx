@@ -76,7 +76,7 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
 
   return (
     <select
-      className="text-lg w-fit px-2 text-center border-1 border-[#e5e7eb] bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
+      className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb] bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
       value={selectedTopicThis}
       onChange={handleSelect}
     >
