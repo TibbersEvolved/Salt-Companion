@@ -79,18 +79,11 @@ export const Teacher = () => {
             onClose={closeManageBootcamp}
             bootCampId={selectedBootcampId}
           />
-          {showManageBootcamp && (
-            <ManageBootcamp
-              selectedBootcamp={selectedBootcamp}
-              onClose={closeManageBootcamp}
-              bootCampId={selectedBootcampId}
-            />
-          )}
 
           {showAddBootcamp && (
             <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-              <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
-                <h1>Add Bootcamp</h1>
+              <div className="bg-white p-6 rounded-md shadow-md w-3/6 h-2/6">
+                <h1 className="text-lg font-bold">Add Bootcamp</h1>
                 <CreateBootCamp clerkId={user?.id as string} />
 
                 <button

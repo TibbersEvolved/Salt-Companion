@@ -39,6 +39,7 @@ export function CreateBootCamp(Prop: Props) {
         placeholder="Bootcamp name"
       />
       <button
+        className="m-6 bg-[#fc7961] text-white h-10 pl-3 pr-3 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
         onClick={() => {
           const updatedRequestBody = {
             name: bootCampName,
