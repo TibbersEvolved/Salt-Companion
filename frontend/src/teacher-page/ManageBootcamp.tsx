@@ -45,6 +45,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
       onSuccess: (data: string) => {
         toast.success("Topic created!");
         console.log("Topic created successfully:", data);
+        // setTopicId(topicId);
         queryClient.invalidateQueries({
           queryKey: ["topics", bootCampId],
         });
@@ -64,6 +65,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
       },
       onSuccess: (data: string) => {
         toast.success("Topic deleted!");
+        setTopicId(0);
         queryClient.invalidateQueries({
           queryKey: ["topics", bootCampId],
         });
