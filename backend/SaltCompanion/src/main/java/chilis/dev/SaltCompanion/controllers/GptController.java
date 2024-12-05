@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @CrossOrigin
@@ -40,12 +37,26 @@ public class GptController {
             description = "request should be ?prompt=Topic")
     public ResponseEntity chat(@RequestParam String prompt) {
 
-        ChatRequest request = new ChatRequest(model, prompt);
+        ChatRequest request = new ChatRequest(model, prompt,1);
 
         ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
 
         validateResponse(response);
 
+        return ResponseEntity.status(200).body(response.getChoices().get(0).getMessage().getContent());
+    }
+
+    @GetMapping("/gpt/flashcard")
+    @Operation(
+            summary = "Get ONE ChatGPT flash card",
+            description = "request should include ?prompt=TopicName")
+    public ResponseEntity getOneChatResponse(@RequestBody String prompt, @RequestParam String topicName) {
+
+        prompt = "Topic name is " + topicName + " do not include any of these questions in your card response";
+
+        ChatRequest request = new ChatRequest(model, prompt,2);
+        ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
+        validateResponse(response);
         return ResponseEntity.status(200).body(response.getChoices().get(0).getMessage().getContent());
     }
 
