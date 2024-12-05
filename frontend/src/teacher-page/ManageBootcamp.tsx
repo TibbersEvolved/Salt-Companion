@@ -202,7 +202,6 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
             </div>
           </div>
         )}
-
         <TopicCards topicId={topicId} />
       </div>
     </div>
