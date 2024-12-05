@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { mockedQuiz } from "../mocked/mocked-data";
 import { funnyQuiz } from "../mocked/mocked-data";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
+import { Link } from "@tanstack/react-router";
 
 function getRandomQuestionsWithTopics(allQuestions, numberOfQuestions = 15) {
   const groupedByTopic = allQuestions.reduce((acc, question) => {
@@ -130,6 +131,11 @@ export const Quiz = () => {
               ))}
             </ul>
           </div>
+          <Link to="/landing">
+            <button className="mt-7 bg-[#0f2d45] text-white h-10 w-56 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200">
+              Back to main page
+            </button>
+          </Link>
         </div>
       ) : (
         <div className="question-container bg-[#eed1d6] p-6 rounded-2xl shadow-md w-full max-w-4xl text-center">
