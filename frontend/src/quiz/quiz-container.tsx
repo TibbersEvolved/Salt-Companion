@@ -145,7 +145,7 @@ export const Quiz = () => {
                 key={index}
                 className={`block bg-gray-100 p-2 rounded-lg border-2 ${
                   selectedAnswer === answer
-                    ? "border-[#0f2d45] bg-slate-800 text-white"
+                    ? "border-[#0f2d45] bg-slate-700 text-white"
                     : "border-gray-100"
                 } cursor-pointer`}
               >
