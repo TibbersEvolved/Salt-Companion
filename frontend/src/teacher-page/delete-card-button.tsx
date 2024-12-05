@@ -43,7 +43,7 @@ export default function DeleteCardButton({ cardId, refresh }: Props) {
 
   return (
     <div>
-      <Toaster />
+      {/* <Toaster /> */}
       <button
         className="btn bg-transparent border-0 text-red-600 hover:text-white hover:bg-red-600"
         onClick={() => handleDeleteCard(cardId)}

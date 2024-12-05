@@ -41,10 +41,26 @@ export function TopicSelect({
     }
   };
 
+  if (bootCampId === 0) {
+    return (
+      <select
+        className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb]
+         bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
+        defaultValue=""
+        onChange={handleSelect}
+      >
+        <option value="" disabled>
+          No Topics
+        </option>
+      </select>
+    );
+  }
+
   if (isPending) {
     return (
       <select
-        className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb] bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
+        className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb]
+         bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
         defaultValue=""
         onChange={handleSelect}
       >
@@ -70,7 +86,8 @@ export function TopicSelect({
 
   return (
     <select
-      className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb] bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
+      className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb]
+       bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
       value={selectedTopic}
       onChange={handleSelect}
     >
