@@ -46,9 +46,6 @@ export default function Navbar() {
                       <a>Teacher Page</a>
                     </Link>
                   </li>
-                  <li>
-                    <a>Link2</a>
-                  </li>
                 </ul>
               </details>
             </li>
