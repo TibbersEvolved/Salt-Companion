@@ -99,22 +99,16 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   };
 
   return (
-    <div className="top-0 left-0 w-full h-screen flex justify-center items-center bg-black bg-opacity-50">
+    <div className="top-0 left-0 w-full h-screen flex justify-center items-center  bg-opacity-50">
       <Toaster />
       <div className="bg-white p-6 rounded-md shadow-md w-full h-full">
         <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
-        <p className="mt-4">
-          Select or add a topic to manage flashcards for the {selectedBootcamp}{" "}
-          bootcamp.
-        </p>
-
         <div className="mt-4 border border-solid border-black">
           <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
           <a
             href="#"
-            className={`ml-5 text-blue-500 hover:text-blue-700 ${
-              inActive ? "cursor-not-allowed" : "cursor-pointer"
-            }`}
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${inActive ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
             onClick={(e) => {
               if (inActive) e.preventDefault();
               else setShowNewTopicForm(!showNewTopicForm);
@@ -124,9 +118,8 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           </a>
           <a
             href="#"
-            className={`ml-5 text-blue-500 hover:text-blue-700 ${
-              inActive ? "cursor-not-allowed" : "cursor-pointer"
-            }`}
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${inActive ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
             onClick={(e) => {
               if (inActive) e.preventDefault();
               else handleDeleteTopic(topicId);
@@ -134,7 +127,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           >
             Delete Topic
           </a>
-          ManageBootcamp///////////////////////////////////////////////
+
         </div>
         {showNewTopicForm && (
           <div className="fixed top-0 left-0 w-full h-600 flex justify-center items-center z-10">

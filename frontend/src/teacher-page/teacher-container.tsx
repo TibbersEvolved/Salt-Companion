@@ -65,7 +65,7 @@ export const Teacher = () => {
               className=" pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
               onClick={handleAddBootcamp}
             >
-              Add a Bootcamp
+              +
             </button>
             <button
               className="pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
