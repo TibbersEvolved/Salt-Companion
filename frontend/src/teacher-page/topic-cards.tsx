@@ -195,7 +195,7 @@ export default function TopicCards({ topicId }: Props) {
   return (
     <div className="card-container ">
       <Toaster />
-      <div className="mt-4 border border-black">
+      <div className="mt-4 flex justify-end">
         <button
           className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
           onClick={updateHandler}
@@ -256,9 +256,8 @@ export default function TopicCards({ topicId }: Props) {
             />
           </svg>
         </button>
-        topic-cards ///////////////////////////////////////////////
       </div>
-      <div className="overflow-x-auto">
+      <div className="shadow-md max-h-fit">
         <table className="table w-full ">
           <thead>
             <tr>
