@@ -31,6 +31,7 @@ export default function TopicsChart({ topicStats }: chartProps) {
                 "#EF476F",
                 "#F78C6B",
                 "#FBAF69",
+                "#AAB996",
               ],
             },
             id: "barCategories",
