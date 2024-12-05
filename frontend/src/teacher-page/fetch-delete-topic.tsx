@@ -4,7 +4,7 @@ import { base_url } from "../services/api";
 
 const DELETE_URL = `${base_url}/bootcamps/topic/delete/`;
 
-export const DeleteTopicCard = async (topicId: number): Promise<string> => {
+export const DeleteTopic = async (topicId: number): Promise<string> => {
   try {
     const response = await fetch(DELETE_URL + topicId, {
       method: "DELETE",

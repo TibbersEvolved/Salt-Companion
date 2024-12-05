@@ -9,6 +9,9 @@ import {
 import { CreateTopicFetch } from "./fetch-create-topic";
 import TopicCards from "./topic-cards";
 import { DeleteTopicCard } from "./fetch-delete-card";
+import { DeleteTopic } from "./fetch-delete-topic";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
+import { Toast } from "flowbite-react";
 
 interface ManageBootcampProps {
   selectedBootcamp: string;
@@ -40,6 +43,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         return await CreateTopicFetch(requestBody);
       },
       onSuccess: (data: string) => {
+        toast.success("Topic created!");
         console.log("Topic created successfully:", data);
         queryClient.invalidateQueries({
           queryKey: ["topics", bootCampId],
@@ -56,10 +60,10 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         if (!topicId) {
           throw new Error("Topic id is required");
         }
-        return await DeleteTopicCard(topicId);
+        return await DeleteTopic(topicId);
       },
       onSuccess: (data: string) => {
-        console.log("Topic deleted successfully:", data);
+        toast.success("Topic deleted!");
         queryClient.invalidateQueries({
           queryKey: ["topics", bootCampId],
         });
@@ -88,11 +92,13 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
     selectedBootcamp === "Select bootcamp";
 
   const handleDeleteTopic = (topicId: number) => {
+    console.log("topicId", topicId);
     mutationDeleteTopic.mutate(topicId);
   };
 
   return (
     <div className="top-0 left-0 w-full h-screen flex justify-center items-center bg-black bg-opacity-50">
+      <Toaster />
       <div className="bg-white p-6 rounded-md shadow-md w-full h-full">
         <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
         <p className="mt-4">
