@@ -244,7 +244,7 @@ export default function TopicCards({ topicId }: Props) {
           </svg>
         </button>
         <button
-          className={`text-lg btn font-medium mb-5 w-32
+          className={`text-lg btn font-medium mb-5 
             right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white
             hover:bg-[#f36384] ${mutationAiCard.isPending ? "cursor-not-allowed" : "cursor-pointer"}`}
           onClick={aiCardHandler}
