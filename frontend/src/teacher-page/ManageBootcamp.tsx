@@ -115,18 +115,18 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
 
       <div className="bg-white p-6 rounded-md shadow-md w-full h-full relative">
         <button
-          className="absolute top-6 right-6 px-4 h-10 text-center font-semibold text-lg text-white bg-[#fc7961] rounded-full hover:bg-[#f35b7e] transition duration-200"
+          className="absolute top-6 right-6 pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
           onClick={handleShowManageStudent}
         >
           Handle students
         </button>
 
-        <h1 className="text-3xl font-bold">{selectedBootcamp}</h1>
-        <div className="mt-4">
+        <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
+        <div className="mt-4  ">
           <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
           <a
             href="#"
-            className={`ml-5 text-lg font-light text-[#424242] hover:text-[#f35b7e] hover:font-medium ${
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${
               inActive ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={(e) => {
@@ -138,7 +138,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           </a>
           <a
             href="#"
-            className={`ml-5 text-lg font-light text-[#424242] hover:text-[#f35b7e] hover:font-medium ${
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${
               inActive ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={(e) => {
@@ -178,7 +178,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           </div>
         )}
         {showManageStudent && (
-          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+          <div className="fixed z-20 top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
             <div className="relative bg-white p-10 rounded-md shadow-md w-5/6 h-fit">
               <button
                 className="absolute top-8 right-8 btn btn-circle bg-white hover:bg-[#f35b7e] hover:text-white"
