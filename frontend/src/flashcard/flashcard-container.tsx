@@ -68,7 +68,16 @@ export const Flashcard = (prop: FlashcardProps) => {
 
   return (
     <>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "red",
+          },
+        }}
+      />
       {isEndReached ? (
         <>
           <div className="flex flex-col items-center justify-center h-screen">

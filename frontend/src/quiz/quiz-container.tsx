@@ -53,9 +53,7 @@ export const Quiz = () => {
 
   const handleNextQuestion = () => {
     if (!selectedAnswer) {
-      toast.error(
-        "Please select an answer before continuing to the next question"
-      );
+      toast.error("Please select an answer");
       return;
     }
 
@@ -82,7 +80,18 @@ export const Quiz = () => {
 
   return (
     <div className="quiz-container bg-gray-100 p-6 min-h-screen flex flex-col items-center justify-center">
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            border: "1px solid red",
+            padding: "20px",
+            margin: "10px",
+            color: "black",
+            textAlign: "center",
+          },
+        }}
+      />
       {isQuizFinished ? (
         <div className="result bg-white p-6 rounded-lg shadow-lg w-1/2 text-center">
           <h1 className="text-3xl font-bold mb-4">Quiz Completed!</h1>
@@ -136,7 +145,7 @@ export const Quiz = () => {
                 key={index}
                 className={`block bg-gray-100 p-2 rounded-lg border-2 ${
                   selectedAnswer === answer
-                    ? "border-[#0f2d45] bg-[#0f2e48] text-white"
+                    ? "border-[#0f2d45] bg-slate-800 text-white"
                     : "border-gray-100"
                 } cursor-pointer`}
               >
