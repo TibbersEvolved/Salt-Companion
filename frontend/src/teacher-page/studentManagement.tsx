@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import { base_url } from "../services/api";
 import { Student } from "./types";
-import LoadingScreen from "../services/loadingScreen";
-import toast, { useToaster } from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
-import { requirePropFactory } from "@mui/material";
-import React from "react";
 
 export const Students = (prop: props) => {
   const [students, setStudents] = useState<Student[]>([]);
