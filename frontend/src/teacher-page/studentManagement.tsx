@@ -2,49 +2,35 @@ import { useEffect, useState } from "react";
 import { base_url } from "../services/api";
 import { Student } from "./types";
 import LoadingScreen from "../services/loadingScreen";
+import toast, { useToaster } from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { requirePropFactory } from "@mui/material";
 
-export const Students = () => {
+export const Students = (prop: props) => {
   const [students, setStudents] = useState<Student[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchStudents = async () => {
-    try {
-      const response = await fetch(`${base_url}/students/all`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch students. Status: ${response.status}`);
-      }
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["fetchStudents"],
+    queryFn: () => fetchBootCampStudents(prop.bootCampId),
+  });
 
-      const data: Student[] = await response.json();
-      setStudents(data);
-    } catch (err) {
-      setError(err.message || "Failed to fetch students.");
-      console.error(err);
-    }
-  };
+  if (isLoading)
+    return <div>loading</div>
+  if (isError) return <div>Server Error, please try again later</div>;
 
-  useEffect(() => {
-    fetchStudents();
-  }, []);
+
 
   return (
     <div>
       <h1>Students</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      {!error && students.length === 0 && (
-        <LoadingScreen displayText="Loading.." />
-      )}
-      {!error && students.length > 0 && (
-        <ul className="list-disc pl-5">
-          {students.map((student) => (
+      {data.length > 0 && (
+        <ul className="list-disc ">
+          {data.map((student) => (
             <li key={student.clerkId}>
               <p>
-                <strong>Name:</strong> {student.name}
+                <strong>Name: </strong> {student.name}
               </p>
               <p>
                 <strong>Bootcamp:</strong> {student.bootcamp} (ID:{" "}
@@ -57,3 +43,23 @@ export const Students = () => {
     </div>
   );
 };
+
+
+const fetchBootCampStudents = async (id: number) => {
+  if (id === 0) {
+    console.log("ran thing")
+    const response = await fetch(`${base_url}/students/all`)
+    console.log("Got Respone")
+    const data = await response.json();
+    console.log("returning data")
+    return data;
+  }
+  const response = await fetch(`${base_url}/bootcamps/student/${id}`)
+  const data = await response.json();
+  return data;
+
+}
+
+type props = {
+  bootCampId: number
+}
