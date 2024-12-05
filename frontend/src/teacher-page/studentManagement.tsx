@@ -12,7 +12,7 @@ export const Students = (prop: props) => {
 
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["fetchStudents"],
+    queryKey: ["fetchStudents", prop.bootCampId],
     queryFn: () => fetchBootCampStudents(prop.bootCampId),
   });
 
