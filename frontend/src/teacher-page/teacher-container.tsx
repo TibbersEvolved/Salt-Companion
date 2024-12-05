@@ -47,14 +47,14 @@ export const Teacher = () => {
     <>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
         <div className="bg-white shadow-md rounded-2xl w-full max-w-6xl p-6 grid grid-cols-1 gap-8">
-          <div className=" flex items-center flex-row justify-center ">
+          <div className="gap-10 flex items-center flex-row justify-center ">
             <GetTeacherBootCamp
               clerkId={user?.id as string}
               setSelectedBootCampId={setSelectedBootcampId}
               setSelectedBootCampName={setSelectedBootcamp}
             />
             <button
-              className=" pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
+              className="px-4 text-2xl text-center text-white bg-[#fc7961] rounded-full hover:bg-[#f35b7e] transition duration-200"
               onClick={handleAddBootcamp}
             >
               +
