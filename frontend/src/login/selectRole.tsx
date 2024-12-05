@@ -5,11 +5,9 @@ import { useNavigate } from "@tanstack/react-router";
 import axios from "axios";
 import LoadingScreen from "../services/loadingScreen";
 
-
 export default function SelectRole(prop: props) {
   const { user } = useUser();
   const navigate = useNavigate();
-
 
   const name = user?.firstName;
   const base_url = import.meta.env.VITE_BASE_URL;
@@ -17,7 +15,9 @@ export default function SelectRole(prop: props) {
   const { isPending, error, data } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const response = await axios.get(`${base_url}/students/user/${prop.clerkId}`);
+      const response = await axios.get(
+        `${base_url}/students/user/${prop.clerkId}`
+      );
       return response.data;
     },
   });
@@ -46,7 +46,7 @@ export default function SelectRole(prop: props) {
     }
   };
 
-  if (isPending) return <LoadingScreen displayText="" />
+  if (isPending) return <LoadingScreen displayText="" />;
 
   if (error) return <div>Error: {error.message}</div>;
   console.log("Data: " + data);
@@ -93,8 +93,8 @@ export default function SelectRole(prop: props) {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 flex flex-col items-center">
+    <div className="flex justify-start ">
+      <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 flex flex-col items-center static">
         <p className="text-3xl font-light">Choose your role</p>
         <div className="flex items-center justify-center">
           <button
@@ -117,4 +117,4 @@ export default function SelectRole(prop: props) {
 
 type props = {
   clerkId: String;
-}
+};

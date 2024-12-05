@@ -59,7 +59,7 @@ export const Teacher = () => {
           setSelectedBootCampId={setSelectedBootcampId}
           setSelectedBootCampName={setSelectedBootcamp}
         />
-        <div className="h-full flex flex-col gap-1 m-10 ">
+        <div className="h-full flex flex-col gap-1  ">
           <button
             className=" ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
             onClick={handleAddBootcamp}
