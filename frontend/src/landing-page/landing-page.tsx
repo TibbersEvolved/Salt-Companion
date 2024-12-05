@@ -93,6 +93,14 @@ export const LandingPage = (prop: userProp) => {
                       borderColor: state.isFocused ? "#f7a1b5" : "#e5e7eb",
                     },
                   }),
+                  option: (baseStyles, state) => ({
+                    ...baseStyles,
+                    backgroundColor: state.isFocused ? "#eed1d6" : "white",
+
+                    "&:active": {
+                      backgroundColor: "#f8bbd0",
+                    },
+                  }),
                 }}
               />
               <button
