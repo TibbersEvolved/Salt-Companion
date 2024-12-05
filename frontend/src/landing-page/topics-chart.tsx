@@ -1,12 +1,8 @@
 import { BarChart } from "@mui/x-charts/BarChart";
-import { cheerfulFiestaPalette } from "@mui/x-charts/colorPalettes";
-import { createTheme } from "flowbite-react";
 
 type chartProps = {
   topicStats: { topicName: string; topicConfidence: number }[];
 };
-
-const saltPalette = ["#E63946", "#F1FAEE", "#A8DADC", "#457B9D", "#1D3557"];
 
 export default function TopicsChart({ topicStats }: chartProps) {
   const topicNames = topicStats.map((topic) => topic.topicName);
@@ -46,7 +42,6 @@ export default function TopicsChart({ topicStats }: chartProps) {
         ]}
         height={300}
         borderRadius={8}
-        colors={cheerfulFiestaPalette}
       />
     </div>
   );
