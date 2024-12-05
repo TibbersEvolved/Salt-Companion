@@ -83,7 +83,10 @@ export default function TopicCards({ topicId }: Props) {
         throw new Error("List of cards required");
       }
 
-      return await GptOneCardFetch(currentCards, topicId);
+      const prompt = currentCards.map((card) => card.question).join("\n");
+      console.log("Prompt:", prompt);
+
+      return await GptOneCardFetch(prompt, topicId);
     },
     onSuccess: (data: Card[]) => {
       console.log("GPT card fetched successfully:", data);
