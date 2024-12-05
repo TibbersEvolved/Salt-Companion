@@ -54,7 +54,7 @@ export function GetTeacherBootCamp({
       className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
       onChange={handleSelect}
     >
-      <option value="">Select bootcamp</option>
+      <option value="0">Select bootcamp</option>
       {bootCampList?.bootcamps.map((bootcamp) => (
         <option key={bootcamp.id} value={bootcamp.id}>
           {bootcamp.name}
