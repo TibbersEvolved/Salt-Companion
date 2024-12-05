@@ -51,7 +51,7 @@ export function CreateBootCamp(Prop: Props) {
           mutationBootCamp.mutate(updatedRequestBody);
         }}
       >
-        Create Bootcamp
+        Submit
       </button>
     </div>
   );
