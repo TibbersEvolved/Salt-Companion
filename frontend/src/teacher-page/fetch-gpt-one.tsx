@@ -9,12 +9,14 @@ export const GptOneCardFetch = async (
   topicId: number
 ): Promise<Card[]> => {
   try {
+    const requestBody = JSON.stringify(body);
+
     const response = await fetch(POST_URL + topicId, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: requestBody,
     });
 
     if (!response.ok) {
