@@ -53,27 +53,28 @@ export const Teacher = () => {
 
   return (
     <>
-      <div className="w-screen h-200 flex items-start flex-row justify-center bg-[#ebebeb]">
+      <div className="w-screen h-2/5 flex items-center flex-row justify-center bg-white">
         <GetTeacherBootCamp
           clerkId={user?.id as string}
           setSelectedBootCampId={setSelectedBootcampId}
           setSelectedBootCampName={setSelectedBootcamp}
         />
-        <button
-          className="mt-10 ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-          onClick={handleAddBootcamp}
-        >
-          Add a Bootcamp
-        </button>
-        <div>
+        <div className="h-full flex flex-col gap-1 m-10 ">
           <button
-            className="mt-10 ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-            onClick={handleShowManageStudent}
+            className=" ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+            onClick={handleAddBootcamp}
           >
-            Handle students
+            Add a Bootcamp
           </button>
+          <div>
+            <button
+              className=" ml-8 pr-4 pl-4 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+              onClick={handleShowManageStudent}
+            >
+              Handle students
+            </button>
+          </div>
         </div>
-        teacher-container ////////////
       </div>
       <ManageBootcamp
         selectedBootcamp={selectedBootcamp}
@@ -107,7 +108,6 @@ export const Teacher = () => {
       {showManageStudent && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
-
             <Students bootCampId={selectedBootcampId} />
             <br />
             <button

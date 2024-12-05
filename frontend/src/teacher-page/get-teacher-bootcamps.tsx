@@ -51,7 +51,7 @@ export function GetTeacherBootCamp({
 
   return (
     <select
-      className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+      className=" w-1/6 p-0 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-sm"
       onChange={handleSelect}
     >
       <option value="0">Select bootcamp</option>
