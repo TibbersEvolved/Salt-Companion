@@ -5,11 +5,13 @@ import chilis.dev.SaltCompanion.controllers.dto.StudentSimpleDto;
 import chilis.dev.SaltCompanion.exceptions.BootCampExistException;
 import chilis.dev.SaltCompanion.models.*;
 import chilis.dev.SaltCompanion.repositories.BootCampRepository;
+import chilis.dev.SaltCompanion.repositories.StudentRepo;
 import chilis.dev.SaltCompanion.repositories.TeacherRepository;
 import chilis.dev.SaltCompanion.repositories.TopicRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,12 +20,15 @@ public class BootcampService {
     BootCampRepository bootCampRepository;
     TeacherRepository teacherRepository;
     TopicRepository topicRepository;
+    StudentRepo studentRepo;
 
 
-    public BootcampService(BootCampRepository bootCampRepository, TeacherRepository teacherRepository, TopicRepository topicRepository) {
+    public BootcampService(BootCampRepository bootCampRepository, TeacherRepository teacherRepository,
+                           TopicRepository topicRepository, StudentRepo studentRepo) {
         this.bootCampRepository = bootCampRepository;
         this.topicRepository = topicRepository;
         this.teacherRepository = teacherRepository;
+        this.studentRepo = studentRepo;
     }
 
     public void saveBootcamp(BootCamp bootCamp){
@@ -135,6 +140,17 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
         for (Student student : students) {
             studentSimpleList.add(new StudentSimpleDto(student.getClerkId(), student.getName(), bootCamp.getId(), student.getBootCampName()));
 
+        }
+        return studentSimpleList;
+    }
+
+    public List<StudentSimpleDto> getUnlistedStudents(){
+        List<StudentSimpleDto> studentSimpleList = new ArrayList<>();
+        List<Student> students = studentRepo.findAll();
+        for(Student student: students){
+            if(student.getBootCamp()==null){
+                studentSimpleList.add(new StudentSimpleDto(student.getClerkId(), student.getName(), null, null));
+            }
         }
         return studentSimpleList;
     }

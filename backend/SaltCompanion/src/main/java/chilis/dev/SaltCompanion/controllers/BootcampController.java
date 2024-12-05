@@ -163,6 +163,16 @@ public class BootcampController {
         return ResponseEntity.status(200).body(bootcampService.getStudentsFromBootCamp(bootCampId));
     }
 
+    @GetMapping("/student/unlisted")
+    @Operation(
+            summary = "Gets all unlisted students",
+            description = "response body with list of student clerkId and stuff")
+    public ResponseEntity<List<StudentSimpleDto>> getUnlistedStudents() {
+
+        return ResponseEntity.status(200).body(bootcampService.getUnlistedStudents());
+    }
+
+
 
     public boolean validateBootCampId(Long bootCampId) {
 
