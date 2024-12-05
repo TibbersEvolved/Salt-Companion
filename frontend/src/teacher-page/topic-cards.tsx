@@ -8,6 +8,7 @@ import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { CreateCardsFetch } from "./fetch-card-add-new-";
 import { CardNewData } from "./types";
 import { create } from "@mui/material/styles/createTransitions";
+import { GptOneCardFetch } from "./fetch-gpt-one";
 
 interface Props {
   topicId: number;
@@ -75,6 +76,23 @@ export default function TopicCards({ topicId }: Props) {
         console.error("Error creating cards:", error);
       },
     });
+
+  const mutationAiCard: UseMutationResult<Card[], Error, Card[]> = useMutation({
+    mutationFn: async (currentCards: Card[]): Promise<Card[]> => {
+      if (!currentCards) {
+        throw new Error("List of cards required");
+      }
+
+      return await GptOneCardFetch(currentCards, topicId);
+    },
+    onSuccess: (data: Card[]) => {
+      console.log("GPT card fetched successfully:", data);
+      setCardList(data);
+    },
+    onError: (error) => {
+      console.error("Error fetching GPT card:", error);
+    },
+  });
 
   const handleTableChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
