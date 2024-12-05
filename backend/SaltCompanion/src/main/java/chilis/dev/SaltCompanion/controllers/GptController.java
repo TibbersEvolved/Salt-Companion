@@ -50,7 +50,7 @@ public class GptController {
         return ResponseEntity.status(200).body(response.getChoices().get(0).getMessage().getContent());
     }
 
-    @GetMapping("/gpt/flashcard")
+    @PostMapping("/gpt/flashcard")
     @Operation(
             summary = "Get ONE ChatGPT flash card",
             description = "request should include ?prompt=TopicName")
