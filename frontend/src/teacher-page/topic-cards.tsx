@@ -91,6 +91,14 @@ export default function TopicCards({ topicId }: Props) {
     onSuccess: (data: Card[]) => {
       console.log("GPT card fetched successfully:", data);
       setCardList(data);
+      const newCard = data.map((card) => {
+        return {
+          topicId: topicId,
+          question: card.question,
+          answer: card.answer,
+        };
+      });
+      mutationAddCard.mutate(newCard);
     },
     onError: (error) => {
       console.error("Error fetching GPT card:", error);
