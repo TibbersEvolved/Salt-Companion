@@ -148,7 +148,7 @@ public Topic findBootCampTopic(Long bootCampId, String topicName){
         List<StudentSimpleDto> studentSimpleList = new ArrayList<>();
         List<Student> students = studentRepo.findAll();
         for(Student student: students){
-            if(student.getBootCamp()==null){
+            if(student.getBootCamp().getName().equals("dummy")){
                 studentSimpleList.add(new StudentSimpleDto(student.getClerkId(), student.getName(), null, null));
             }
         }
