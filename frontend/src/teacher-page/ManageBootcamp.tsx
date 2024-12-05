@@ -29,9 +29,11 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   const [showNewTopicForm, setShowNewTopicForm] = useState(false);
   const [topicId, setTopicId] = useState(0);
   const [showManageStudent, setShowMAnageStudent] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState<number | "">("");
 
   useEffect(() => {
     setTopicId(0);
+    setSelectedTopic("");
   }, [bootCampId]);
 
   const queryClient = useQueryClient();
@@ -51,6 +53,8 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         queryClient.invalidateQueries({
           queryKey: ["topics", bootCampId],
         });
+        setTopicId(0);
+        setSelectedTopic("");
       },
       onError: (error) => {
         console.error("Error creating topic:", error);
@@ -123,7 +127,12 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
 
         <h1 className="text-3xl font-bold">{selectedBootcamp}</h1>
         <div className="mt-4">
-          <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
+          <TopicSelect
+            bootCampId={bootCampId}
+            setTopicId={setTopicId}
+            selectedTopic={selectedTopic} // Pass state
+            setSelectedTopic={setSelectedTopic}
+          />
           <a
             href="#"
             className={`ml-5 text-lg font-light text-[#424242] hover:text-[#f35b7e] hover:font-medium ${

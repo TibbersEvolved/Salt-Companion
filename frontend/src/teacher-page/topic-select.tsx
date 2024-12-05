@@ -6,15 +6,22 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 interface Props {
   bootCampId: number;
   setTopicId: (topicId: number) => void;
+  selectedTopic: number | "";
+  setSelectedTopic: (topicId: number | "") => void;
 }
 
-export function TopicSelect({ bootCampId, setTopicId }: Props) {
-  const [selectedTopicThis, setSelectedTopicThis] = useState<number | "">("");
+export function TopicSelect({
+  bootCampId,
+  setTopicId,
+  selectedTopic,
+  setSelectedTopic,
+}: Props) {
+  //   const [selectedTopicThis, setSelectedTopicThis] = useState<number | "">("");
 
-  useEffect(() => {
-    setSelectedTopicThis("");
-    setTopicId(0);
-  }, [bootCampId, setTopicId]);
+  //   useEffect(() => {
+  //     setSelectedTopicThis("");
+  //     setTopicId(0);
+  //   }, [bootCampId, setTopicId]);
 
   const queryClient = useQueryClient();
   const { data, isPending, isError, error } = useQuery<TopicList>({
@@ -28,9 +35,9 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
 
     setTopicId(topicId);
     if (topicId === 0) {
-      setSelectedTopicThis("");
+      setSelectedTopic("");
     } else {
-      setSelectedTopicThis(topicId);
+      setSelectedTopic(topicId);
     }
   };
 
@@ -64,7 +71,7 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
   return (
     <select
       className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb] bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
-      value={selectedTopicThis}
+      value={selectedTopic}
       onChange={handleSelect}
     >
       <option value="" disabled>

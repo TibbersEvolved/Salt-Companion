@@ -8,10 +8,7 @@ export async function topicFetcher(bootCampId: number): Promise<TopicList> {
     return { topics: [] };
   } else {
     try {
-      const response = await fetch(
-        GET_URL + bootCampId
-        //   `https://salt-companion-backend-876198057788.us-central1.run.app/api/bootcamps/topic/${bootCampId}`
-      );
+      const response = await fetch(GET_URL + bootCampId);
 
       if (!response.ok) {
         throw new Error("Could not fetch topics");
