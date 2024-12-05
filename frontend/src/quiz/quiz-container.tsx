@@ -41,9 +41,6 @@ type UserAnswer = {
 };
 
 export const Quiz = () => {
-  // const [quizQuestions] = useState(
-  //   getRandomQuestionsWithTopics(mockedQuiz, 15)
-  // );
   const [quizQuestions] = useState(getRandomQuestionsWithTopics(funnyQuiz, 3));
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
