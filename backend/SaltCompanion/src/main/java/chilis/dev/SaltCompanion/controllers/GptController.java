@@ -3,6 +3,7 @@ package chilis.dev.SaltCompanion.controllers;
 import chilis.dev.SaltCompanion.exceptions.GptException;
 import chilis.dev.SaltCompanion.models.GptModels.ChatRequest;
 import chilis.dev.SaltCompanion.models.GptModels.ChatResponse;
+import chilis.dev.SaltCompanion.services.BootcampService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 @Tag(name = "GPT API", description = "API to interact with ChatGPT for generating responses")
 public class GptController {
 
+    private BootcampService bootcampService;
+
     @Qualifier("openaiRestTemplate")
     private RestTemplate restTemplate;
 
@@ -27,7 +30,8 @@ public class GptController {
     private String apiUrl;
 
 
-    public GptController(RestTemplate restTemplate){
+    public GptController(RestTemplate restTemplate, BootcampService bootcampService) {
+        this.bootcampService = bootcampService;
         this.restTemplate = restTemplate;
     }
 
@@ -50,7 +54,8 @@ public class GptController {
     @Operation(
             summary = "Get ONE ChatGPT flash card",
             description = "request should include ?prompt=TopicName")
-    public ResponseEntity getOneChatResponse(@RequestBody String prompt, @RequestParam String topicName) {
+    public ResponseEntity getOneChatResponse(@RequestBody String prompt, @RequestParam Long topicId) {
+        String topicName = bootcampService.getTopicName(topicId);
 
         prompt = "Topic name is " + topicName + " do not include any of these questions in your card response";
 
