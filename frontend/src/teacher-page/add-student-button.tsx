@@ -1,12 +1,14 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { useState } from "react";
-import { addStudentToBootcamp } from "./types";
+import { useEffect, useState } from "react";
+import { addStudentToBootcamp, Student } from "./types";
 import { addStudent } from "./fetch-student-add";
+import { getUnlistedStudents } from "./fetch-student-unlisted";
 
 export default function AddStudentButton() {
   const [clerkId, setClerkId] = useState<string>("");
   const [bootcampId, setBootcampId] = useState<number>(0);
   const [showNewStudents, setShowNewStudents] = useState<boolean>(false);
+  const [unlistedStudents, setUnlistedStudents] = useState<Student[]>([]);
 
   const mutationAddStudent: UseMutationResult<
     string,
@@ -28,6 +30,25 @@ export default function AddStudentButton() {
     },
   });
 
+  const mutationGetUnlistedStudents = useMutation<Student[], Error>({
+    mutationFn: async (): Promise<Student[]> => {
+      return await getUnlistedStudents();
+    },
+    onSuccess: (data: Student[]) => {
+      console.log("Students fetched successfully:", data);
+      setUnlistedStudents(data);
+    },
+    onError: (error) => {
+      console.error("Error fetching students:", error);
+    },
+  });
+
+  useEffect(() => {
+    if (showNewStudents) {
+      mutationGetUnlistedStudents.mutate();
+    }
+  }, [showNewStudents]);
+
   const handleAddStudent = () => {
     mutationAddStudent.mutate({ clerkId, bootcampId });
   };
@@ -40,6 +61,11 @@ export default function AddStudentButton() {
           <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6 ">
             <h1>Add Student</h1>
             <p>here is a list of unassigned students</p>
+            <ul className="overflow-y-scroll h-96">
+              {unlistedStudents.map((student) => (
+                <li key={student.clerkId}>{student.name}</li>
+              ))}
+            </ul>
             <button
               className="ml-5  text-blue-500 hover:text-blue-700"
               type="submit"

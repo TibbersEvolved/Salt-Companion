@@ -9,7 +9,7 @@ export const Students = (prop: props) => {
   const [error, setError] = useState<string | null>(null);
   const [currentClerkId, setCurrentClerkId] = useState<string>("");
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery<Student[]>({
     queryKey: ["fetchStudents", prop.bootCampId],
     queryFn: () => fetchBootCampStudents(prop.bootCampId),
   });
@@ -19,8 +19,8 @@ export const Students = (prop: props) => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center mb-6 z-10">Students</h1>
-      {data.length > 0 && (
+      <h1 className="text-2xl font-bold text-center mb-6 ">Students</h1>
+      {data && data.length > 0 && (
         <div className="grid grid-cols-2 gap-4 overflow-y-auto max-h-96 px-20">
           <h3 className="font-bold border-b pb-2 text-center">Name</h3>
           <h3 className="font-bold border-b pb-2 text-center">Bootcamp</h3>
@@ -37,7 +37,7 @@ export const Students = (prop: props) => {
   );
 };
 
-const fetchBootCampStudents = async (id: number) => {
+const fetchBootCampStudents = async (id: number): Promise<Student[]> => {
   if (id === 0) {
     console.log("ran thing");
     const response = await fetch(`${base_url}/students/all`);
