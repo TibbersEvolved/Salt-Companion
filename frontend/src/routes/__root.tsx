@@ -26,7 +26,7 @@ function RootComponent() {
           signInFallbackRedirectUrl="/landing"
         >
           <Navbar />
-          <div className="flex-grow bg-gray-100/50">
+          <div className="flex-grow bg-gray-100/50 overflow-y-auto">
             <Outlet />
           </div>
           <Footer />
