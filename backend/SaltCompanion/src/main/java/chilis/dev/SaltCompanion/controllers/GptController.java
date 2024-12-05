@@ -62,6 +62,9 @@ public class GptController {
         ChatRequest request = new ChatRequest(model, prompt,2);
         ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
         validateResponse(response);
+        String stringResponse =response.getChoices().get(0).getMessage().getContent();
+
+
         return ResponseEntity.status(200).body(response.getChoices().get(0).getMessage().getContent());
     }
 
