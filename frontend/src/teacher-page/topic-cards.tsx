@@ -16,7 +16,7 @@ interface Props {
 
 export default function TopicCards({ topicId }: Props) {
   if (topicId === 0) {
-    return <div>No topic selected</div>;
+    return <p className="mt-10 text-lg">No topic selected</p>;
   }
   const [cardList, setCardList] = useState<Card[]>([]);
   const [newCards, setNewCards] = useState<CardNewData[]>([]);
