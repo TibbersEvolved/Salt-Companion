@@ -19,7 +19,7 @@ export const Students = (prop: props) => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center mb-6">Students</h1>
+      <h1 className="text-2xl font-bold text-center mb-6 z-10">Students</h1>
       {data.length > 0 && (
         <div className="grid grid-cols-2 gap-4 overflow-y-auto max-h-96 px-20">
           <h3 className="font-bold border-b pb-2 text-center">Name</h3>
