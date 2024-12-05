@@ -36,6 +36,11 @@ input:checked {
   margin: 8px 0 0 20px;
 }
 
+.select__input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .loader {
   width: 48px;
   height: 48px;
