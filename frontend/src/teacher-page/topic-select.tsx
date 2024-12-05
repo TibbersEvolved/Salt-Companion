@@ -16,19 +16,6 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
     setTopicId(0);
   }, [bootCampId, setTopicId]);
 
-  //   if (bootCampId === 0) {
-  //     return (
-  //       <select
-  //         className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
-  //         value="No Topics"
-  //       >
-  //         <option value="No Topics" disabled>
-  //           No Topics
-  //         </option>
-  //       </select>
-  //     );
-  //   }
-
   const queryClient = useQueryClient();
   const { data, isPending, isError, error } = useQuery<TopicList>({
     queryKey: ["topics", bootCampId],
