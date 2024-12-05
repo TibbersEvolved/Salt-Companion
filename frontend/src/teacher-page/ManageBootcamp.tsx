@@ -113,15 +113,16 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
     <div className="top-0 left-0 w-full h-screen flex justify-center items-center  bg-opacity-50">
       <Toaster />
 
-      <div className="bg-white p-6 rounded-md shadow-md w-full h-full">
+      <div className="bg-white p-6 rounded-md shadow-md w-full h-full relative">
         <button
-          className="pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
+          className="absolute top-6 right-6 pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
           onClick={handleShowManageStudent}
         >
           Handle students
         </button>
+
         <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
-        <div className="mt-4 border border-solid border-black">
+        <div className="mt-4  ">
           <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
           <a
             href="#"
@@ -148,6 +149,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
             Delete Topic
           </a>
         </div>
+
         {showNewTopicForm && (
           <div className="fixed top-0 left-0 w-full h-600 flex justify-center items-center z-10">
             <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6 ">
