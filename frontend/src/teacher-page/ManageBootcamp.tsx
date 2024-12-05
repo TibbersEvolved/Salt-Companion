@@ -122,11 +122,11 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         </button>
 
         <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
-        <div className="mt-4  ">
+        <div className="mt-4">
           <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
           <a
             href="#"
-            className={`ml-5 text-blue-500 hover:text-blue-700 ${
+            className={`ml-5 text-lg font-light text-[#424242] hover:text-[#f35b7e] hover:font-medium ${
               inActive ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={(e) => {
@@ -138,7 +138,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           </a>
           <a
             href="#"
-            className={`ml-5 text-blue-500 hover:text-blue-700 ${
+            className={`ml-5 text-lg font-light text-[#424242] hover:text-[#f35b7e] hover:font-medium ${
               inActive ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={(e) => {
