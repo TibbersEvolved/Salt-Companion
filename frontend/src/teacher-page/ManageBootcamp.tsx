@@ -115,7 +115,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
 
       <div className="bg-white p-6 rounded-md shadow-md w-full h-full relative">
         <button
-          className="absolute top-6 right-6 pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
+          className="absolute top-6 right-6 px-4 h-10 text-center font-semibold text-lg text-white bg-[#fc7961] rounded-full hover:bg-[#f35b7e] transition duration-200"
           onClick={handleShowManageStudent}
         >
           Handle students
