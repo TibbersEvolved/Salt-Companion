@@ -57,9 +57,9 @@ public class GptController {
     public ResponseEntity getOneChatResponse(@RequestBody String prompt, @RequestParam Long topicId) {
         String topicName = bootcampService.getTopicName(topicId);
 
-        prompt = "Topic name is " + topicName + " do not include any of these questions in your card response";
+        String editedPrompt = "Topic name is " + topicName + " do not include any of these questions in your card response" + prompt;
 
-        ChatRequest request = new ChatRequest(model, prompt,2);
+        ChatRequest request = new ChatRequest(model, editedPrompt,2);
         ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
         validateResponse(response);
         String stringResponse =response.getChoices().get(0).getMessage().getContent();
