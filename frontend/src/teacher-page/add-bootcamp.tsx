@@ -39,7 +39,7 @@ export function CreateBootCamp(Prop: Props) {
         value={bootCampName}
         onChange={(e) => setBootCampName(e.target.value)}
         placeholder="Bootcamp name"
-        className="rounded-md w-2/5 focus:ring-[#f7a1b5] border-[#e5e7eb] focus:border-[#f7a1b5]"
+        className="rounded-md w-3/5 focus:ring-[#f7a1b5] border-[#e5e7eb] focus:border-[#f7a1b5]"
       />
       <button
         className="m-6 bg-[#fc7961] text-white h-10 px-4 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
