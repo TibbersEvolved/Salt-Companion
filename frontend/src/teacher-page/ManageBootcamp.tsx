@@ -153,27 +153,41 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         {showNewTopicForm && (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
             <div className="relative bg-white p-12 rounded-md shadow-md w-3/6 h-fit">
-              <h1>Add Topic</h1>
+              <button
+                className="absolute top-5 right-5 btn btn-circle bg-white hover:bg-[#f35b7e] hover:text-white"
+                onClick={() => setShowNewTopicForm(false)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+              <h1 className="text-2xl font-bold">Add Topic</h1>
               <form onSubmit={submitHandler}>
                 <input
                   type="text"
                   placeholder="Topic name"
                   value={newTopicName}
                   onChange={inputHandler}
+                  className="rounded-md w-3/5 focus:ring-[#f7a1b5] border-[#e5e7eb] focus:border-[#f7a1b5]"
                 />
                 <button
-                  className="ml-5  text-blue-500 hover:text-blue-700"
+                  className="m-6 bg-[#fc7961] text-white h-10 px-4 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
                   type="submit"
                 >
                   Submit
                 </button>
               </form>
-              <button
-                className="mt-4 px-4 py-2 bg-black text-white rounded-md"
-                onClick={() => setShowNewTopicForm(false)}
-              >
-                Close
-              </button>
             </div>
           </div>
         )}

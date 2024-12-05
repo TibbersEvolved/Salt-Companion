@@ -56,7 +56,14 @@ export default function AddStudentButton() {
 
   return (
     <>
-      <button onClick={() => setShowNewStudents(true)}>Add Student</button>
+      <div className="text-center">
+        <button
+          onClick={() => setShowNewStudents(true)}
+          className="bg-[#fc7961] text-white h-10 px-4 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
+        >
+          Add Student
+        </button>
+      </div>
       {showNewStudents && (
         <div className="fixed top-0 left-0 w-full h-600 flex justify-center items-center z-10">
           <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6 ">
