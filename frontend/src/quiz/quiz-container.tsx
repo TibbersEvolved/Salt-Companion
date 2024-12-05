@@ -132,7 +132,7 @@ export const Quiz = () => {
             </ul>
           </div>
           <Link to="/landing">
-            <button className="mt-7 bg-[#0f2d45] text-white h-10 w-56 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200">
+            <button className="mt-7 bg-[#0f2d45] text-white h-10 w-56 rounded-full text-lg font-semibold hover:bg-[#28567d] transition duration-200">
               Back to main page
             </button>
           </Link>
