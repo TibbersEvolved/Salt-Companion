@@ -121,7 +121,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           Handle students
         </button>
 
-        <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
+        <h1 className="text-3xl font-bold">{selectedBootcamp}</h1>
         <div className="mt-4">
           <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
           <a
