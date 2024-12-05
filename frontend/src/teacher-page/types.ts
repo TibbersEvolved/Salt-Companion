@@ -45,3 +45,8 @@ export type CardNewData = {
   answer: string;
   topicId: number;
 };
+
+export type addStudentToBootcamp = {
+  clerkId: string;
+  bootcampId: number;
+};
