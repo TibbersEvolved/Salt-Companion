@@ -24,17 +24,16 @@ export const Students = (prop: props) => {
 
   return (
     <div>
-      <h1>Students</h1>
+      <h1></h1>
       {data.length > 0 && (
-        <ul className="list-disc ">
-          {data.map((student) => (
-            <li key={student.clerkId}>
+        <ul className="list-disc text-xl">
+          {data.map((student, index) => (
+            <li key={index} className="flex flex-row pt-2 gap-4">
               <p>
                 <strong>Name: </strong> {student.name}
               </p>
               <p>
-                <strong>Bootcamp:</strong> {student.bootcamp} (ID:{" "}
-                {student.bootCampId})
+                <strong>Bootcamp:</strong> {student.bootcamp}
               </p>
             </li>
           ))}

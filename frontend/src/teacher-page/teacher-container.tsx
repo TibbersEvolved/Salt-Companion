@@ -107,7 +107,7 @@ export const Teacher = () => {
       {showManageStudent && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
-            <h1>Students</h1>
+
             <Students bootCampId={selectedBootcampId} />
             <br />
             <button
