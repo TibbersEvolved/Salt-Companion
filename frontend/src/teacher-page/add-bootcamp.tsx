@@ -2,6 +2,7 @@ import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { CreateBootCampFetch } from "./fetch-create-bootcamp";
 import { BootCampPostData } from "./types";
 import { useState, useRef, createContext, useContext, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 type Props = {
   clerkId: string;
@@ -23,7 +24,7 @@ export function CreateBootCamp(Prop: Props) {
         return await CreateBootCampFetch(requestBody);
       },
       onSuccess: (data: string) => {
-        console.log("Bootcamp created successfully:", data);
+        toast.success("Bootcamp created successfully");
       },
       onError: (error) => {
         console.error("Error fetching the current game state:", error);
@@ -32,14 +33,16 @@ export function CreateBootCamp(Prop: Props) {
 
   return (
     <div>
+      <Toaster />
       <input
         type="text"
         value={bootCampName}
         onChange={(e) => setBootCampName(e.target.value)}
         placeholder="Bootcamp name"
+        className="rounded-md w-2/6"
       />
       <button
-        className="m-6 bg-[#fc7961] text-white h-10 pl-3 pr-3 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
+        className="m-4 bg-[#fc7961] text-white h-10 pl-3 pr-3 rounded-md text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
         onClick={() => {
           const updatedRequestBody = {
             name: bootCampName,

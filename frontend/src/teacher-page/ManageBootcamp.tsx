@@ -12,6 +12,7 @@ import { DeleteTopicCard } from "./fetch-delete-card";
 import { DeleteTopic } from "./fetch-delete-topic";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { Toast } from "flowbite-react";
+import { Students } from "./studentManagement";
 
 interface ManageBootcampProps {
   selectedBootcamp: string;
@@ -27,6 +28,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   const [newTopicName, setNewTopicName] = useState("");
   const [showNewTopicForm, setShowNewTopicForm] = useState(false);
   const [topicId, setTopicId] = useState(0);
+  const [showManageStudent, setShowMAnageStudent] = useState(false);
 
   useEffect(() => {
     setTopicId(0);
@@ -78,6 +80,15 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTopicName(e.target.value);
   };
+
+  const handleShowManageStudent = () => {
+    setShowMAnageStudent(true);
+  };
+
+  const closeShowManageStudent = () => {
+    setShowMAnageStudent(false);
+  };
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updatedRequestBody: TopicPostData = {
@@ -101,14 +112,22 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
   return (
     <div className="top-0 left-0 w-full h-screen flex justify-center items-center  bg-opacity-50">
       <Toaster />
+
       <div className="bg-white p-6 rounded-md shadow-md w-full h-full">
+        <button
+          className="pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
+          onClick={handleShowManageStudent}
+        >
+          Handle students
+        </button>
         <h1 className="text-xl font-bold">{selectedBootcamp}</h1>
         <div className="mt-4 border border-solid border-black">
           <TopicSelect bootCampId={bootCampId} setTopicId={setTopicId} />
           <a
             href="#"
-            className={`ml-5 text-blue-500 hover:text-blue-700 ${inActive ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${
+              inActive ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
             onClick={(e) => {
               if (inActive) e.preventDefault();
               else setShowNewTopicForm(!showNewTopicForm);
@@ -118,8 +137,9 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           </a>
           <a
             href="#"
-            className={`ml-5 text-blue-500 hover:text-blue-700 ${inActive ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+            className={`ml-5 text-blue-500 hover:text-blue-700 ${
+              inActive ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
             onClick={(e) => {
               if (inActive) e.preventDefault();
               else handleDeleteTopic(topicId);
@@ -127,7 +147,6 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
           >
             Delete Topic
           </a>
-
         </div>
         {showNewTopicForm && (
           <div className="fixed top-0 left-0 w-full h-600 flex justify-center items-center z-10">
@@ -150,6 +169,20 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
               <button
                 className="mt-4 px-4 py-2 bg-black text-white rounded-md"
                 onClick={() => setShowNewTopicForm(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+        {showManageStudent && (
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
+              <Students bootCampId={bootCampId} />
+              <br />
+              <button
+                className="px-4 py-2 bg-black text-white rounded-md mt-auto mb-auto"
+                onClick={closeShowManageStudent}
               >
                 Close
               </button>

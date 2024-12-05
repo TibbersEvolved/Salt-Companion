@@ -14,7 +14,7 @@ export const Teacher = () => {
   );
   const [showManageBootcamp, setShowManageBootcamp] = useState(false);
   const [showAddBootcamp, setShowAddBootcamp] = useState(false);
-  const [showManageStudent, setShowMAnageStudent] = useState(false);
+
   const [selectedBootcampId, setSelectedBootcampId] = useState<number>(0);
 
   const { user } = useUser();
@@ -35,20 +35,12 @@ export const Teacher = () => {
     }
   };
 
-  const handleShowManageStudent = () => {
-    setShowMAnageStudent(true);
-  };
-
   const closeManageBootcamp = () => {
     setShowManageBootcamp(false);
   };
 
   const closeAddBootcamp = () => {
     setShowAddBootcamp(false);
-  };
-
-  const closeShowManageStudent = () => {
-    setShowMAnageStudent(false);
   };
 
   return (
@@ -66,12 +58,6 @@ export const Teacher = () => {
               onClick={handleAddBootcamp}
             >
               +
-            </button>
-            <button
-              className="pr-4 pl-4 text-center text-white bg-[#fc7961] border border-3 border-black rounded-md hover:bg-[#f35b7e] transition duration-200"
-              onClick={handleShowManageStudent}
-            >
-              Handle students
             </button>
           </div>
           <ManageBootcamp
@@ -96,20 +82,6 @@ export const Teacher = () => {
             </div>
           )}
 
-          {showManageStudent && (
-            <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-              <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6">
-                <Students bootCampId={selectedBootcampId} />
-                <br />
-                <button
-                  className="px-4 py-2 bg-black text-white rounded-md mt-auto mb-auto"
-                  onClick={closeShowManageStudent}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
           <div />
         </div>
       </div>
