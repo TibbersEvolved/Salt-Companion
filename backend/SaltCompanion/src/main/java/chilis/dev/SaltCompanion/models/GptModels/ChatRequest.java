@@ -16,8 +16,8 @@ public class ChatRequest {
     private final String MANY_CARD_PROMPT = "Write me 10 new and unique flashcard with a question and answer. " +
             "Include information not covered before. The reply should be json array. Keep answer short. The subject is: ";
 
-    private final String ONE_CARD_PROMPT = "Write me a new and unique JSON flashcard with a question and answer. " +
-            "Include information not covered before. The reply should be json array of objects one card has quesion: and answer:. Keep answer short.";
+    private final String ONE_CARD_PROMPT = "Generate a new and unique flashcard. The response must be a JSON array with one object. " +
+            "Each object should have the fields: 'question' and 'answer'. Do not include any additional text outside the JSON. Keep the 'answer' concise.";
 
     public ChatRequest(String model, String prompt, int requestType) {
         this.model = model;
