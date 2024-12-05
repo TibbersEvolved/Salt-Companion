@@ -96,7 +96,6 @@ export const LandingPage = (prop: userProp) => {
                   option: (baseStyles, state) => ({
                     ...baseStyles,
                     backgroundColor: state.isFocused ? "#eed1d6" : "white",
-
                     "&:active": {
                       backgroundColor: "#f8bbd0",
                     },
