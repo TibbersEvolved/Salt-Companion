@@ -84,6 +84,16 @@ export const LandingPage = (prop: userProp) => {
                 classNamePrefix="select"
                 onChange={handleChange}
                 placeholder="Select topics to practice"
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    borderColor: state.isFocused ? "#f7a1b5" : "#e5e7eb",
+                    boxShadow: state.isFocused ? "0 0 0 1px #f35b7e" : "none",
+                    "&:hover": {
+                      borderColor: state.isFocused ? "#f7a1b5" : "#e5e7eb",
+                    },
+                  }),
+                }}
               />
               <button
                 onClick={handleClick}
