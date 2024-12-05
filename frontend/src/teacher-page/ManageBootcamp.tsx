@@ -151,8 +151,8 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         </div>
 
         {showNewTopicForm && (
-          <div className="fixed top-0 left-0 w-full h-600 flex justify-center items-center z-10">
-            <div className="bg-white p-6 rounded-md shadow-md w-5/6 h-5/6 ">
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+            <div className="relative bg-white p-12 rounded-md shadow-md w-3/6 h-fit">
               <h1>Add Topic</h1>
               <form onSubmit={submitHandler}>
                 <input
