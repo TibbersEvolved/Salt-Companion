@@ -93,7 +93,7 @@ export default function SelectRole(prop: props) {
   };
 
   return (
-    <div className="flex justify-start ">
+    <div className="flex justify-start mb-80">
       <div className="bg-white shadow-md rounded-2xl w-full max-w-4xl p-6 flex flex-col items-center static">
         <p className="text-3xl font-light">Choose your role</p>
         <div className="flex items-center justify-center">
