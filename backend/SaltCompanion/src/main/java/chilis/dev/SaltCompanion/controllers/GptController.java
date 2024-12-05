@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-@CrossOrigin
+@CrossOrigin(origins="*")
 @RestController("/api")
 @Tag(name = "GPT API", description = "API to interact with ChatGPT for generating responses")
 public class GptController {
