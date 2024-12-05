@@ -50,7 +50,7 @@ export function TopicSelect({ bootCampId, setTopicId }: Props) {
   if (isPending) {
     return (
       <select
-        className="mt-10 w-1/6 text-center text-black bg-[#ebebeb] border border-3 border-black rounded-md"
+        className="text-lg min-w-40 px-2 text-center border-1 border-[#e5e7eb] bg-white rounded-md focus:ring-[#f7a1b5] focus:border-[#f7a1b5]"
         defaultValue=""
         onChange={handleSelect}
       >
