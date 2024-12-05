@@ -15,12 +15,14 @@ h3 {
 p,
 input,
 label,
-li {
+li,
+select {
   font-weight: 300;
 }
 
 input,
-label {
+label,
+select {
   color: #424242;
 }
 
