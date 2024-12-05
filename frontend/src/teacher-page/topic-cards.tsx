@@ -193,9 +193,9 @@ export default function TopicCards({ topicId }: Props) {
   }, [updateGate, cardList]);
 
   return (
-    <div className="card-container ">
+    <div className="card-container">
       <Toaster />
-      <div className="mt-4 flex justify-end">
+      <div className="mt-4 flex justify-end  shadow-md mb-1">
         <button
           className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
           onClick={updateHandler}
@@ -257,8 +257,9 @@ export default function TopicCards({ topicId }: Props) {
           </svg>
         </button>
       </div>
-      <div className="shadow-md max-h-fit">
-        <table className="table w-full ">
+
+      <div className="shadow-md h-[35rem]   overflow-auto rounded-md">
+        <table className="table w-full">
           <thead>
             <tr>
               {/* <th>ID</th> */}
@@ -303,4 +304,3 @@ export default function TopicCards({ topicId }: Props) {
     </div>
   );
 }
-// hello
