@@ -51,7 +51,7 @@ export default function Stat(prop: props) {
         </div>
         <div className="stat-title text-[#424242]">Record Streak</div>
         <div className="stat-value text-[#424242]">
-          {prop.recordStreak} days
+          {prop.recordStreak} <span className="text-2xl">days</span>
         </div>
       </div>
 
