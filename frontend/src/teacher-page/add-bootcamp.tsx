@@ -14,7 +14,7 @@ export function CreateBootCamp(Prop: Props) {
     clerkId: Prop.clerkId,
   });
 
-  const mutationCreateGame: UseMutationResult<string, Error, BootCampPostData> =
+  const mutationBootCamp: UseMutationResult<string, Error, BootCampPostData> =
     useMutation({
       mutationFn: async (requestBody: BootCampPostData): Promise<string> => {
         if (!requestBody) {
@@ -44,7 +44,7 @@ export function CreateBootCamp(Prop: Props) {
             name: bootCampName,
             clerkId: Prop.clerkId,
           };
-          mutationCreateGame.mutate(updatedRequestBody);
+          mutationBootCamp.mutate(updatedRequestBody);
         }}
       >
         Create Bootcamp
