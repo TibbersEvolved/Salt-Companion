@@ -42,7 +42,7 @@ export function CreateBootCamp(Prop: Props) {
         className="rounded-md w-2/6"
       />
       <button
-        className="m-4 bg-[#fc7961] text-white h-10 pl-3 pr-3 rounded-md text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
+        className="m-6 bg-[#fc7961] text-white h-10 px-4 rounded-full text-lg font-semibold hover:bg-[#f35b7e] transition duration-200"
         onClick={() => {
           const updatedRequestBody = {
             name: bootCampName,
