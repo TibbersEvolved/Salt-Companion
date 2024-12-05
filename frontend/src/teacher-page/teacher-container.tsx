@@ -111,7 +111,7 @@ export const Teacher = () => {
             <Students bootCampId={selectedBootcampId} />
             <br />
             <button
-              className="mt-4 px-4 py-2 bg-black text-white rounded-md"
+              className="px-4 py-2 bg-black text-white rounded-md mt-auto mb-auto"
               onClick={closeShowManageStudent}
             >
               Close

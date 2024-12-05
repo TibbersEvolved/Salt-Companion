@@ -24,9 +24,9 @@ export const Students = (prop: props) => {
 
   return (
     <div>
-      <h1></h1>
+      <h1 className="text-2xl font-bold">Students</h1>
       {data.length > 0 && (
-        <ul className="list-disc text-xl">
+        <ul className="list-disc overflow-y-auto max-h-96">
           {data.map((student, index) => (
             <li key={index} className="flex flex-row pt-2 gap-4">
               <p>
