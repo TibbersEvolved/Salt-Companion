@@ -195,9 +195,9 @@ export default function TopicCards({ topicId }: Props) {
   return (
     <div className="card-container">
       <Toaster />
-      <div className="mt-4 flex justify-end  shadow-md mb-1">
+      <div className="mt-4 flex justify-end shadow-md mb-1 space-x-3">
         <button
-          className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
+          className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white hover:bg-[#f36384] cursor-pointer"
           onClick={updateHandler}
         >
           Save cards{" "}
@@ -217,7 +217,7 @@ export default function TopicCards({ topicId }: Props) {
           </svg>{" "}
         </button>
         <button
-          className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
+          className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white hover:bg-[#f36384] cursor-pointer"
           onClick={addCardHandler}
         >
           New Card
@@ -237,10 +237,10 @@ export default function TopicCards({ topicId }: Props) {
           </svg>
         </button>
         <button
-          className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
+          className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white hover:bg-[#f36384] cursor-pointer"
           onClick={aiCardHandler}
         >
-          Ai Card
+          AI Card
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -258,10 +258,10 @@ export default function TopicCards({ topicId }: Props) {
         </button>
       </div>
 
-      <div className="shadow-md h-[35rem]   overflow-auto rounded-md">
+      <div className="shadow-md h-[35rem] overflow-auto rounded-md">
         <table className="table w-full">
           <thead>
-            <tr>
+            <tr className="text-lg text-[#424242]">
               {/* <th>ID</th> */}
               <th>Question</th>
               <th>Answer</th>
@@ -273,7 +273,7 @@ export default function TopicCards({ topicId }: Props) {
               <tr className="hover" key={card.cardId}>
                 <td>
                   <textarea
-                    className="textarea textarea-bordered w-full"
+                    className="textarea textarea-bordered w-full text-base font-light text-[#424242]"
                     value={card.question}
                     readOnly={false}
                     onChange={(event) => handleTableChange(event, card)}
@@ -283,7 +283,7 @@ export default function TopicCards({ topicId }: Props) {
                 <td>
                   {" "}
                   <textarea
-                    className="textarea textarea-bordered w-full"
+                    className="textarea textarea-bordered w-full text-base font-light text-[#424242]"
                     value={card.answer}
                     readOnly={false}
                     onChange={(event) => handleTableChange(event, card)}
