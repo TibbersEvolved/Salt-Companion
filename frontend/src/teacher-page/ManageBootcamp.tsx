@@ -118,7 +118,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
 
   return (
     <div className="top-0 left-0 w-full h-screen flex justify-center items-center  bg-opacity-50">
-      <Toaster />
+      {/* <Toaster /> */}
 
       <div className="bg-white p-6 rounded-md shadow-md w-full h-full relative">
         <button

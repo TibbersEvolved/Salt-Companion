@@ -99,6 +99,7 @@ export default function TopicCards({ topicId }: Props) {
         };
       });
       mutationAddCard.mutate(newCard);
+      toast.success("AI card created!");
     },
     onError: (error) => {
       console.error("Error fetching GPT card:", error);
@@ -194,7 +195,7 @@ export default function TopicCards({ topicId }: Props) {
 
   return (
     <div className="card-container">
-      <Toaster />
+      {/* <Toaster /> */}
       <div className="mt-4 flex justify-end shadow-md mb-1 space-x-3">
         <button
           className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white hover:bg-[#f36384] cursor-pointer"
