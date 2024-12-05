@@ -9,6 +9,7 @@ export default function AddStudentButton() {
   const [bootcampId, setBootcampId] = useState<number>(0);
   const [showNewStudents, setShowNewStudents] = useState<boolean>(false);
   const [unlistedStudents, setUnlistedStudents] = useState<Student[]>([]);
+  const [clicked, setClicked] = useState<boolean>(false);
 
   const mutationAddStudent: UseMutationResult<
     string,
