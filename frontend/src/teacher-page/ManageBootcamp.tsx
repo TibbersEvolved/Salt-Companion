@@ -49,7 +49,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
       onSuccess: (data: string) => {
         toast.success("Topic created!");
         console.log("Topic created successfully:", data);
-        // setTopicId(topicId);
+
         queryClient.invalidateQueries({
           queryKey: ["topics", bootCampId],
         });
@@ -75,6 +75,8 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         queryClient.invalidateQueries({
           queryKey: ["topics", bootCampId],
         });
+        setTopicId(0);
+        setSelectedTopic("");
       },
       onError: (error) => {
         console.error("Error deleting topic:", error);
@@ -101,6 +103,7 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
     };
     console.log("updatedRequestBody", updatedRequestBody);
     mutationCreateTopic.mutate(updatedRequestBody);
+    setShowNewTopicForm(false);
   };
 
   const inActive =
