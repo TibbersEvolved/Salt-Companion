@@ -68,16 +68,28 @@ export const Teacher = () => {
 
           {showAddBootcamp && (
             <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-              <div className="bg-white p-6 rounded-md shadow-md w-3/6 h-fit">
-                <h1 className="text-2xl font-bold">Add Bootcamp</h1>
-                <CreateBootCamp clerkId={user?.id as string} />
-
+              <div className="relative bg-white p-12 rounded-md shadow-md w-3/6 h-fit">
                 <button
-                  className="mt-4 px-4 py-2 bg-black text-white rounded-md"
+                  className="absolute top-5 right-5 btn btn-circle bg-white hover:bg-[#f35b7e] hover:text-white"
                   onClick={closeAddBootcamp}
                 >
-                  Close
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
                 </button>
+                <h1 className="text-2xl font-bold">Add Bootcamp</h1>
+                <CreateBootCamp clerkId={user?.id as string} />
               </div>
             </div>
           )}
