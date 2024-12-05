@@ -50,3 +50,10 @@ export type addStudentToBootcamp = {
   clerkId: string;
   bootcampId: number;
 };
+
+export type Student = {
+  clerkId: string;
+  name: string;
+  bootCampId: number;
+  bootcamp: string;
+};

@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { base_url } from "../services/api";
 import { Student } from "./types";
+import AddStudentButton from "./add-student-button";
 
 export const Students = (prop: props) => {
   const [students, setStudents] = useState<Student[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [currentClerkId, setCurrentClerkId] = useState<string>("");
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["fetchStudents", prop.bootCampId],
@@ -30,6 +32,7 @@ export const Students = (prop: props) => {
           ))}
         </div>
       )}
+      <AddStudentButton />
     </div>
   );
 };
