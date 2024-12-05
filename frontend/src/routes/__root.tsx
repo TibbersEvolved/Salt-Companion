@@ -16,6 +16,7 @@ if (!PUBLISHABLE_KEY) {
 }
 
 function RootComponent() {
+  console.log("Publishable key = ", PUBLISHABLE_KEY);
   return (
     <>
       <div className="min-h-screen flex flex-col">
