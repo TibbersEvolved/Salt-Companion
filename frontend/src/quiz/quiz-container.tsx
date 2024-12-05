@@ -123,7 +123,7 @@ export const Quiz = () => {
               ].map((topic, index) => (
                 <li
                   key={index}
-                  className="p-2 text-center content-center rounded-md bg-[#fc7961] w-28"
+                  className="quiz-topic p-2 text-center content-center rounded-md bg-[#fc7961] w-28"
                 >
                   {topic}
                 </li>

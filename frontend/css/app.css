@@ -31,7 +31,7 @@ input:checked {
   color: white !important;
 }
 
-li:first-child {
+.quiz-topic:first-child {
   margin: 8px 0 0 20px;
 }
 
