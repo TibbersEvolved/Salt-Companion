@@ -145,6 +145,17 @@ export default function TopicCards({ topicId }: Props) {
     toast.success("Cards updated and saved!");
   };
 
+  const aiCardHandler = async () => {
+    for (let card of cardList) {
+      if (card.cardId === 0) {
+        toast.error("Please fill the current card before adding a new card");
+        return;
+      }
+    }
+
+    await mutationAiCard.mutate(cardList);
+  };
+
   const addCardHandler = async () => {
     for (let card of cardList) {
       if (card.cardId === 0) {
@@ -216,7 +227,7 @@ export default function TopicCards({ topicId }: Props) {
         </button>
         <button
           className="btn right-5 bg-transparent border-none text-blue-500 hover:text-blue-700 cursor-pointer"
-          onClick={addCardHandler}
+          onClick={aiCardHandler}
         >
           Ai Card
           <svg

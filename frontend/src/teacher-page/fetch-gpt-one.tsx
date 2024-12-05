@@ -2,15 +2,15 @@ import { BootCampPostData } from "./types";
 import { base_url } from "../services/api";
 import { Card } from "./types";
 
-const GET_URL = `${base_url}/gpt/flashcard?topicName=`;
+const POST_URL = `${base_url}/gpt/flashcard?topicName=`;
 
 export const GptOneCardFetch = async (
   body: Card[],
   topicId: number
 ): Promise<Card[]> => {
   try {
-    const response = await fetch(GET_URL + topicId, {
-      method: "GET",
+    const response = await fetch(POST_URL + topicId, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
