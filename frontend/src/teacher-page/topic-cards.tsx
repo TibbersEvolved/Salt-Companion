@@ -268,7 +268,7 @@ export default function TopicCards({ topicId }: Props) {
         </button>
       </div>
 
-      <div className="shadow-md h-[35rem] overflow-auto rounded-md">
+      <div className="shadow-md h-[33rem] overflow-auto rounded-md">
         <table className="table w-full">
           <thead>
             <tr className="text-lg text-[#424242]">
