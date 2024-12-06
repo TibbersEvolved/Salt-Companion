@@ -21,7 +21,7 @@ export default function Navbar() {
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1 mx-4">
             <li>
-              {/* <details className="mx-4">
+              <details className="mx-4">
                 <summary>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ export default function Navbar() {
                     </Link>
                   </li>
                 </ul>
-              </details> */}
+              </details>
             </li>
             <UserButton />
           </ul>
