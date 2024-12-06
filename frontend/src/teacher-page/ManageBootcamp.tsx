@@ -163,8 +163,8 @@ export const ManageBootcamp: React.FC<ManageBootcampProps> = ({
         </div>
 
         {showNewTopicForm && (
-          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-            <div className="relative bg-white p-12 rounded-md shadow-md w-3/6 h-fit">
+          <div className="fixed top-0 z-20 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+            <div className="relative z-20 bg-white p-12 rounded-md shadow-md w-3/6 h-fit">
               <button
                 className="absolute top-5 right-5 btn btn-circle bg-white hover:bg-[#f35b7e] hover:text-white"
                 onClick={() => setShowNewTopicForm(false)}
