@@ -204,7 +204,7 @@ export default function TopicCards({ topicId }: Props) {
       {/* <Toaster /> */}
       <div className="mt-4 flex justify-end shadow-md mb-1 space-x-3">
         <button
-          className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white hover:bg-[#f36384] cursor-pointer"
+          className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#0f2d45] hover:text-white hover:bg-[#0f2d45] cursor-pointer"
           onClick={updateHandler}
         >
           Save cards{" "}
@@ -224,7 +224,7 @@ export default function TopicCards({ topicId }: Props) {
           </svg>{" "}
         </button>
         <button
-          className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white hover:bg-[#f36384] cursor-pointer"
+          className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#0f2d45] hover:text-white hover:bg-[#0f2d45] cursor-pointer"
           onClick={addCardHandler}
         >
           New Card
@@ -245,8 +245,8 @@ export default function TopicCards({ topicId }: Props) {
         </button>
         <button
           className={`text-lg btn font-medium mb-5 
-            right-5 rounded-full bg-transparent border-none text-[#f36384] hover:text-white
-            hover:bg-[#f36384] ${mutationAiCard.isPending ? "cursor-not-allowed" : "cursor-pointer"}`}
+            right-5 rounded-full bg-transparent border-none text-[#0f2d45] hover:text-white
+            hover:bg-[#0f2d45] ${mutationAiCard.isPending ? "cursor-not-allowed" : "cursor-pointer"}`}
           onClick={aiCardHandler}
           disabled={mutationAiCard.isPending}
         >
