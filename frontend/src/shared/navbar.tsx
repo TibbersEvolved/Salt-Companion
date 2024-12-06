@@ -1,6 +1,7 @@
 import { SignedIn, UserButton } from "@clerk/clerk-react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import darklogo from "../../public/salt-logo-dark.svg";
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -16,7 +17,7 @@ export default function Navbar() {
           <Link draggable="false" to="/landing">
             <img
               draggable="false"
-              src="public/salt-logo-dark.svg"
+              src={darklogo}
               alt="salt logo"
             />
           </Link>
