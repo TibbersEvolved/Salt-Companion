@@ -39,7 +39,7 @@ export const LandingPage = (prop: userProp) => {
       return;
     }
     const response = await startFlashcardSession(
-      10,
+      5,
       topics,
       user?.id as string
     );
