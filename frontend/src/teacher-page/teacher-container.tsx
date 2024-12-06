@@ -47,6 +47,9 @@ export const Teacher = () => {
     <>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
         <div className="bg-white shadow-md rounded-2xl w-full max-w-6xl p-6 grid grid-cols-1 gap-8">
+          <h2 className="text-4xl font-bold my-4 text-center">
+            Welcome, {user?.firstName}!
+          </h2>
           <div className="gap-10 flex items-center flex-row justify-center ">
             <GetTeacherBootCamp
               clerkId={user?.id as string}
