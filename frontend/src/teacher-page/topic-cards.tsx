@@ -202,7 +202,7 @@ export default function TopicCards({ topicId }: Props) {
   return (
     <div className="card-container">
       {/* <Toaster /> */}
-      <div className="mt-4 flex justify-end shadow-md mb-1 space-x-3">
+      <div className="mt-4 flex justify-end border-b-2 shadow-sm mb-1 space-x-3">
         <button
           className="text-lg btn font-medium mb-5 right-5 rounded-full bg-transparent border-none text-[#0f2d45] hover:text-white hover:bg-[#0f2d45] cursor-pointer"
           onClick={updateHandler}
@@ -268,7 +268,7 @@ export default function TopicCards({ topicId }: Props) {
         </button>
       </div>
 
-      <div className="shadow-md h-[33rem] overflow-auto rounded-md">
+      <div className="h-[40rem] overflow-auto rounded-md ">
         <table className="table w-full">
           <thead>
             <tr className="text-lg text-[#424242]">
